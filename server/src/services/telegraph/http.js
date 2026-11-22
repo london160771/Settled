@@ -63,11 +63,23 @@ export async function paidAsk({
     );
   }
   const { header } = await buildEscrowPayment(account, entry);
-  const res = await fetchImpl(url, {
-    method: 'POST',
-    headers: { ...headers, 'X-PAYMENT': header },
-    body: json,
-  });
+  let res;
+  try {
+    res = await fetchImpl(url, {
+      method: 'POST',
+      headers: { ...headers, 'X-PAYMENT': header },
+      body: json,
+    });
+  } catch (err) {
+    // The signed payment was sent; we cannot know if it was charged. Treat as paid.
+    return {
+      status: 0,
+      body: { error: String(err.message || err) },
+      receipt: null,
+      quotedUusdc: quoted,
+      paid: true,
+    };
+  }
   const receipt =
     decodeReceiptHeader(res.headers.get('x-payment-response')) ||
     decodeReceiptHeader(res.headers.get('x-telegraph-receipt'));

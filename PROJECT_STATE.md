@@ -4,7 +4,7 @@ Progress log. Updated in every phase commit. Newest notes at the top of the log.
 
 ## Now
 
-- Current phase: Phase 1 — Gate 0 (paid part blocked); building Phases 2–3 meanwhile
+- Current phase: Phase 1 — Gate 0 (paid part blocked); building later phases meanwhile (live checks pending)
 - Branch: `claude/project-thread-00viqq` (session's push branch; PR to `main`)
 - Blocked on: `MASTER_MNEMONIC` + Sepolia ETH for the operator — see docs/manual/01-gate0-wallet-and-network.md
 - Deadline: Dec 1, 2026, 23:59 UTC (internal cutoff 12:00 UTC)
@@ -16,7 +16,7 @@ Progress log. Updated in every phase commit. Newest notes at the top of the log.
 | 0 | Repo setup | Passed | (see log) | Workspaces, ESLint+Prettier, Vitest, config validation, CI, /api/health |
 | 1 | Gate 0: prove Telegraph works | Blocked | | Free part done (schemas, rails, escrow signature check). Paid asks need guide 01 |
 | 2 | Data, wallets and the cap | Passed | (see log) | Models, HD wallets, escrow top-up, atomic budget, monthly reset |
-| 3 | Telegraph client | Not started | | |
+| 3 | Telegraph client | Passed offline; live smoke pending | (see log) | askIntent (escrow rail), #228 handling, reconcile. Live smoke needs guide 01 |
 | 4 | Flight evidence and decision | Not started | | |
 | 5 | Claims and proof page | Not started | | Manual stop if SMTP is chosen |
 | 6 | Web app | Not started | | |
@@ -53,6 +53,7 @@ Free part (2026-11-22, run `node server/scripts/gate0.js --free-only`):
 
 ## Log
 
+- 2026-11-22: Phase 3 built. `askIntent()` in `server/src/services/telegraph/askIntent.js` is the only caller of Telegraph in app code (Gate 0 script uses the low-level client by design). Checks: lint pass; `npm test` → 29 pass, 1 skipped (live). Mocked-HTTP tests: 402→escrow-signed→200 (signature verified by the fake node with viem), multi-miner rows, direct miner ask without budget, 500-but-charged → `charged_on_failure` + one retry only, retry blocked by cap, unknown Intent refused before paying, budget out of range, decision cap, refused-before-payment released, escrow refusal → WALLET_UNFUNDED. `server/scripts/reconcile.js` + tests. **Not verified live:** `LIVE_TELEGRAPH=1 npm test -w server` needs guide 01.
 - 2026-11-22: Phase 2 passed. Checks: `npm run lint` → pass; `npm test` → 16/16 (budget: 20 parallel reservations vs cap of 5 → exactly 5 granted; 20 parallel in one decision vs decision cap of 3 → 3; release on failure; charged_on_failure counts as spent; double settle refused; month rollover). Mongo via mongodb-memory-server (download works in the cloud env). Top-up is unit-tested with a fake funder; live top-up waits for guide 01.
 - 2026-11-22: Phase 1 free part done; paid part blocked on MASTER_MNEMONIC + operator Sepolia ETH (guide 01). Found: no x402 exact on Ethereum Sepolia → escrow rail. Continuing with Phases 2–3 (do not need funds).
 - 2026-11-22: Phase 0 passed. Checks: `npm install` ok; `npm run lint` → pass; `npm test` → 4/4 pass; `npm run build` → pass; `node server/src/index.js` (NODE_ENV=test, dummy vars) → `/api/health` 200; missing vars → clear error, exit 1.
