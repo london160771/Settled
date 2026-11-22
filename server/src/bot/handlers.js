@@ -11,6 +11,7 @@ import { createUser } from '../services/users.js';
 import { checkCase } from '../services/flights/evidence.js';
 import { parseBookingText } from '../services/booking.js';
 import { getBudget } from '../services/budget/index.js';
+import { paidAsk } from '../services/ask/index.js';
 
 const usdc = (u) => (Number(u) / 1e6).toFixed(2);
 const short = (h) => (h ? `${h.slice(0, 8)}…${h.slice(-4)}` : '—');
@@ -274,5 +275,20 @@ export function createHandlers(config, deps = {}) {
     );
   }
 
-  return { start, text, callback, listClaims, wallet, cap, web, awaitingRecipient };
+  async function ask(io, kind, input) {
+    const u = await needUser(io);
+    if (!u) return;
+    if (!String(input || '').trim())
+      return io.reply(
+        `Usage: /${kind} <${kind === 'price' ? 'token, e.g. ETH' : kind === 'weather' ? 'city' : 'question'}>`,
+      );
+    try {
+      const out = await paidAsk(config, u._id, kind, input, deps.telegraph || {});
+      return io.reply(`${out.answer}\n\n${receiptLine(out.receipt)}`);
+    } catch (e) {
+      return fail(io, e);
+    }
+  }
+
+  return { start, text, callback, listClaims, wallet, cap, web, ask, awaitingRecipient };
 }

@@ -29,6 +29,8 @@ export function createBot(config, deps = {}) {
   bot.command('wallet', (ctx) => h.wallet(ioFrom(ctx)));
   bot.command('cap', (ctx) => h.cap(ioFrom(ctx), ctx.match?.trim()));
   bot.command('web', (ctx) => h.web(ioFrom(ctx)));
+  for (const kind of ['ask', 'price', 'weather', 'search'])
+    bot.command(kind, (ctx) => h.ask(ioFrom(ctx), kind, ctx.match));
   if (deps.extraCommands) deps.extraCommands(bot, h, ioFrom);
   bot.on('callback_query:data', async (ctx) => {
     await ctx.answerCallbackQuery().catch(() => {});
@@ -52,6 +54,10 @@ export async function startBot(config, app, deps = {}) {
     { command: 'wallet', description: 'Wallet, balance and cap' },
     { command: 'cap', description: 'Set monthly cap, e.g. /cap 1.50' },
     { command: 'web', description: 'One-time login link for the web app' },
+    { command: 'price', description: 'Paid ask: token price, e.g. /price ETH' },
+    { command: 'weather', description: 'Paid ask: weather, e.g. /weather Lagos' },
+    { command: 'search', description: 'Paid ask: web search' },
+    { command: 'ask', description: 'Paid ask: any question' },
   ]);
   if (config.isProd && config.telegramWebhookSecret) {
     app.use(

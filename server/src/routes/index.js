@@ -10,6 +10,7 @@ import * as claims from '../services/claims/index.js';
 import * as account from '../services/account.js';
 import { checkCase } from '../services/flights/evidence.js';
 import { getBudget } from '../services/budget/index.js';
+import * as ask from '../services/ask/index.js';
 
 const wrap = (fn) => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
 
@@ -224,6 +225,33 @@ export function apiRouter(config, deps = {}) {
     wrap(async (req, res) => {
       res.json({ code: await auth.createLinkCode(req.user._id, 'telegram'), expiresInMinutes: 10 });
     }),
+  );
+
+  // Mission 9
+  r.post(
+    '/ask',
+    requireUser,
+    limiter(20),
+    wrap(async (req, res) => {
+      res.json(
+        await ask.paidAsk(
+          config,
+          req.user._id,
+          req.body?.kind,
+          req.body?.input,
+          deps.telegraph || {},
+        ),
+      );
+    }),
+  );
+  r.get(
+    '/asks',
+    requireUser,
+    wrap(async (req, res) => res.json({ asks: await ask.myAsks(req.user._id) })),
+  );
+  r.get(
+    '/leaderboard',
+    wrap(async (_req, res) => res.json({ rows: await ask.leaderboard() })),
   );
 
   // Public proof page

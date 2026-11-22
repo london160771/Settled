@@ -9,6 +9,8 @@ import Receipts from './pages/Receipts.jsx';
 import Wallet from './pages/Wallet.jsx';
 import Settings from './pages/Settings.jsx';
 import Proof from './pages/Proof.jsx';
+import Ask from './pages/Ask.jsx';
+import Leaderboard from './pages/Leaderboard.jsx';
 
 function Shell({ children }) {
   const { user, signOut } = useAuth();
@@ -28,8 +30,10 @@ function Shell({ children }) {
               Home
             </NavLink>
             <NavLink to="/claims">Claims</NavLink>
+            <NavLink to="/ask">Ask</NavLink>
             <NavLink to="/receipts">Receipts</NavLink>
             <NavLink to="/wallet">Wallet</NavLink>
+            <NavLink to="/leaderboard">Leaderboard</NavLink>
             <NavLink to="/settings">Settings</NavLink>
             <button className="link" onClick={signOut}>
               Sign out
@@ -57,6 +61,7 @@ export default function App() {
             <Route path="/signin" element={<AuthPage mode="signin" />} />
             <Route path="/signup" element={<AuthPage mode="signup" />} />
             <Route path="/proof/:publicId" element={<Proof />} />
+            <Route path="/leaderboard" element={<Leaderboard />} />
             <Route
               path="/"
               element={
