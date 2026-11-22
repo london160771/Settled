@@ -23,8 +23,7 @@ export async function ensureWallet(config, userId) {
 }
 
 export async function signerFor(config, userId) {
-  const w = await Wallet.findOne({ userId }).lean();
-  if (!w) throw new Error('wallet not found');
+  const w = await ensureWallet(config, userId);
   return deriveAccount(requireVar(config, 'masterMnemonic', 'MASTER_MNEMONIC'), w.hdIndex);
 }
 

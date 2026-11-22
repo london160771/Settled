@@ -6,7 +6,7 @@ Progress log. Updated in every phase commit. Newest notes at the top of the log.
 
 - Current phase: Phase 1 — Gate 0 (paid part blocked); building later phases meanwhile (live checks pending)
 - Branch: `claude/project-thread-00viqq` (session's push branch; PR to `main`)
-- Blocked on: `MASTER_MNEMONIC` + Sepolia ETH for the operator — see docs/manual/01-gate0-wallet-and-network.md
+- Blocked on: `MASTER_MNEMONIC` + Sepolia ETH for the operator — see docs/manual/01-gate0-wallet-and-network.md. Also waiting (non-blocking): `TELEGRAM_BOT_TOKEN` (guide 03), SMTP (guide 02, optional).
 - Deadline: Dec 1, 2026, 23:59 UTC (internal cutoff 12:00 UTC)
 
 ## Phases
@@ -20,7 +20,7 @@ Progress log. Updated in every phase commit. Newest notes at the top of the log.
 | 4 | Flight evidence and decision | Passed offline; live run pending | (see log) | airports.json (3,245), EU261-simple, 2 distinct miners + weather, agreement check. Live run needs guide 01 + Gate 0 Option A |
 | 5 | Claims and proof page | Passed (mailto path); SMTP live send pending | (see log) | Draft from backed facts only, 2-step confirm, SMTP/mailto, Paid/Rejected, proof data. SMTP: guide 02 (optional) |
 | 6 | Web app | Passed | (see log) | Auth (cookie JWT), API, all §4.1 pages except Judge/Ask/Leaderboard |
-| 7 | Telegram bot | Not started | | Manual stop for BotFather token |
+| 7 | Telegram bot | Passed offline; live /start pending | (see log) | grammY bot in-process, all §4.2 commands, due-case worker. Token: guide 03 |
 | 8 | Mission 9: Ask and leaderboard | Not started | | |
 | 9 | Judge mode and Attack Lab | Not started | | |
 | 10 | Release readiness (no deploy) | Not started | | Stops here; Adesope deploys |
@@ -53,6 +53,7 @@ Free part (2026-11-22, run `node server/scripts/gate0.js --free-only`):
 
 ## Log
 
+- 2026-11-22: Phase 7 built. grammY bot runs inside the server process (long polling in dev, webhook in production). Handlers in `server/src/bot/handlers.js` call services only. `/start` (+ link code), add case by message, forwarded booking email parsed as data (`services/booking.js`, instructions → UNTRUSTED_INSTRUCTION, ignored), live receipt lines, alerts, Send/Edit/Not now with recipient confirm (callback carries an address tag, so a changed address is refused), `/claims`, `/wallet`, `/cap`, `/web`. Worker (`server/src/worker`) checks past Watching flights once every 15 min. Checks: lint pass; `npm test` → 65 pass, 1 skipped (bot handlers with a fake context, full check→draft→confirm→send flow, untrusted email, web link code → bot case visible on web, real grammY Bot routing an update with a stubbed API, worker incl. cap). **Live /start not verified** (needs guide 03).
 - 2026-11-22: Phase 6 passed. Express API (`server/src/routes/index.js`, routes call services) + React pages: sign up/in, Home, Add a case, Claims, Claim detail (check now, decision with fact→receipt links, draft, edit, recipient confirm, send/mailto, paid/rejected), Receipts, Wallet (address, escrow balance, cap, testnet top-up), Settings (caps, names, leaderboard opt-in, Telegram link code), public Proof page. Checks: lint pass; `npm test` → 58 pass, 1 skipped (API: auth, one-time login link, protected routes, supertest smoke sign up → add case → check → Owed → draft → recipient confirm → mailto → mark sent, wallet/settings); `npm run build` → pass. Extra: headless-browser click-through of the same flow against a mocked node (scratch script, not committed) — no page errors.
 - 2026-11-22: Phase 5 built. Checks: lint pass; `npm test` → claims 11/11 (invariant 2: unbacked fact blocks draft; invariant 4: no send without a confirm naming the stored address, SMTP send via nodemailer JSON transport with Reply-To, mailto fallback + mark sent, demo accounts locked to demo inbox; invariant 5: duplicate flight refused, parallel drafts → 1 claim; proof data hides email and booking ref). Mailto path verified in tests. **Real SMTP send not verified** (guide 02, optional; SMTP provider is Adesope's choice).
 - 2026-11-22: Phase 4 built. `server/data/airports.json` from OurAirports (3,245 large/medium airports with scheduled service). Rules `eu261-simple-1`; evidence: routed TRAVEL_DISRUPTION_GENERAL ask + direct ask to a different miner (`/engine/v1/ask/{minerId}`) + WEATHER_FORECAST_GENERAL at departure; delay = smaller of two agreeing answers. Checks: lint pass; `npm test` → 41 pass, 1 skipped. Fixtures: 3h40m LHR–LOS → Owed 600; 2h10m → NotOwed; disagree → EvidenceConflict; same miner → NeedsMoreProof; JFK–LOS on DL → NotOwed (not covered); cancellation; weather warning; checkCase end-to-end with mocked node. **Not verified live** (needs guide 01, and Gate 0 must show the miners can answer past flights).
