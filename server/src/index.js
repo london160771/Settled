@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import { loadConfig, ConfigError } from './config/index.js';
 import { createApp } from './app.js';
+import { connectDb } from './db.js';
 
 let config;
 try {
@@ -13,6 +14,7 @@ try {
   throw err;
 }
 
+if (!config.isTest) await connectDb(config.mongoUri);
 const app = createApp(config);
 app.listen(config.port, () => {
   console.log(`Settled API on :${config.port} (${config.nodeEnv}, testnet)`);
