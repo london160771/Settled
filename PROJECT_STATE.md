@@ -4,7 +4,7 @@ Progress log. Updated in every phase commit. Newest notes at the top of the log.
 
 ## Now
 
-- Current phase: Phase 1 — Gate 0 (paid part blocked); building later phases meanwhile (live checks pending)
+- Current phase: P0 code complete (Phases 0, 2, 5–10 passed; 1 blocked; 3, 4, 7, 8, 9 passed offline with live checks pending). Stopped: next steps need Adesope.
 - Branch: `claude/project-thread-00viqq` (session's push branch; PR to `main`)
 - Blocked on: `MASTER_MNEMONIC` + Sepolia ETH for the operator — see docs/manual/01-gate0-wallet-and-network.md. Also waiting (non-blocking): `TELEGRAM_BOT_TOKEN` (guide 03), SMTP (guide 02, optional).
 - Deadline: Dec 1, 2026, 23:59 UTC (internal cutoff 12:00 UTC)
@@ -23,7 +23,7 @@ Progress log. Updated in every phase commit. Newest notes at the top of the log.
 | 7 | Telegram bot | Passed offline; live /start pending | (see log) | grammY bot in-process, all §4.2 commands, due-case worker. Token: guide 03 |
 | 8 | Mission 9: Ask and leaderboard | Passed offline; live 4-ask run pending | (see log) | Router, /ask /price /weather /search (web + bot), opt-in leaderboard. Live: `node server/scripts/mission9.js` after guide 01 |
 | 9 | Judge mode and Attack Lab | Passed offline; real timed run pending | (see log) | /judge, seed-judge.js, Run the demo, 6 attacks, daily limit. Real timing needs guide 01 |
-| 10 | Release readiness (no deploy) | Not started | | Stops here; Adesope deploys |
+| 10 | Release readiness (no deploy) | Passed (refresh numbers after live runs) | (see log) | README, REAL_VS_MOCKED, tutorial draft, deploy guide 04, clean clone verified |
 | 11 | P1: SLA / uptime claims | Waiting for go | | Only when Adesope says |
 | 12 | P1: Contract audit + OpenClaw skill | Waiting for go | | Only when Adesope says |
 
@@ -52,6 +52,17 @@ Free part (2026-11-22, run `node server/scripts/gate0.js --free-only`):
 - `evidence/gate0/escrow-signature-check.json` — signature accepted, deposit missing, nothing charged.
 
 ## Log
+
+- 2026-11-22: Phase 10 passed. README (what, status, sponsor-to-file table, run, env, sample request, costs, limits, troubleshooting, mainnet switch, commercial summary), REAL_VS_MOCKED final for this point, `docs/tutorial.md` draft, `docs/manual/04-deploy.md` (Render + Vercel + Atlas), CONCEPT-BRIEF.md removed (PRD carries it). Root `npm run dev` now starts API and web together. Checks: fresh clone of the branch → `npm ci`, `npm run lint` pass, `npm test` 75 pass / 1 skipped, `npm run build` pass; `npm run dev` served `/api/health` on :4000 and the web on :5173 (proxy OK). README states no live numbers yet; every number it gives is a constant from code or the mocked example, labelled as such. **After the live runs, refresh README/REAL_VS_MOCKED with evidence numbers.**
+
+## Next steps (in order, after guide 01)
+
+1. `node server/scripts/gate0.js` → record Option A/B, first receipt_hash, in "Gate 0 results"; pick the judge seed flight (update `JUDGE_SEED` in `server/src/services/judge.js` and `PREFERRED_TRAVEL_MINERS` in `server/src/services/flights/evidence.js`). If Option B: log it in the PRD and move Phase 11 into P0.
+2. `LIVE_TELEGRAPH=1 npm test -w server` (Phase 3 live smoke) → `evidence/live/phase3-smoke.json`.
+3. Phase 4 live run on the seeded flight → evidence; replace `server/data/replay/conflict.json` with a real conflicting pair if one is captured.
+4. `node server/scripts/mission9.js` → `evidence/mission9/run.json`.
+5. Timed `/judge` Run the demo → record seconds here.
+6. With guide 03: live `/start`. With guide 02: one email to the demo inbox.
 
 - 2026-11-22: Phase 9 built. `/judge` creates (or reuses for 1 h per browser) a demo account funded 0.50 test USDC with the seeded case (BA75 2026-11-20 LHR→LOS, to be confirmed by Gate 0), Run the demo (real asks → decision → draft; send only to the demo inbox after confirm), Run the attacks (6, each blocked with its code; #3 and #5 use replayed **synthetic** fixtures in `server/data/replay/` until real captured receipts replace them), `JUDGE_DAILY_RUN_LIMIT` on new demo accounts, `server/scripts/seed-judge.js`. Checks: lint pass; `npm test` → 75 pass, 1 skipped (session/reuse, daily limit, demo → DraftReady, demo inbox lock, all six attack codes with zero payments); build pass; headless click-through of /judge on a mocked node (demo → DraftReady in 0.2 s **mocked**, all six blocked). **Real timed run not verified** (needs guide 01).
 - 2026-11-22: Phase 8 built. `services/ask` routes price→CRYPTO_PRICE_USD, weather→WEATHER_CHECK_TEMPERATURE, search→WEB_SEARCH_GENERAL, ask→QUESTION_ANSWERING_GENERAL (free-form query; free fallback to CHAT_COMPLETION_GENERAL if refused before payment). Web Ask + Leaderboard pages, bot commands. Checks: lint pass; `npm test` → 70 pass, 1 skipped (routing; 4 paid asks → 4 receipts, 5th → CAP_EXCEEDED with no payment; leaderboard opt-in + anonymous; fallback; bot /price); `npm run build` pass. **Live 4-ask run not verified** (`node server/scripts/mission9.js`, needs guide 01).

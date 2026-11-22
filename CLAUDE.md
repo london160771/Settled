@@ -98,4 +98,6 @@ npm run build
 node server/scripts/gate0.js
 node server/scripts/reconcile.js
 node server/scripts/seed-judge.js
+node server/scripts/mission9.js     # live: 4 paid asks + 5th blocked
+LIVE_TELEGRAPH=1 npm test -w server # live smoke ask
 ```

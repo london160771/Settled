@@ -11,11 +11,12 @@
     "node": ">=20"
   },
   "scripts": {
-    "dev": "npm run dev --workspaces --if-present",
+    "dev": "npm run dev -w server & npm run dev -w web; wait",
     "test": "npm test --workspaces --if-present",
     "lint": "eslint . && prettier --check .",
     "format": "prettier --write .",
-    "build": "npm run build --workspaces --if-present"
+    "build": "npm run build --workspaces --if-present",
+    "start": "npm run build -w web && npm start -w server"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
