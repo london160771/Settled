@@ -71,13 +71,22 @@ export function fakeTelegraph({
   known = [
     'TRAVEL_DISRUPTION_GENERAL',
     'WEATHER_CHECK_TEMPERATURE',
+    'WEATHER_FORECAST_GENERAL',
     'CRYPTO_PRICE_USD',
     'WEB_SEARCH_GENERAL',
     'QUESTION_ANSWERING_GENERAL',
   ],
   preHandler,
 } = {}) {
-  const fake = { calls: [], paid: 0 };
+  const fake = {
+    calls: [],
+    paid: 0,
+    miners: [
+      { id: 'm1', compatible: true },
+      { id: 'm2', compatible: true },
+      { id: 'm3', compatible: true },
+    ],
+  };
   fake.fetch = async (url, opts = {}) => {
     const u = new URL(url);
     if (!opts.method || opts.method === 'GET') {
@@ -85,7 +94,12 @@ export function fakeTelegraph({
       if (m) {
         const name = decodeURIComponent(m[1]);
         return known.includes(name)
-          ? res(200, { intent_name: name, miner_count: 3, request: { params: [] } })
+          ? res(200, {
+              intent_name: name,
+              miner_count: 3,
+              request: { params: [] },
+              miners: fake.miners,
+            })
           : res(200, {
               intent_name: name,
               miner_count: 0,

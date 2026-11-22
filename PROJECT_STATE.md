@@ -17,7 +17,7 @@ Progress log. Updated in every phase commit. Newest notes at the top of the log.
 | 1 | Gate 0: prove Telegraph works | Blocked | | Free part done (schemas, rails, escrow signature check). Paid asks need guide 01 |
 | 2 | Data, wallets and the cap | Passed | (see log) | Models, HD wallets, escrow top-up, atomic budget, monthly reset |
 | 3 | Telegraph client | Passed offline; live smoke pending | (see log) | askIntent (escrow rail), #228 handling, reconcile. Live smoke needs guide 01 |
-| 4 | Flight evidence and decision | Not started | | |
+| 4 | Flight evidence and decision | Passed offline; live run pending | (see log) | airports.json (3,245), EU261-simple, 2 distinct miners + weather, agreement check. Live run needs guide 01 + Gate 0 Option A |
 | 5 | Claims and proof page | Not started | | Manual stop if SMTP is chosen |
 | 6 | Web app | Not started | | |
 | 7 | Telegram bot | Not started | | Manual stop for BotFather token |
@@ -53,6 +53,7 @@ Free part (2026-11-22, run `node server/scripts/gate0.js --free-only`):
 
 ## Log
 
+- 2026-11-22: Phase 4 built. `server/data/airports.json` from OurAirports (3,245 large/medium airports with scheduled service). Rules `eu261-simple-1`; evidence: routed TRAVEL_DISRUPTION_GENERAL ask + direct ask to a different miner (`/engine/v1/ask/{minerId}`) + WEATHER_FORECAST_GENERAL at departure; delay = smaller of two agreeing answers. Checks: lint pass; `npm test` → 41 pass, 1 skipped. Fixtures: 3h40m LHR–LOS → Owed 600; 2h10m → NotOwed; disagree → EvidenceConflict; same miner → NeedsMoreProof; JFK–LOS on DL → NotOwed (not covered); cancellation; weather warning; checkCase end-to-end with mocked node. **Not verified live** (needs guide 01, and Gate 0 must show the miners can answer past flights).
 - 2026-11-22: Phase 3 built. `askIntent()` in `server/src/services/telegraph/askIntent.js` is the only caller of Telegraph in app code (Gate 0 script uses the low-level client by design). Checks: lint pass; `npm test` → 29 pass, 1 skipped (live). Mocked-HTTP tests: 402→escrow-signed→200 (signature verified by the fake node with viem), multi-miner rows, direct miner ask without budget, 500-but-charged → `charged_on_failure` + one retry only, retry blocked by cap, unknown Intent refused before paying, budget out of range, decision cap, refused-before-payment released, escrow refusal → WALLET_UNFUNDED. `server/scripts/reconcile.js` + tests. **Not verified live:** `LIVE_TELEGRAPH=1 npm test -w server` needs guide 01.
 - 2026-11-22: Phase 2 passed. Checks: `npm run lint` → pass; `npm test` → 16/16 (budget: 20 parallel reservations vs cap of 5 → exactly 5 granted; 20 parallel in one decision vs decision cap of 3 → 3; release on failure; charged_on_failure counts as spent; double settle refused; month rollover). Mongo via mongodb-memory-server (download works in the cloud env). Top-up is unit-tested with a fake funder; live top-up waits for guide 01.
 - 2026-11-22: Phase 1 free part done; paid part blocked on MASTER_MNEMONIC + operator Sepolia ETH (guide 01). Found: no x402 exact on Ethereum Sepolia → escrow rail. Continuing with Phases 2–3 (do not need funds).
