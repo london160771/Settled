@@ -1,0 +1,23 @@
+:root {
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  color: #1a1a1a;
+  background: #fafaf7;
+}
+body {
+  margin: 0;
+}
+.banner {
+  background: #fff3c4;
+  color: #5c4500;
+  text-align: center;
+  font-size: 13px;
+  padding: 6px 16px;
+}
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 16px;
+}

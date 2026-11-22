@@ -4,7 +4,8 @@ Progress log. Updated in every phase commit. Newest notes at the top of the log.
 
 ## Now
 
-- Current phase: Phase 0 — Repo setup (not started)
+- Current phase: Phase 1 — Gate 0
+- Branch: `claude/project-thread-00viqq` (session's push branch; PR to `main`)
 - Blocked on: nothing
 - Deadline: Dec 1, 2026, 23:59 UTC (internal cutoff 12:00 UTC)
 
@@ -12,7 +13,7 @@ Progress log. Updated in every phase commit. Newest notes at the top of the log.
 
 | Phase | Name | Status | Commit | Notes |
 | --- | --- | --- | --- | --- |
-| 0 | Repo setup | Not started | | |
+| 0 | Repo setup | Passed | (see log) | Workspaces, ESLint+Prettier, Vitest, config validation, CI, /api/health |
 | 1 | Gate 0: prove Telegraph works | Not started | | Expect a manual stop (wallet, Sepolia ETH, network) |
 | 2 | Data, wallets and the cap | Not started | | |
 | 3 | Telegraph client | Not started | | |
@@ -38,4 +39,5 @@ Status values: Not started, In progress, Passed, Blocked, Waiting for go.
 
 ## Log
 
+- 2026-11-22: Phase 0 passed. Checks: `npm install` ok; `npm run lint` → pass; `npm test` → 4/4 pass; `npm run build` → pass; `node server/src/index.js` (NODE_ENV=test, dummy vars) → `/api/health` 200; missing vars → clear error, exit 1.
 - 2026-11-22: Docs written (PRD, CLAUDE.md, PROJECT_STATE, ROADMAP, README, REAL_VS_MOCKED, CONCEPT-BRIEF). No code yet.
