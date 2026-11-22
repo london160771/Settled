@@ -11,6 +11,8 @@ import * as account from '../services/account.js';
 import { checkCase } from '../services/flights/evidence.js';
 import { getBudget } from '../services/budget/index.js';
 import * as ask from '../services/ask/index.js';
+import * as judge from '../services/judge.js';
+import { runAttacks } from '../services/attacks/index.js';
 
 const wrap = (fn) => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
 
@@ -252,6 +254,42 @@ export function apiRouter(config, deps = {}) {
   r.get(
     '/leaderboard',
     wrap(async (_req, res) => res.json({ rows: await ask.leaderboard() })),
+  );
+
+  // Judge mode + Attack Lab
+  const optionalUser = wrap(async (req, _res, next) => {
+    const uid = auth.verifyToken(config, req.cookies?.[auth.COOKIE]);
+    req.user = uid ? await User.findById(uid) : null;
+    next();
+  });
+  r.post(
+    '/judge/session',
+    limiter(5),
+    optionalUser,
+    wrap(async (req, res) => {
+      const out = await judge.judgeSession(config, req.user, deps);
+      login(res, out.user).json({
+        user: auth.publicUser(out.user),
+        reused: out.reused,
+        funding: out.funding || null,
+      });
+    }),
+  );
+  const requireDemo = (req, _res, next) =>
+    req.user?.isDemo ? next() : next(new AppError('BAD_REQUEST', 'Start a judge session first.'));
+  r.post(
+    '/judge/demo',
+    requireUser,
+    requireDemo,
+    limiter(5),
+    wrap(async (req, res) => res.json(await judge.runDemo(config, req.user, deps))),
+  );
+  r.post(
+    '/judge/attacks',
+    requireUser,
+    requireDemo,
+    limiter(5),
+    wrap(async (req, res) => res.json(await runAttacks(config, req.user, deps))),
   );
 
   // Public proof page

@@ -1,0 +1,11 @@
+{
+  "source": "Replayed bug #228 case: a paid ask that returned HTTP 500 but was charged 0.01 test USDC (seen on testnet, Nov 2026). SYNTHETIC values until a real one is captured.",
+  "synthetic": true,
+  "receipt": {
+    "intent": "TRAVEL_DISRUPTION_GENERAL",
+    "minerId": "replay-down",
+    "minerName": "Replayed miner (host down)",
+    "costUusdc": 10000,
+    "httpStatus": 500
+  }
+}

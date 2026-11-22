@@ -11,6 +11,7 @@ import Settings from './pages/Settings.jsx';
 import Proof from './pages/Proof.jsx';
 import Ask from './pages/Ask.jsx';
 import Leaderboard from './pages/Leaderboard.jsx';
+import Judge from './pages/Judge.jsx';
 
 function Shell({ children }) {
   const { user, signOut } = useAuth();
@@ -34,6 +35,7 @@ function Shell({ children }) {
             <NavLink to="/receipts">Receipts</NavLink>
             <NavLink to="/wallet">Wallet</NavLink>
             <NavLink to="/leaderboard">Leaderboard</NavLink>
+            {user.isDemo ? <NavLink to="/judge">Judge</NavLink> : null}
             <NavLink to="/settings">Settings</NavLink>
             <button className="link" onClick={signOut}>
               Sign out
@@ -62,6 +64,7 @@ export default function App() {
             <Route path="/signup" element={<AuthPage mode="signup" />} />
             <Route path="/proof/:publicId" element={<Proof />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
+            <Route path="/judge" element={<Judge />} />
             <Route
               path="/"
               element={
