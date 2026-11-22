@@ -1,0 +1,118 @@
+{
+  "children": [
+    "TRAVEL_DISRUPTION_GENERAL"
+  ],
+  "class": "judgment",
+  "intent_id": "TRAVEL_DISRUPTION",
+  "intent_name": "TRAVEL_DISRUPTION",
+  "miner_count": 0,
+  "miners": [],
+  "onchain": {
+    "format_version": 4,
+    "off_chain": [
+      "route_or_flight",
+      "status",
+      "delay_minutes",
+      "reason"
+    ],
+    "ready": true,
+    "request": [
+      {
+        "name": "route_or_flight",
+        "type": "string",
+        "slot": "strings",
+        "index": 0,
+        "max_bytes": 256
+      }
+    ],
+    "response": [
+      {
+        "name": "disrupted",
+        "type": "bool",
+        "slot": "bools",
+        "index": 0
+      }
+    ],
+    "served_by": "TRAVEL_DISRUPTION"
+  },
+  "prefix": true,
+  "request": {
+    "params": [
+      {
+        "name": "route_or_flight",
+        "type": "string",
+        "required": true,
+        "description": "Flight, route or station"
+      }
+    ],
+    "schema_version": 4,
+    "served_by": "TRAVEL_DISRUPTION"
+  },
+  "response": {
+    "fields": [
+      {
+        "name": "route_or_flight",
+        "description": "The flight, route or station checked",
+        "type": "string",
+        "off_chain": true
+      },
+      {
+        "name": "disrupted",
+        "description": "Whether there is a delay, cancellation or disruption",
+        "type": "bool",
+        "true_when": [
+          "true",
+          "yes",
+          "delayed",
+          "cancelled",
+          "disrupted"
+        ],
+        "false_when": [
+          "false",
+          "no",
+          "0",
+          "on time",
+          "on_time",
+          "scheduled",
+          "normal"
+        ],
+        "scored": true
+      },
+      {
+        "name": "status",
+        "description": "Status as stated (on time, delayed, cancelled)",
+        "type": "string",
+        "off_chain": true
+      },
+      {
+        "name": "delay_minutes",
+        "description": "Delay in minutes",
+        "type": "number",
+        "unit": "minutes",
+        "range": [
+          0,
+          10000
+        ],
+        "decimals": 6,
+        "off_chain": true
+      },
+      {
+        "name": "reason",
+        "description": "Stated cause of the disruption",
+        "type": "string",
+        "off_chain": true
+      }
+    ],
+    "format_version": 4,
+    "served_by": "TRAVEL_DISRUPTION"
+  },
+  "wasm": [
+    {
+      "registration_id": 29,
+      "slug": "",
+      "address": "0xb3fb14fecac09efbd0c74fc07d50d7ed1eef2b53",
+      "status": "rejected"
+    }
+  ],
+  "wasm_count": 1
+}

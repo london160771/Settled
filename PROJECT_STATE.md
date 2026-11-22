@@ -4,9 +4,9 @@ Progress log. Updated in every phase commit. Newest notes at the top of the log.
 
 ## Now
 
-- Current phase: Phase 1 — Gate 0
+- Current phase: Phase 1 — Gate 0 (paid part blocked); building Phases 2–3 meanwhile
 - Branch: `claude/project-thread-00viqq` (session's push branch; PR to `main`)
-- Blocked on: nothing
+- Blocked on: `MASTER_MNEMONIC` + Sepolia ETH for the operator — see docs/manual/01-gate0-wallet-and-network.md
 - Deadline: Dec 1, 2026, 23:59 UTC (internal cutoff 12:00 UTC)
 
 ## Phases
@@ -14,7 +14,7 @@ Progress log. Updated in every phase commit. Newest notes at the top of the log.
 | Phase | Name | Status | Commit | Notes |
 | --- | --- | --- | --- | --- |
 | 0 | Repo setup | Passed | (see log) | Workspaces, ESLint+Prettier, Vitest, config validation, CI, /api/health |
-| 1 | Gate 0: prove Telegraph works | Not started | | Expect a manual stop (wallet, Sepolia ETH, network) |
+| 1 | Gate 0: prove Telegraph works | Blocked | | Free part done (schemas, rails, escrow signature check). Paid asks need guide 01 |
 | 2 | Data, wallets and the cap | Not started | | |
 | 3 | Telegraph client | Not started | | |
 | 4 | Flight evidence and decision | Not started | | |
@@ -31,13 +31,28 @@ Status values: Not started, In progress, Passed, Blocked, Waiting for go.
 
 ## Gate 0 results
 
-(Phase 1 fills this: Option A or B, intents confirmed, miner selection possible?, weather Intent name, test USDC mint, first receipt_hash.)
+Free part (2026-11-22, run `node server/scripts/gate0.js --free-only`):
+
+- **Payment rail:** the live node's 402 offers `exact` only on Base Sepolia and Solana Devnet, and `escrow` on Ethereum Sepolia (`evidence/gate0/payment-rails.json`). x402 `exact` on Ethereum Sepolia is **not offered**. Decision: pay via the **escrow** scheme on Ethereum Sepolia (see PRD Decisions Log). Operator funds each user's escrow with `depositUSDCFor`; user wallets need no ETH.
+- **Escrow signing works:** node accepted our signature and refused only for missing deposit (`evidence/gate0/escrow-signature-check.json`).
+- **Intent names (exact):** `TRAVEL_DISRUPTION_GENERAL` (18 miners; plain `TRAVEL_DISRUPTION` has 0), `WEATHER_CHECK_TEMPERATURE` (32), `WEATHER_FORECAST_GENERAL` (26), `WEB_SEARCH_GENERAL` (29), `CRYPTO_PRICE_USD` (56), `CHAT_COMPLETION_GENERAL` (17), `QUESTION_ANSWERING_GENERAL` (17, no input schema → free-form `query`), `SLA_COMPLIANCE_GENERAL` (22), `SERVER_UPTIME_MONITOR_GENERAL` (19, no schema), `CONTRACT_OBLIGATION_AUDIT_GENERAL` (13).
+- **TRAVEL_DISRUPTION schema:** param `route_or_flight` only; fields `disrupted, status, delay_minutes, reason`. No scheduled/actual times, no date param.
+- **Miner selection:** yes. `POST /engine/v1/ask/{minerId}` with intent+params picks one miner (no budget, no fallback). Escrow is offered there too.
+- **Test USDC mint:** public `mint(address,uint256)` on `0xcc19…Ae17` (simulated OK). Needs gas only.
+- **Unknown intent:** `GET /engine/v1/intents/X` → 200 with `miner_count: 0`, `request: null`. A POST with an unknown name returns 402 first (payment gate runs first), so we check the free GET before paying.
+- **Risk for Option A:** most TRAVEL_DISRUPTION miners are US airport-level, *current* status (FAA, METAR, NWS). Only generalists (TxLens, ChainSight, ReferenceForge, PREFLIGHT) might answer a past individual flight. The paid asks decide A vs B.
+- Still open (paid part): Option A or B, first receipt_hash, weather answer.
 
 ## Evidence index
 
-(List files in `evidence/` with one line each.)
+- `evidence/gate0/intents.json` — all live Intents with miner counts.
+- `evidence/gate0/schemas/*.json` — schemas for every Intent in PRD §7.
+- `evidence/gate0/summary-free.json` — params, fields and miners per Intent.
+- `evidence/gate0/payment-rails.json` — schemes/networks offered by the 402 (routed and direct).
+- `evidence/gate0/escrow-signature-check.json` — signature accepted, deposit missing, nothing charged.
 
 ## Log
 
+- 2026-11-22: Phase 1 free part done; paid part blocked on MASTER_MNEMONIC + operator Sepolia ETH (guide 01). Found: no x402 exact on Ethereum Sepolia → escrow rail. Continuing with Phases 2–3 (do not need funds).
 - 2026-11-22: Phase 0 passed. Checks: `npm install` ok; `npm run lint` → pass; `npm test` → 4/4 pass; `npm run build` → pass; `node server/src/index.js` (NODE_ENV=test, dummy vars) → `/api/health` 200; missing vars → clear error, exit 1.
 - 2026-11-22: Docs written (PRD, CLAUDE.md, PROJECT_STATE, ROADMAP, README, REAL_VS_MOCKED, CONCEPT-BRIEF). No code yet.

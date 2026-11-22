@@ -1,0 +1,686 @@
+{
+  "fetched_at": "2026-11-22T17:46:40.419Z",
+  "count": 136,
+  "intents": [
+    {
+      "name": "ACADEMIC_SEARCH_GENERAL",
+      "miner_count": 18,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "AGENT_TASK_GENERAL",
+      "miner_count": 17,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "AIR_QUALITY_INDEX_GENERAL",
+      "miner_count": 22,
+      "lifecycle_state": "registered"
+    },
+    {
+      "name": "AI_TEXT_DETECTION_GENERAL",
+      "miner_count": 20,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "API_HEALTH_CHECK_GENERAL",
+      "miner_count": 18,
+      "lifecycle_state": "registered"
+    },
+    {
+      "name": "ASSET_RESERVE_ATTESTATION_GENERAL",
+      "miner_count": 23,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "B2B_IDENTITY_ENRICHMENT_GENERAL",
+      "miner_count": 16,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "CARRIER_SERVICEABILITY_GENERAL",
+      "miner_count": 28,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "CHATBOT_CONVERSATION_GENERAL",
+      "miner_count": 15,
+      "lifecycle_state": "registered"
+    },
+    {
+      "name": "CHAT_COMPLETION_GENERAL",
+      "miner_count": 17,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "CLOUD_RESOURCE_USAGE_GENERAL",
+      "miner_count": 16,
+      "lifecycle_state": "registered"
+    },
+    {
+      "name": "CODE_GENERATION_GENERAL",
+      "miner_count": 13,
+      "lifecycle_state": "registered"
+    },
+    {
+      "name": "CODE_PATCH_VERIFY_GENERAL",
+      "miner_count": 24,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "CODE_REVIEW_GENERAL",
+      "miner_count": 18,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "COMMERCE_PURCHASE_VERIFY_GENERAL",
+      "miner_count": 17,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "CONTENT_EXTRACTION_GENERAL",
+      "miner_count": 22,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "CONTENT_MODERATION_GENERAL",
+      "miner_count": 17,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "CONTENT_VERIFICATION_GENERAL",
+      "miner_count": 19,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "CONTRACT_OBLIGATION_AUDIT_GENERAL",
+      "miner_count": 13,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "CORPORATE_REGISTRY_LOOKUP_GENERAL",
+      "miner_count": 27,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "CREDIT_SCORE_VERIFY_GENERAL",
+      "miner_count": 13,
+      "lifecycle_state": "registered"
+    },
+    {
+      "name": "CROSS_CHAIN_STATE_VERIFY_GENERAL",
+      "miner_count": 28,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "CRYPTO_PRICE_USD",
+      "miner_count": 56,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "CRYPTO_TRANSFER_VERIFY_GENERAL",
+      "miner_count": 24,
+      "lifecycle_state": "registered"
+    },
+    {
+      "name": "CRYPTO_YIELD_RATE_GENERAL",
+      "miner_count": 28,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "CURRENCY_EXCHANGE_CONVERT",
+      "miner_count": 22,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "CUSTOMER_TICKET_RESOLUTION_GENERAL",
+      "miner_count": 14,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "CVE_LOOKUP_CVSS",
+      "miner_count": 21,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "DATACENTER_TELEMETRY_VERIFY_GENERAL",
+      "miner_count": 14,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "DEEPFAKE_DETECTION_GENERAL",
+      "miner_count": 14,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "DELIVERY_WINDOW_VERIFY_GENERAL",
+      "miner_count": 18,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "DNS_RECORD_LOOKUP_GENERAL",
+      "miner_count": 26,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "DOCUMENT_AUTHENTICITY_GENERAL",
+      "miner_count": 19,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "EMAIL_SECURITY_GENERAL",
+      "miner_count": 21,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "EMBEDDING_GENERATION_GENERAL",
+      "miner_count": 17,
+      "lifecycle_state": "registered"
+    },
+    {
+      "name": "ENTITY_EXTRACTION_GENERAL",
+      "miner_count": 14,
+      "lifecycle_state": "registered"
+    },
+    {
+      "name": "EVENT_OUTCOME_RESOLUTION_GENERAL",
+      "miner_count": 39,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "FACT_CHECK_GENERAL",
+      "miner_count": 20,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "FARE_RULE_VERIFY_GENERAL",
+      "miner_count": 17,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "FINANCIAL_DATA_GENERAL",
+      "miner_count": 21,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "FLIGHT_AVAILABILITY_GENERAL",
+      "miner_count": 14,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "FRAUD_DETECTION_GENERAL",
+      "miner_count": 28,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "FRAUD_RISK_GENERAL",
+      "miner_count": 16,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "FX_NOW_CAD",
+      "miner_count": 18,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "FX_NOW_EUR",
+      "miner_count": 18,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "FX_NOW_SEK",
+      "miner_count": 18,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "GAME_RESULT_GENERAL",
+      "miner_count": 17,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "GAS_PRICE_GENERAL",
+      "miner_count": 29,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "GRAMMAR_SPELL_CHECK_GENERAL",
+      "miner_count": 18,
+      "lifecycle_state": "registered"
+    },
+    {
+      "name": "GRID_POWER_PRICE_GENERAL",
+      "miner_count": 41,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "HOTEL_AVAILABILITY_GENERAL",
+      "miner_count": 17,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "IMAGE_CAPTIONING_GENERAL",
+      "miner_count": 14,
+      "lifecycle_state": "registered"
+    },
+    {
+      "name": "IMAGE_VERIFICATION_GENERAL",
+      "miner_count": 15,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "INVOICE_LEDGER_RECONCILE_GENERAL",
+      "miner_count": 16,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "IP_GEOLOCATION_GENERAL",
+      "miner_count": 15,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "KEYWORD_EXTRACTION_GENERAL",
+      "miner_count": 15,
+      "lifecycle_state": "registered"
+    },
+    {
+      "name": "KYC_BIOMETRIC_LIVENESS_GENERAL",
+      "miner_count": 14,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "LANGUAGE_GENERATION_GENERAL",
+      "miner_count": 17,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "LANGUAGE_TRANSLATION_GENERAL",
+      "miner_count": 23,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "LIQUIDITY_DEPTH_VERIFY_GENERAL",
+      "miner_count": 40,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "LIVE_PORT_CONGESTION_GENERAL",
+      "miner_count": 13,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "LIVE_SHELF_PRICE_GENERAL",
+      "miner_count": 25,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "LLM_OUTPUT_EVALUATION_GENERAL",
+      "miner_count": 15,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "LOAN_INTEREST_RATE_QUOTE_GENERAL",
+      "miner_count": 25,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "MACRO_ECONOMIC_INDICATOR_GENERAL",
+      "miner_count": 29,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "MALWARE_DETECTION_HASH",
+      "miner_count": 16,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "MEDIA_AUTHENTICITY_CHECK_GENERAL",
+      "miner_count": 19,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "MEDIA_FORENSIC_VERIFY_GENERAL",
+      "miner_count": 19,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "MINING_HASHPRICE_VERIFY_GENERAL",
+      "miner_count": 31,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "NEWS_HEADLINES_GENERAL",
+      "miner_count": 18,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "NEWS_SEARCH_GENERAL",
+      "miner_count": 21,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "ONCHAIN_METRIC_VERIFY_GENERAL",
+      "miner_count": 45,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "ONCHAIN_TX_LOOKUP_GENERAL",
+      "miner_count": 31,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "OPTIMAL_EXECUTION_ROUTE_GENERAL",
+      "miner_count": 45,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "PACKAGE_STATUS_GENERAL",
+      "miner_count": 13,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "PAYMENT_METHOD_VERIFY_GENERAL",
+      "miner_count": 21,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "PLAGIARISM_DETECTION_GENERAL",
+      "miner_count": 17,
+      "lifecycle_state": "registered"
+    },
+    {
+      "name": "PORT_SCAN_AUDIT_GENERAL",
+      "miner_count": 16,
+      "lifecycle_state": "registered"
+    },
+    {
+      "name": "PRODUCT_AUTHENTICITY_GENERAL",
+      "miner_count": 13,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "PURCHASE_ORDER_VERIFY_GENERAL",
+      "miner_count": 16,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "QUESTION_ANSWERING_GENERAL",
+      "miner_count": 17,
+      "lifecycle_state": "registered"
+    },
+    {
+      "name": "REGRESSION_VERIFY_GENERAL",
+      "miner_count": 21,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "REGULATORY_FILING_MONITOR_GENERAL",
+      "miner_count": 24,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "RESEARCH_QUERY_GENERAL",
+      "miner_count": 32,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "RESEARCH_SYNTHESIS_GENERAL",
+      "miner_count": 20,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "RETURN_POLICY_VERIFY_GENERAL",
+      "miner_count": 19,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "ROUTE_ETA_GENERAL",
+      "miner_count": 19,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "SANCTIONS_SCREENING_MATCH_GENERAL",
+      "miner_count": 29,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "SATELLITE_IMAGERY_ANALYSIS_GENERAL",
+      "miner_count": 16,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "SECURITY_REVIEW_GENERAL",
+      "miner_count": 35,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "SEMANTIC_SIMILARITY_GENERAL",
+      "miner_count": 17,
+      "lifecycle_state": "registered"
+    },
+    {
+      "name": "SENSOR_TELEMETRY_VERIFY_GENERAL",
+      "miner_count": 24,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "SENTIMENT_ANALYSIS_GENERAL",
+      "miner_count": 23,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "SERVER_UPTIME_MONITOR_GENERAL",
+      "miner_count": 19,
+      "lifecycle_state": "registered"
+    },
+    {
+      "name": "SHIPMENT_DELAY_RISK_GENERAL",
+      "miner_count": 15,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "SHIP_RATE_ETA_GENERAL",
+      "miner_count": 21,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "SKU_IN_STOCK_GENERAL",
+      "miner_count": 16,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "SLA_COMPLIANCE_GENERAL",
+      "miner_count": 22,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "SMART_CONTRACT_AUDIT_GENERAL",
+      "miner_count": 20,
+      "lifecycle_state": "registered"
+    },
+    {
+      "name": "SOCIAL_BOT_DETECTION_GENERAL",
+      "miner_count": 17,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "SPEECH_TO_TEXT_GENERAL",
+      "miner_count": 14,
+      "lifecycle_state": "registered"
+    },
+    {
+      "name": "SPORTS_SCORE_GENERAL",
+      "miner_count": 15,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "SSL_VERIFICATION_CERT",
+      "miner_count": 22,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "STOCK_PRICE_US_EQUITY",
+      "miner_count": 27,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "STORM_ALERT_GENERAL",
+      "miner_count": 20,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "TASK_COMPLETION_GENERAL",
+      "miner_count": 17,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "TASK_EXECUTION_QUALITY_GENERAL",
+      "miner_count": 15,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "TELEGRAPH_KNOWLEDGE_GENERAL",
+      "miner_count": 15,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "TEXT_AUTHENTICITY_CHECK_GENERAL",
+      "miner_count": 20,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "TEXT_CLASSIFICATION_GENERAL",
+      "miner_count": 22,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "TEXT_GENERATION_GENERAL",
+      "miner_count": 20,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "TEXT_SUMMARIZATION_GENERAL",
+      "miner_count": 20,
+      "lifecycle_state": "registered"
+    },
+    {
+      "name": "TEXT_TO_SPEECH_GENERAL",
+      "miner_count": 16,
+      "lifecycle_state": "registered"
+    },
+    {
+      "name": "THREAT_INTELLIGENCE_INDICATOR",
+      "miner_count": 20,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "THREAT_IP_REPUTATION_GENERAL",
+      "miner_count": 26,
+      "lifecycle_state": "registered"
+    },
+    {
+      "name": "TOKEN_HOLDER_COUNT_GENERAL",
+      "miner_count": 22,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "TOKEN_TOTAL_SUPPLY_VERIFY_GENERAL",
+      "miner_count": 28,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "TRANSACTION_RISK_GENERAL",
+      "miner_count": 17,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "TRAVEL_DISRUPTION_GENERAL",
+      "miner_count": 18,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "TRAVEL_TRANSIT_LOCK_GENERAL",
+      "miner_count": 15,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "TVL_LOOKUP_GENERAL",
+      "miner_count": 24,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "TWITTER_SEARCH_GENERAL",
+      "miner_count": 14,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "URL_SAFE_GENERAL",
+      "miner_count": 20,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "URL_SCAN_VERDICT",
+      "miner_count": 22,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "VALIDATOR_PERFORMANCE_VERIFY_GENERAL",
+      "miner_count": 23,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "VENDOR_VERIFY_GENERAL",
+      "miner_count": 26,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "VESSEL_TELEMETRY_VERIFY_GENERAL",
+      "miner_count": 18,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "VIDEO_VERIFICATION_GENERAL",
+      "miner_count": 16,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "VULNERABILITY_TRIAGE_GENERAL",
+      "miner_count": 39,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "WALLET_BALANCE_CHECK_GENERAL",
+      "miner_count": 24,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "WAREHOUSE_INVENTORY_GENERAL",
+      "miner_count": 17,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "WASH_TRADING_DETECTION_GENERAL",
+      "miner_count": 18,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "WEATHER_CHECK_TEMPERATURE",
+      "miner_count": 32,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "WEATHER_FORECAST_GENERAL",
+      "miner_count": 26,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "WEATHER_FORECAST_VERIFY_GENERAL",
+      "miner_count": 28,
+      "lifecycle_state": "active"
+    },
+    {
+      "name": "WEB_SEARCH_GENERAL",
+      "miner_count": 29,
+      "lifecycle_state": "active"
+    }
+  ]
+}

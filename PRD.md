@@ -362,6 +362,8 @@ Scoring reminder (Apps & Agents, /100): technical quality + mainnet readiness 35
 - 2026-11-22: Flights first (EU261 simplified); SLA claims P1 unless Gate 0 says otherwise.
 - 2026-11-22: Agent works phases continuously, commits + pushes each passed phase, stops only for manual tasks, never deploys. (Adesope)
 
+- 2026-11-22 (Gate 0, agent): The live node's 402 offers no x402 `exact` on Ethereum Sepolia (only Base Sepolia/Solana), so Settled pays with the **escrow** scheme on Ethereum Sepolia (EIP-191 signed, `X-PAYMENT` header). The operator funds each user's escrow with `depositUSDCFor(user, amount)`; the user's Settled wallet balance is its escrow `available` from `/v1/ledger/account/{address}`. Receipts come in `X-PAYMENT-RESPONSE` (escrow has no tx_hash; show it when present). `@x402/fetch`/`@x402/evm` are not used. Exact Intent names come from Gate 0 (`*_GENERAL`, `WEATHER_CHECK_TEMPERATURE`, `CRYPTO_PRICE_USD`).
+
 ## 20. Open questions
 
 - Which real past delayed flight is the seeded judge case? (Pick in Phase 4 from flights that Gate 0 shows the miners can answer.)
