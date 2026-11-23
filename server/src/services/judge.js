@@ -60,7 +60,7 @@ export async function judgeSession(config, currentUser, deps = {}) {
   const seeded = await addSlaCase(user._id, JUDGE_SLA_SEED);
   let funding = null;
   try {
-    funding = await requestTopUp(config, user._id, deps.wallet || {});
+    funding = await requestTopUp(config, user._id, deps.wallet || {}, { ifNeeded: true });
   } catch (e) {
     funding = { error: e.code || e.message };
   }

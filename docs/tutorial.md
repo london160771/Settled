@@ -1,14 +1,14 @@
-# How an agent pays Telegraph for proof (draft)
+# How an agent pays Telegraph for proof
 
 This is how Settled, a personal claims assistant, buys verified answers from Telegraph miners with a hard spending cap. Every snippet is from the repo (`server/src/services/telegraph/`). Testnet only.
 
 ## 1. Find the Intent and its schema (free)
 
 ```
-curl https://devnode.telegraphprotocol.com/engine/v1/intents/TRAVEL_DISRUPTION_GENERAL
+curl https://devnode.telegraphprotocol.com/engine/v1/intents/SLA_COMPLIANCE_GENERAL
 ```
 
-It lists the params (`route_or_flight`), the response fields (`disrupted`, `status`, `delay_minutes`, `reason`) and the live miners. An unknown name returns `miner_count: 0` and `request: null`, so check here before paying: a POST with an unknown name still gets a 402 first.
+It lists the live miners and what each one covers. Settled uses two of them: one that answers a vendor's uptime for a **calendar month** from its public incident history, and one that answers over a **rolling window** (`30d`, `54d`…). Both return `service, uptime_pct, sla_target_pct, compliant, period`. An unknown name returns `miner_count: 0` and `request: null`, so check here before paying: a POST with an unknown name still gets a 402 first.
 
 ## 2. Reserve the budget before you ask
 
@@ -48,7 +48,7 @@ A paid ask that fails (HTTP 500, miner down) may still be charged. Settled settl
 
 ## 6. Combine purchases into one decision
 
-For a flight: one routed ask, one direct ask to a *different* miner (`POST /engine/v1/ask/{minerId}`), and a weather ask. The two travel answers must agree within 15 minutes; otherwise the result is `EvidenceConflict` and no claim is drafted. Every fact in the claim points to the receipts that back it, and the claim email links a public proof page where anyone can check them.
+For an SLA credit: one direct ask (`POST /engine/v1/ask/{minerId}`) for the billing month. If that month missed the promise, a second direct ask to a *different* miner over a window that covers the month. Only if both see a breach is the case `Owed`; if they disagree it is `EvidenceConflict` and no claim is drafted. A live run on Vercel's October 2026 uptime (99.9645% vs 99.99%) took about 9 seconds and 0.02 test USDC. Every fact in the claim points to the receipts that back it, and the claim email links a public proof page where anyone can check them.
 
 ## Try it
 

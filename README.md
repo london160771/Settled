@@ -103,23 +103,25 @@ LIVE_TELEGRAPH=1 npm test -w server        # adds 1 real paid smoke ask (0.01 te
 
 ### Sample request and expected result
 
-After signing up (cookie session), add a case and check it:
+After signing up (cookie session), add an SLA case and check it:
 
 ```
 curl -b jar -c jar -X POST localhost:4000/api/cases -H 'content-type: application/json' \
-  -d '{"flightNumber":"BA75","date":"2026-11-20","from":"LHR","to":"LOS"}'
+  -d '{"type":"sla","vendor":"vercel","period":"2026-10","monthlyFeeUsd":400}'
 curl -b jar -X POST localhost:4000/api/cases/<caseId>/check
 ```
 
-Expected shape (amount and outcome depend on what the miners report):
+Live result (2026-11-23, [evidence/sla/live-check.json](evidence/sla/live-check.json)):
 
 ```
-{ "decision": { "outcome": "Owed", "amountEur": 600,
-  "reasons": ["Departs from LHR (GB), an EU/EEA/UK airport: covered.", "Arrival delay 220 min is at least 180 min. Distance 5004 km → 600 EUR."],
-  "factRefs": [{ "fact": "delayMinutes", "value": 220, "receiptIds": ["…", "…"] }], "spentUusdc": 30000 } }
+{ "decision": { "outcome": "Owed", "amountUsd": 40,
+  "reasons": ["Uptime in 2026-10 was 99.9645%, below the promised 99.99%.",
+              "A second miner also saw a breach (99.1224% over last 54 days).",
+              "Your tiers give a 10% service credit = 40 USD of 400 USD."],
+  "spentUusdc": 20000 } }
 ```
 
-The 220-minute example above is from the mocked test node, not a live run. Live results will be saved under `evidence/` with their receipt hashes.
+Live judge demo in a real browser: Owed in 8.9 s, all six attacks blocked ([evidence/judge/](evidence/judge/)).
 
 ## Costs and limits (testnet)
 

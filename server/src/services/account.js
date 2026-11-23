@@ -30,11 +30,12 @@ export async function walletView(config, userId, deps = {}) {
   };
 }
 
-export async function requestTopUp(config, userId, deps = {}) {
+export async function requestTopUp(config, userId, deps = {}, { ifNeeded = false } = {}) {
   const user = await User.findById(userId).lean();
   const w = await ensureWallet(config, userId);
   const bal = await getEscrowBalance(config, w.address, deps.fetchImpl);
   if (bal.availableUusdc >= TOPUP_ONLY_BELOW_UUSDC) {
+    if (ifNeeded) return { alreadyFunded: true, availableUusdc: bal.availableUusdc };
     throw new AppError(
       'BAD_REQUEST',
       'Your wallet still has enough test USDC. Top-up is for empty wallets.',
