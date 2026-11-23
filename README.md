@@ -15,8 +15,8 @@ Core guarantee: **no claim without a paid receipt behind every fact in it, and s
 | Part | State |
 | --- | --- |
 | Code for P0 (web, API, bot, cap, Telegraph client, decisions, claims, Ask, leaderboard, judge mode, Attack Lab) | Built, 75 automated tests pass (Telegraph mocked in tests) |
-| Real paid Telegraph asks | **Not yet run.** Waiting for the wallet seed and Sepolia ETH ([guide 01](docs/manual/01-gate0-wallet-and-network.md)). Free Gate 0 checks are done ([evidence/gate0](evidence/gate0)). |
-| Flights vs SLA path (Gate 0 Option A/B) | Open until the paid Gate 0 asks run |
+| Real paid Telegraph asks | **Run live on 2026-11-23** with real receipts: Gate 0 ([evidence/gate0](evidence/gate0)), smoke ask ([evidence/live](evidence/live)), Mission 9 4 asks + 5th blocked ([evidence/mission9](evidence/mission9)) |
+| Flights vs SLA path (Gate 0 Option A/B) | Live Gate 0: no miner returned a past flight's delay (BA75 LHR–LOS), so flight checks end in Needs more proof. Option B (SLA path) under review |
 | Telegram bot live | Waiting for `TELEGRAM_BOT_TOKEN` ([guide 03](docs/manual/03-telegram-bot.md)) |
 | Real email sending | Optional SMTP ([guide 02](docs/manual/02-email-sending.md)); `mailto:` fallback works today |
 | Deploy | Not done by the agent. [Guide 04](docs/manual/04-deploy.md) |
