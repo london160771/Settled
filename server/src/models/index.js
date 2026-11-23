@@ -63,6 +63,8 @@ const CaseSchema = new Schema(
     promisedPct: Number,
     monthlyFeeUsd: Number,
     tiers: [{ _id: false, belowPct: Number, creditPct: Number }],
+    termsReceiptId: { type: Schema.Types.ObjectId, ref: 'Receipt' }, // contract read by a miner
+    claimWindowDays: Number,
     flightNumber: { type: String, uppercase: true, trim: true },
     date: String, // YYYY-MM-DD
     from: { type: String, uppercase: true },

@@ -14,7 +14,7 @@ Core guarantee: **no claim without a paid receipt behind every fact in it, and s
 
 | Part | State |
 | --- | --- |
-| Code for P0 (web, API, bot, cap, Telegraph client, SLA + flight decisions, claims, Ask, leaderboard, judge mode, Attack Lab) | Built, 89 automated tests pass (Telegraph mocked in tests) |
+| Code for P0 (web, API, bot, cap, Telegraph client, SLA + flight decisions, claims, Ask, leaderboard, judge mode, Attack Lab) | Built, 94 automated tests pass (Telegraph mocked in tests) |
 | Real paid Telegraph asks | **Run live on 2026-11-23** with real receipts: Gate 0 ([evidence/gate0](evidence/gate0)), smoke ask ([evidence/live](evidence/live)), Mission 9 4 asks + 5th blocked ([evidence/mission9](evidence/mission9)) |
 | Main path | **SLA credits** (Gate 0 Option B). Live: Vercel Oct 2026 99.9645% vs 99.99% → Owed, 10% credit, 2 receipts from 2 miners, 9.8 s ([evidence/sla/live-check.json](evidence/sla/live-check.json)). Flights stay as a second path, but live miners can't report a past flight's delay yet, so they end in Needs more proof |
 | Telegram bot live | Waiting for `TELEGRAM_BOT_TOKEN` ([guide 03](docs/manual/03-telegram-bot.md)) |
@@ -39,6 +39,8 @@ Mission 9: ask the assistant things that need fresh data (`/price`, `/weather`, 
 2. Settled buys `SLA_COMPLIANCE_GENERAL` for that calendar month from a contract-scoped miner. If it shows a breach, it buys a second opinion from a **different** miner over a rolling window that covers the month (works up to 90 days back).
 3. **Owed** only if both see a breach; credit = your tier × your bill. One says breach and the other doesn't → **Evidence conflict**.
 4. Draft credit request with the receipts appendix and proof page; you confirm the address and send.
+
+Optional: paste your SLA in the form and Settled pays a Telegraph miner (`CONTRACT_OBLIGATION_AUDIT_GENERAL`) to quote its clauses, keeps only the ones found word for word in your text, and fills in the promised uptime, credit tiers and claim window for you to check ([`server/src/services/sla/terms.js`](server/src/services/sla/terms.js)).
 
 Judges: open `/judge` → **Start the demo account** → **Run the demo** (Vercel, October 2026) → **Run the attacks**.
 
@@ -69,7 +71,7 @@ Prerequisites: Node 20+ (22 tested), npm 10, internet access to `devnode.telegra
 git clone https://github.com/london160771/Settled.git
 cd Settled
 npm install
-npm test          # 89 tests, Telegraph mocked; no secrets needed
+npm test          # 94 tests, Telegraph mocked; no secrets needed
 npm run lint
 npm run build
 ```

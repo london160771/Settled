@@ -14,6 +14,7 @@ import * as ask from '../services/ask/index.js';
 import * as judge from '../services/judge.js';
 import { runAttacks } from '../services/attacks/index.js';
 import { VENDORS, DEFAULT_TIERS } from '../services/sla/vendors.js';
+import { readTerms } from '../services/sla/terms.js';
 
 const wrap = (fn) => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
 
@@ -76,6 +77,14 @@ export function apiRouter(config, deps = {}) {
   r.get('/me', requireUser, (req, res) => res.json({ user: auth.publicUser(req.user) }));
 
   // Cases + claims
+  r.post(
+    '/sla/read-terms',
+    requireUser,
+    limiter(10),
+    wrap(async (req, res) => {
+      res.json(await readTerms(config, req.user._id, req.body?.text, deps.telegraph || {}));
+    }),
+  );
   r.get('/sla/vendors', (_req, res) =>
     res.json({
       vendors: Object.entries(VENDORS).map(([key, v]) => ({ key, name: v.name })),

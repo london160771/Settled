@@ -111,6 +111,13 @@ export function decideSla({ caseDoc, month = null, window = null }) {
       ],
     };
   }
+  if (caseDoc.termsReceiptId) {
+    factRefs.push({
+      fact: 'contractTerms',
+      value: { promisedPct: caseDoc.promisedPct ?? null, tiers: caseDoc.tiers || [] },
+      receiptIds: [caseDoc.termsReceiptId],
+    });
+  }
   factRefs.push({
     fact: 'breachCorroborated',
     value: { uptimePct: wUptime, period: facts.windowPeriod },
@@ -141,7 +148,9 @@ export function decideSla({ caseDoc, month = null, window = null }) {
     ],
     warnings: [
       ...warnings,
-      'Most vendors only pay credits you request in time (often within 30 days after the month). Check your contract.',
+      caseDoc.claimWindowDays
+        ? `Your contract says to claim within ${caseDoc.claimWindowDays} days after the month ends.`
+        : 'Most vendors only pay credits you request in time (often within 30 days after the month). Check your contract.',
     ],
     facts,
     factRefs,

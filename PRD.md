@@ -366,6 +366,8 @@ Scoring reminder (Apps & Agents, /100): technical quality + mainnet readiness 35
 
 - 2026-11-23 (Gate 0 Option B, Adesope chose it on the decision card): no live TRAVEL_DISRUPTION miner returns a past non-US flight's delay, so the **main path is SLA/uptime claims** and Phase 11 moves into P0. Scope kept small: SLA cases = vendor (Vercel, GitHub, DigitalOcean, Twilio) + finished billing month + optional promised % / monthly bill / credit tiers. Evidence = `SLA_COMPLIANCE_GENERAL` from a calendar-month, contract-scoped miner plus a second, different miner's rolling window covering the month (≤ 90 days back); "Owed" needs both to see a breach. Credit = the user's tiers (example defaults, labelled). The judge demo runs the Vercel 2026-10 case; the flight path stays as a secondary path. `SERVER_UPTIME_MONITOR` (point-in-time only) is not used.
 
+- 2026-11-23 (Adesope: "go"): Phase 12 contract reading built — paste SLA → CONTRACT_OBLIGATION_AUDIT clauses → verbatim check → parsed terms the user confirms. OpenClaw skill not started.
+
 ## 20. Open questions
 
 - Which real past delayed flight is the seeded judge case? (Pick in Phase 4 from flights that Gate 0 shows the miners can answer.)

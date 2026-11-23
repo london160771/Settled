@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { api } from '../api/client.js';
+import { api, shortHash } from '../api/client.js';
 import { ErrorBox, useLoad } from '../components/ui.jsx';
 
 function lastMonth() {
@@ -20,13 +20,43 @@ function AddSla() {
     tiers: '99.99:10, 99:25, 95:50',
   });
   const [error, setError] = useState(null);
+  const [paste, setPaste] = useState('');
+  const [reading, setReading] = useState(false);
+  const [terms, setTerms] = useState(null); // { read, filled: { promisedPct, tiers } }
   const nav = useNavigate();
   const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
+  const tiersText = (t) => t.map((x) => `${x.belowPct}:${x.creditPct}`).join(', ');
+  const readSla = async () => {
+    setError(null);
+    setReading(true);
+    try {
+      const read = await api('/sla/read-terms', { method: 'POST', body: { text: paste } });
+      const s = read.suggestion;
+      const filled = {
+        promisedPct: s.promisedPct != null ? String(s.promisedPct) : form.promisedPct,
+        tiers: s.tiers.length ? tiersText(s.tiers) : form.tiers,
+      };
+      setForm({ ...form, ...filled });
+      setTerms({ read, filled });
+    } catch (err) {
+      setError(err);
+    } finally {
+      setReading(false);
+    }
+  };
+  // The receipt only backs the terms if the user kept what the miner's clauses say.
+  const termsKept =
+    terms && form.promisedPct === terms.filled.promisedPct && form.tiers === terms.filled.tiers;
   const submit = async (e) => {
     e.preventDefault();
     setError(null);
     try {
-      const d = await api('/cases', { method: 'POST', body: { type: 'sla', ...form } });
+      const body = { type: 'sla', ...form };
+      if (termsKept) {
+        body.termsReceiptId = terms.read.receipt._id;
+        body.claimWindowDays = terms.read.suggestion.claimWindowDays;
+      }
+      const d = await api('/cases', { method: 'POST', body });
       nav(`/cases/${d.case._id}`);
     } catch (err) {
       setError(err);
@@ -48,6 +78,41 @@ function AddSla() {
         Billing month (must have ended)
         <input required type="month" value={form.period} onChange={set('period')} />
       </label>
+      <details className="stack" open={!!paste}>
+        <summary>Paste your SLA to fill these in (optional, about 0.01 test USDC)</summary>
+        <textarea
+          rows={6}
+          maxLength={20000}
+          placeholder="Paste the uptime commitment and service credit sections of your agreement"
+          value={paste}
+          onChange={(e) => setPaste(e.target.value)}
+        />
+        <button
+          type="button"
+          className="secondary"
+          disabled={reading || paste.trim().length < 40}
+          onClick={readSla}
+        >
+          {reading ? 'A Telegraph miner is reading it…' : 'Read my SLA'}
+        </button>
+        {terms ? (
+          <p className="muted">
+            Read by {terms.read.receipt.minerName || terms.read.receipt.minerId} · receipt{' '}
+            <span className="mono">{shortHash(terms.read.receipt.receiptHash)}</span> ·{' '}
+            {terms.read.quotesVerified} clause(s) matched your text word for word
+            {terms.read.suggestion.claimWindowDays
+              ? ` · claim within ${terms.read.suggestion.claimWindowDays} days`
+              : ''}
+            .{' '}
+            {termsKept
+              ? 'Check the values below.'
+              : 'You changed the values, so they will be saved as your own, without the receipt.'}
+            {terms.read.suggestion.promisedPct == null && !terms.read.suggestion.tiers.length
+              ? ' No uptime terms were found; fill them in yourself.'
+              : ''}
+          </p>
+        ) : null}
+      </details>
       <div className="grid2">
         <label>
           Promised uptime % <span className="muted">(blank = vendor's published SLA)</span>

@@ -14,11 +14,11 @@ const BASE = process.env.TELEGRAPH_BASE_URL || 'https://devnode.telegraphprotoco
 const user = deriveAccount(process.env.MASTER_MNEMONIC, 1);
 const [miner, label, ...q] = process.argv.slice(2);
 const body = process.env.P
-  ? { intent: 'SLA_COMPLIANCE_GENERAL', params: JSON.parse(process.env.P) }
-  : { intent: 'SLA_COMPLIANCE_GENERAL', query: q.join(' ') };
+  ? { intent: process.env.INTENT || 'SLA_COMPLIANCE_GENERAL', params: JSON.parse(process.env.P) }
+  : { intent: process.env.INTENT || 'SLA_COMPLIANCE_GENERAL', query: q.join(' ') };
 const p = miner === 'routed' ? '/engine/v1/ask' : `/engine/v1/ask/${miner}`;
 if (miner === 'routed') body.max_budget_usdc = 20000;
-const out = path.join(ROOT, `evidence/sla/probe-${label}.json`);
+const out = path.join(ROOT, `evidence/${process.env.OUTDIR || 'sla'}/probe-${label}.json`);
 fs.mkdirSync(path.dirname(out), { recursive: true });
 try {
   const r = await paidAsk({ baseUrl: BASE, path: p, body, account: user, maxPaymentUusdc: 20000 });

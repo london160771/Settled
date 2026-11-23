@@ -1,0 +1,61 @@
+{
+  "at": "2026-11-23T14:08:57.752Z",
+  "miner": "83159274",
+  "request": {
+    "intent": "CONTRACT_OBLIGATION_AUDIT_GENERAL",
+    "params": {
+      "contract": "SAMPLE SERVICE LEVEL AGREEMENT (synthetic example written for Settled tests; not any vendor's real terms)\n\n1. Service Commitment. Acme Cloud will use commercially reasonable efforts to make the Platform available with a Monthly Uptime Percentage of at least 99.99% during each calendar month (the \"Service Commitment\").\n\n2. Service Credits. If Acme Cloud does not meet the Service Commitment, Customer will be eligible to receive a Service Credit as a percentage of the monthly fees paid for the affected month, as follows:\n   (a) Monthly Uptime Percentage less than 99.99% but equal to or greater than 99.0%: 10% Service Credit;\n   (b) Monthly Uptime Percentage less than 99.0% but equal to or greater than 95.0%: 25% Service Credit;\n   (c) Monthly Uptime Percentage less than 95.0%: 50% Service Credit.\n\n3. Claims. To receive a Service Credit, Customer must submit a claim to support within thirty (30) days after the end of the month in which the downtime occurred. Service Credits are Customer's sole remedy.\n\n4. Exclusions. The Service Commitment does not apply to scheduled maintenance announced at least 48 hours in advance or to degraded performance that does not make the Platform unavailable.\n"
+    }
+  },
+  "status": 200,
+  "body": {
+    "miner_id": "83159274",
+    "miner_name": "TelegraphIntent",
+    "endpoint": "/audit",
+    "result": {
+      "verdict": "Unclear",
+      "obligations": [
+        "Acme Cloud: will use commercially reasonable efforts to make the Platform available with a Monthly Uptime Percentage of at least 99.99% during each calendar month (the \"Service Commitment\") - unverifiable from the contract text: read from the contract wording; performance is not evidenced in the text",
+        "If Acme Cloud does not meet the Service Commitment, Customer: will be eligible to receive a Service Credit as a percentage of the monthly fees paid for the affected month, as follows: (a) Monthly Uptime Percentage less than 99.99% but equal to or greater than 99.0%: 10% Service Credit - unverifiable from the contract text: read from the contract wording; performance is not evidenced in the text",
+        "To receive a Service Credit, Customer: must submit a claim to support within thirty (30) days after the end of the month in which the downtime occurred - unverifiable from the contract text: read from the contract wording; performance is not evidenced in the text"
+      ],
+      "clauses": [
+        "Acme Cloud will use commercially reasonable efforts to make the Platform available with a Monthly Uptime Percentage of at least 99.99% during each calendar month (the \"Service Commitment\").",
+        "If Acme Cloud does not meet the Service Commitment, Customer will be eligible to receive a Service Credit as a percentage of the monthly fees paid for the affected month, as follows:\n   (a) Monthly Uptime Percentage less than 99.99% but equal to or greater than 99.0%: 10% Service Credit;",
+        "To receive a Service Credit, Customer must submit a claim to support within thirty (30) days after the end of the month in which the downtime occurred."
+      ],
+      "summary": "Unclear: all 3 identified obligation(s) are stated but none can be verified from the text alone, including Acme Cloud's obligation to will use commercially reasonable efforts to make the Platform available with a Monthly Uptime Percentage of.... This audits the contract text itself; no external evidence of performance was available. This audit used the deterministic reader rather than the model (no model configured), so obligations are read from the contract's own wording."
+    },
+    "result_shape": "intent",
+    "format_version": 3,
+    "field_status": {
+      "verdict": "ok",
+      "obligations": "ok",
+      "clauses": "ok",
+      "summary": "ok"
+    },
+    "input": {
+      "contract": "SAMPLE SERVICE LEVEL AGREEMENT (synthetic example written for Settled tests; not any vendor's real terms)\n\n1. Service Commitment. Acme Cloud will use commercially reasonable efforts to make the Platform available with a Monthly Uptime Percentage of at least 99.99% during each calendar month (the \"Service Commitment\").\n\n2. Service Credits. If Acme Cloud does not meet the Service Commitment, Customer will be eligible to receive a Service Credit as a percentage of the monthly fees paid for the affected month, as follows:\n   (a) Monthly Uptime Percentage less than 99.99% but equal to or greater than 99.0%: 10% Service Credit;\n   (b) Monthly Uptime Percentage less than 99.0% but equal to or greater than 95.0%: 25% Service Credit;\n   (c) Monthly Uptime Percentage less than 95.0%: 50% Service Credit.\n\n3. Claims. To receive a Service Credit, Customer must submit a claim to support within thirty (30) days after the end of the month in which the downtime occurred. Service Credits are Customer's sole remedy.\n\n4. Exclusions. The Service Commitment does not apply to scheduled maintenance announced at least 48 hours in advance or to degraded performance that does not make the Platform unavailable.\n"
+    },
+    "input_schema_version": 3,
+    "cost_usd": 0.01,
+    "duration_ms": 200,
+    "timestamp": "2026-11-23T14:08:47.730862684Z",
+    "reasoning": "Intent: miner telegraph-intent-miner given by the caller\nMiner: input schema v3 mapped in code to POST /audit",
+    "intent": "CONTRACT_OBLIGATION_AUDIT_GENERAL",
+    "intent_version": 1,
+    "signal_hash": "0xa406557b72268210abe7f5eb33824de37c21b6395220b0d490d20acd5467b1f5"
+  },
+  "receipt": {
+    "receipt_hash": "0x89a26648237b659477dea8286dc1ff1e2558bd5979235d5e723c4615057a8cb1",
+    "rail": "escrow",
+    "payer": "0xf308f872796f5c1ca01c28541a366f7f9393dfb8",
+    "miner": "6183",
+    "intent": "CONTRACT_OBLIGATION_AUDIT_GENERAL",
+    "amount_uusdc": "10000",
+    "epoch_id": 43,
+    "settlement": "epoch",
+    "chain": "telegraph",
+    "timestamp": 1795442937
+  }
+}

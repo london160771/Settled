@@ -1,6 +1,6 @@
 // Cases: add, list, get. Invariant 5: one case (and so one claim) per flight + date per user.
 import { randomBytes } from 'node:crypto';
-import { Case } from '../models/index.js';
+import { Case, Receipt } from '../models/index.js';
 import { AppError } from '../errors.js';
 import { parseFlightNumber } from './flights/carriers.js';
 import { getAirport } from './flights/airports.js';
@@ -58,7 +58,7 @@ const PERIOD = /^\d{4}-(0[1-9]|1[0-2])$/;
 // SLA case: a vendor + a finished billing month (YYYY-MM) + the user's contract terms.
 export async function addSlaCase(
   userId,
-  { vendor, period, promisedPct, monthlyFeeUsd, tiers } = {},
+  { vendor, period, promisedPct, monthlyFeeUsd, tiers, termsReceiptId, claimWindowDays } = {},
   now = new Date(),
 ) {
   const v = getVendor(vendor);
@@ -79,13 +79,31 @@ export async function addSlaCase(
   } catch (e) {
     throw new AppError('BAD_REQUEST', e.message);
   }
+  // Contract terms read by a miner: only the user's own settled contract receipt can be attached.
+  let terms;
+  if (termsReceiptId) {
+    terms = await Receipt.findOne({
+      _id: termsReceiptId,
+      userId,
+      intent: 'CONTRACT_OBLIGATION_AUDIT_GENERAL',
+      status: { $in: ['settled', 'reconciled'] },
+      caseId: null, // one reading backs one case
+    }).catch(() => null);
+    if (!terms)
+      throw new AppError(
+        'BAD_REQUEST',
+        'That contract reading is not yours, not paid, or already used.',
+      );
+  }
+  const days =
+    claimWindowDays === '' || claimWindowDays == null ? undefined : Number(claimWindowDays);
   const key = String(vendor).toLowerCase();
   const dup = () =>
     new AppError('DUPLICATE_CLAIM', `You already have a case for ${v.name} in ${period}.`);
   const existing = await Case.findOne({ userId, type: 'sla', vendor: key, period });
   if (existing) throw dup();
   try {
-    return await Case.create({
+    const c = await Case.create({
       userId,
       type: 'sla',
       vendor: key,
@@ -93,8 +111,12 @@ export async function addSlaCase(
       promisedPct: pct,
       monthlyFeeUsd: fee,
       tiers: parsedTiers,
+      termsReceiptId: terms?._id,
+      claimWindowDays: Number.isInteger(days) && days > 0 && days < 366 ? days : undefined,
       publicId: randomBytes(9).toString('base64url'),
     });
+    if (terms) await Receipt.updateOne({ _id: terms._id }, { $set: { caseId: c._id } });
+    return c;
   } catch (e) {
     if (e.code === 11000) throw dup();
     throw e;

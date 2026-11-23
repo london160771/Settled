@@ -32,4 +32,4 @@ Known limits:
 | Credit tiers | Defaults (`99.99:10, 99:25, 95:50`) are an **example**, labelled in the form; the user should enter their contract's tiers. |
 | Vendor list | Fixed to vendors both live SLA miners understand (Vercel, GitHub, DigitalOcean, Twilio). |
 | SLA tests | Telegraph mocked in `server/test/sla.test.js`, answer shapes copied from the live evidence. |
-
+| Contract reading (P1) | Real Telegraph asks (CONTRACT_OBLIGATION_AUDIT_GENERAL). The miner only quotes clauses; Settled keeps quotes found word for word in the paste and parses numbers with plain rules. The sample SLA in `server/data/samples/` is **synthetic** (labelled in its first line). |
