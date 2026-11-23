@@ -6,7 +6,7 @@ Progress log. Updated in every phase commit. Newest notes at the top of the log.
 
 - Current phase: P0 code complete (Phases 0, 2, 5–10 passed; 1 blocked; 3, 4, 7, 8, 9 passed offline with live checks pending). Stopped: next steps need Adesope.
 - Branch: `claude/project-thread-00viqq` (session's push branch; PR to `main`)
-- Blocked on: nothing hard. Token set (guide 03 done); live `/start` passed 2026-11-23. Bot `sla vercel 2026-10 400` live check in progress. Waiting (non-blocking): SMTP (guide 02, optional).
+- Blocked on: nothing hard. Token set (guide 03 done); live `/start` passed 2026-11-23. Bot `/topup` + `sla vercel 2026-10 400` live check passed 2026-11-23 (Owed, 40 USD). Waiting (non-blocking): SMTP (guide 02, optional).
 - Deadline: Dec 1, 2026, 23:59 UTC (internal cutoff 12:00 UTC)
 
 ## Phases
@@ -68,14 +68,13 @@ Paid part (2026-11-23, operator `0x6029…7AC5`, test user HD index 1 `0xF308…
 
 ## Log
 
-- 2026-11-23: Live bot check. `TELEGRAM_BOT_TOKEN` visible in the cloud session; Telegram getMe → @GetSettledBot. Server started with an in-memory MongoDB (no MONGODB_URI set; launcher in ignored `server/.tmp/`), long polling. Adesope sent `/start` in Telegram → bot replied "Welcome to Settled. Proof first. Then the claim. …". **Passed.** `sla vercel 2026-10 400` in the bot: pending.
+- 2026-11-23: Live bot check. `TELEGRAM_BOT_TOKEN` visible in the cloud session; Telegram getMe → @GetSettledBot. Server started with an in-memory MongoDB (no MONGODB_URI set; launcher in ignored `server/.tmp/`), long polling. Adesope sent `/start` in Telegram → bot replied "Welcome to Settled. Proof first. Then the claim. …". **Passed.** Then `/topup` → "Topped up with test USDC"; `sla vercel 2026-10 400` → Case added → Check now (cap 0.20) → 2 receipts: MONEY OWED Contract SLA Check `0xfb12e9f4…842d03` (0.01) and Statuspage SLA Auditor `0x0a2e6077…f9b36a28` (0.01) → Decision Owed, 40 USD credit (99.9645% vs 99.99%; second miner 99.1224% over 54 days) → Draft ready with receipts. **Passed** (seen in Adesope's Telegram screenshots). Note: the draft's proof link uses `WEB_URL` (unset here, so `http://localhost:5173/proof/…`); it becomes public once `WEB_URL` is set at deploy (guide 04).
 - 2026-11-23: Phase 11 (SLA path) passed, now the main path. Live probes (`evidence/sla/probe-*.json`): MONEY OWED Contract SLA Check (2611217) answers calendar months (Vercel 2026-10: 99.9645% vs 99.99% target, not compliant; GitHub Enterprise Cloud, DigitalOcean, Twilio compliant); Statuspage SLA Auditor (7410311) answers rolling windows only (`30d`, `54d`; ignores calendar dates); one free-text query to 7410311 failed with HTTP 500 (`unknown_component`, may be charged per #228). Built: SLA cases (vendor + finished month + optional promised %, bill, tiers), evidence (month miner, then a different window miner only if the month shows a breach), `decideSla` (`sla-credit-1`), credit-request draft, proof page, web Add/Detail/Claims/Home, bot `sla vercel 2026-10 400` + `/sla`, judge demo now runs Vercel 2026-10 (flight case kept, honest Needs more proof). Checks: `npm run lint` pass; `npm test` 89 pass / 1 skipped (13 new SLA tests + 1 bot test); `npm run build` pass; **live** `node server/scripts/sla-live.js` → Owed, 40 USD credit (10% of 400), 2 receipts from 2 miners (`0xefdeee88…3253`, `0xf9da4321…5380`), 9.8 s, 0.02 test USDC. Web pages built but not clicked through in a browser yet.
 - 2026-11-23: Wallet set (guide 01 done). Paid Gate 0, Phase 3 live smoke and Mission 9 live run done; see Gate 0 results. Fixes found live: 200-without-receipt counted as quoted price; `/ask` → CHAT_COMPLETION_GENERAL. Checks: `npm test` 75 pass / 1 skipped; live smoke 1/1. Option A fails for BA75; asking Adesope about Option B.
 - 2026-11-22: Phase 10 passed. README (what, status, sponsor-to-file table, run, env, sample request, costs, limits, troubleshooting, mainnet switch, commercial summary), REAL_VS_MOCKED final for this point, `docs/tutorial.md` draft, `docs/manual/04-deploy.md` (Render + Vercel + Atlas), CONCEPT-BRIEF.md removed (PRD carries it). Root `npm run dev` now starts API and web together. Checks: fresh clone of the branch → `npm ci`, `npm run lint` pass, `npm test` 75 pass / 1 skipped, `npm run build` pass; `npm run dev` served `/api/health` on :4000 and the web on :5173 (proxy OK). README states no live numbers yet; every number it gives is a constant from code or the mocked example, labelled as such. **After the live runs, refresh README/REAL_VS_MOCKED with evidence numbers.**
 
 ## Next steps (now)
 
-1. Bot live: `/topup` then `sla vercel 2026-10 400` → Check now in @GetSettledBot (/start already passed).
 2. Timed `/judge` Run the demo on a running server → record seconds here.
 3. Optional guide 02 (SMTP): one email to the demo inbox.
 4. `node server/scripts/reconcile.js` after the next epoch root (check #228 charges for the two HTTP 500s).
