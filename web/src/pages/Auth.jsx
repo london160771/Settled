@@ -27,9 +27,9 @@ export default function AuthPage({ mode }) {
   };
   const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
   return (
-    <div className="narrow">
+    <div className="narrow auth">
       <h1>{signup ? 'Create your account' : 'Sign in'}</h1>
-      <p className="muted">Proof first. Then the claim.</p>
+      <p className="muted">Proof first, then the claim</p>
       <form onSubmit={submit} className="card stack">
         {signup ? (
           <label>
@@ -59,7 +59,7 @@ export default function AuthPage({ mode }) {
           />
         </label>
         <ErrorBox error={error} />
-        <button disabled={busy}>
+        <button className="big-btn" disabled={busy}>
           {busy ? 'Please wait…' : signup ? 'Create account' : 'Sign in'}
         </button>
       </form>

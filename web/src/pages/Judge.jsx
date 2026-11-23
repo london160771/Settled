@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Check, FlaskConical, Play, ShieldCheck } from 'lucide-react';
 import { api, usdc, amountText } from '../api/client.js';
 import { useAuth } from '../auth.jsx';
 import { ErrorBox, Badge, ReceiptsTable } from '../components/ui.jsx';
@@ -70,14 +71,28 @@ export default function Judge() {
   return (
     <>
       <h1>Judge mode</h1>
-      <p>
-        A fresh demo account inside the real product: a testnet wallet funded with 0.50 test USDC
-        and two seeded real cases: Vercel's uptime in October 2026, and a late flight.{' '}
-        <strong>REAL:</strong> Telegraph asks, receipts, cap, decision, draft.{' '}
-        <strong>DEMO:</strong> the account, and claims can only go to the demo inbox.
+      <p className="lede">
+        A fresh demo account inside the real product, with a testnet wallet funded with 0.50 test
+        USDC and two seeded cases: Vercel's uptime in October 2026, and a late flight.
       </p>
+      <div className="realmock">
+        <div>
+          <strong>
+            <Check strokeWidth={1.5} size={16} /> Real
+          </strong>
+          Telegraph asks on Ethereum Sepolia, receipts, the spending cap, the decision and the draft
+        </div>
+        <div>
+          <strong>
+            <FlaskConical strokeWidth={1.5} size={16} /> Demo
+          </strong>
+          The account itself. Claims from it can only go to the demo inbox
+        </div>
+      </div>
       {!isDemo ? (
-        <button onClick={start}>Start the demo account</button>
+        <button className="big-btn" onClick={start}>
+          Start the demo account
+        </button>
       ) : (
         <p className="muted">
           You are in a demo account{session?.reused ? ' (reused for up to 1 hour)' : ''}.
@@ -89,48 +104,65 @@ export default function Judge() {
       {isDemo ? (
         <>
           <section className="card stack">
-            <h2>1. Run the demo</h2>
+            <h2>
+              <span className="step-n">1</span>Run the demo
+            </h2>
             <p className="muted">
               Buys Vercel's October 2026 uptime from one SLA miner and a second opinion from a
               different miner, compares it with the 99.99% promise, works out the service credit and
-              drafts the request. Target: under 90 seconds. (The flight case is there too: live
-              miners can't report past flight delays yet, so it honestly ends in Needs more proof.)
+              drafts the request. Target: under 90 seconds. The flight case is there too. Live
+              miners can't report past flight delays yet, so it honestly ends in Needs more proof.
             </p>
-            <button disabled={running} onClick={runDemo}>
-              {running ? `Running… ${elapsed}s` : 'Run the demo'}
-            </button>
+            <div>
+              <button disabled={running} onClick={runDemo}>
+                <Play strokeWidth={1.5} /> {running ? `Running… ${elapsed}s` : 'Run the demo'}
+              </button>
+            </div>
             {receipts.length ? <ReceiptsTable receipts={receipts} /> : null}
             {demo ? (
-              <div className="stack">
-                <div>
-                  Decision: <Badge value={demo.decision.outcome} /> {amountText(demo.decision)} ·{' '}
-                  {(demo.ms / 1000).toFixed(1)} s · evidence cost {usdc(demo.decision.spentUusdc)}{' '}
-                  test USDC
+              <div className="receipt" style={{ margin: '0 0 12px' }}>
+                <div className="receipt-head">
+                  <div>
+                    <div className="receipt-kicker">
+                      DECISION · {(demo.ms / 1000).toFixed(1)} s · {usdc(demo.decision.spentUusdc)}{' '}
+                      test USDC
+                    </div>
+                    <div className="receipt-figure">{amountText(demo.decision) || '—'}</div>
+                  </div>
+                  <Badge value={demo.decision.outcome} />
                 </div>
-                <ul>
+                <hr className="rule" />
+                <ul className="reasons">
                   {demo.decision.reasons.map((r, i) => (
                     <li key={i}>{r}</li>
                   ))}
                 </ul>
                 {demo.claim ? (
-                  <p>
+                  <p className="fine">
                     Draft ready.{' '}
-                    <Link to={`/cases/${demo.caseId}`}>Open it to send to the demo inbox</Link> (you
-                    confirm the address first).
+                    <Link to={`/cases/${demo.caseId}`}>
+                      Open the case to send it to the demo inbox
+                    </Link>
+                    . You confirm the address first.
                   </p>
                 ) : null}
               </div>
             ) : null}
           </section>
           <section className="card stack">
-            <h2>2. Run the attacks</h2>
+            <h2>
+              <span className="step-n">2</span>Run the attacks
+            </h2>
             <p className="muted">
               Six ways to break it. Each runs the real code path and must be blocked with its reason
               code. No attack spends money.
             </p>
-            <button disabled={attacking} onClick={runAttacks}>
-              {attacking ? 'Running attacks…' : 'Run the attacks'}
-            </button>
+            <div>
+              <button disabled={attacking} onClick={runAttacks}>
+                <ShieldCheck strokeWidth={1.5} />{' '}
+                {attacking ? 'Running attacks…' : 'Run the attacks'}
+              </button>
+            </div>
             {attacks ? (
               <div className="table-wrap">
                 <table>
@@ -145,20 +177,20 @@ export default function Judge() {
                   <tbody>
                     {attacks.results.map((a) => (
                       <tr key={a.id}>
-                        <td>{a.id}</td>
+                        <td className="n meta">{a.id}</td>
                         <td>
                           {a.name}{' '}
                           {a.replayed ? (
                             <span className="badge warn">
-                              {a.synthetic ? 'replayed (synthetic fixture)' : 'replayed'}
+                              {a.synthetic ? 'Replayed, synthetic fixture' : 'Replayed'}
                             </span>
                           ) : (
-                            <span className="badge info">live code path</span>
+                            <span className="badge info">Live code path</span>
                           )}
                         </td>
                         <td>
                           <span className={`badge ${a.passed ? 'good' : 'bad'}`}>
-                            {a.passed ? 'blocked' : 'NOT blocked'} · {a.code}
+                            {a.passed ? 'Blocked' : 'Not blocked'} · {a.code}
                           </span>
                         </td>
                         <td className="muted">{a.detail}</td>

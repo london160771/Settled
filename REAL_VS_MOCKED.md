@@ -33,3 +33,11 @@ Known limits:
 | Vendor list | Fixed to vendors both live SLA miners understand (Vercel, GitHub, DigitalOcean, Twilio). |
 | SLA tests | Telegraph mocked in `server/test/sla.test.js`, answer shapes copied from the live evidence. |
 | Contract reading (P1) | Real Telegraph asks (CONTRACT_OBLIGATION_AUDIT_GENERAL). The miner only quotes clauses; Settled keeps quotes found word for word in the paste and parses numbers with plain rules. The sample SLA in `server/data/samples/` is **synthetic** (labelled in its first line). |
+
+## Landing page (added 2026-11-23)
+
+| Part | Status |
+| --- | --- |
+| Figures on the landing page receipt | **Real**, copied from the deployed judge run on 2026-11-23 (Vercel 2026-10, 99.9645% vs 99.99%, Owed 40 USD, 2 receipts, 14.4 s; `evidence/deploy/`). They are static text on the page, not a live query. |
+| Claim email excerpt on the landing page | Shortened from a real draft of the same run. |
+| Photos | Stock photos from Unsplash (Unsplash License), stored in `web/public/img/`. They are illustration, not product data. |

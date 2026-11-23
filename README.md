@@ -1,48 +1,75 @@
+<p align="center"><img src="web/public/favicon.svg" width="56" alt="Settled logo"></p>
+
 # Settled
 
-**Proof first. Then the claim.**
+**Your cloud vendor missed its uptime promise. Settled proves it and gets you the credit back.**
 
-Settled is a personal claims assistant: a web app plus a Telegram bot that share one account, one capped wallet and one list of claims. When a cloud vendor (Vercel, GitHub, DigitalOcean, Twilio) misses its uptime promise for a month, Settled pays Telegraph miners for proof from two independent sources, works out the service credit from your contract tiers, and drafts the credit request with every paid receipt attached. Late flights (simplified EU261/UK261) are a second path. Nothing is sent without your yes.
+[Live app](https://settled-orpin.vercel.app) · [Judge demo](https://settled-orpin.vercel.app/judge) · Telegram [@GetSettledBot](https://t.me/GetSettledBot) · Telegraph Protocol Hackathon S2, Apps & Agents: **mission 15** (Consumer Automation) and **mission 9** (Personal Agent)
 
-Built for the Telegraph Protocol Hackathon Season II, Apps & Agents track: **mission 15** (Consumer Automation, main) and **mission 9** (Personal Agent, bonus).
+![Settled landing page](docs/img/landing.webp)
 
-> **Network: testnet only.** Ethereum Sepolia (chain 11155111), test USDC `0xcc194e1a843B658526D0D5C431f670028582Ae17`, Telegraph devnode. Nothing here is production usage or real money.
+## The story
 
-Core guarantee: **no claim without a paid receipt behind every fact in it, and spent + reserved ≤ the cap you set.**
+Every team that pays for Vercel, GitHub, DigitalOcean or Twilio is paying for an uptime promise: 99.9%, 99.99%. When a month falls short, the contract says you are owed a service credit. Almost nobody claims it. Proving the breach means digging through status pages, doing the maths against your contract's tiers and writing an email billing will push back on. It takes an afternoon to win 40 dollars, so the money stays with the vendor.
+
+Settled does that afternoon in about fifteen seconds, for two cents.
+
+1. **You file the month.** "Vercel, October 2026, we pay 400 USD a month." Optionally paste your SLA and a Telegraph miner quotes the clauses. Settled keeps only the quotes it finds word for word in your text.
+2. **Settled buys the proof.** It pays one Telegraph miner for that month's uptime. If the month shows a breach, it pays a **different** miner for a second window. It says **Owed** only when both independent sources agree.
+3. **It does the maths.** Vercel's October 2026 came in at **99.9645%** against a **99.99%** promise. A second miner saw 99.1224% over the last 54 days. Your tier gives 10%, so **40 USD**.
+4. **It drafts the claim, you send it.** Every figure in the email carries a `receipt_hash`: one paid Telegraph call that anyone, including the vendor's billing team, can look up with its Merkle proof. Nothing is sent and no money moves until you confirm.
+
+That is the whole product: **proof first, then the claim.** A screenshot can be argued with. A paid, signed receipt from two independent data providers is much harder to brush off.
+
+![Case page: the decision printed as a receipt, each fact with its hash](docs/img/case.webp)
+
+### Why it needs Telegraph
+
+Settled can't make this claim without Telegraph. The product's promise is that every fact in a claim has a paid, verifiable receipt behind it from someone other than Settled.
+
+- **Independent sources on demand:** Telegraph's SLA miners turn a vendor's public incident history into one number per month, and Settled can choose a *different* miner for the second opinion.
+- **Receipts are the evidence:** the `receipt_hash` goes straight into the email and onto a public proof page. Settled never asks the vendor to trust Settled.
+- **Paying per fact keeps it cheap and capped:** each check reserves its budget first, so spent plus reserved can never pass the cap you set, even with many checks running at once.
+
+### Built to be hard to fool
+
+Judge mode runs six attacks against the real code paths, and each must be blocked with its reason code: going over the cap, claiming the same case twice, two miners that disagree, hidden instructions in a booking email, a failed paid ask (Telegraph bug #228, counted as spent and retried once at most), and sending to an unconfirmed address. On the deployed app all six were blocked and the Vercel case was decided as Owed in 14.4 s ([evidence/deploy](evidence/deploy)).
+
+## Try it in one minute
+
+1. Open **https://settled-orpin.vercel.app/judge**.
+2. Press **Start the demo account**. You get a funded testnet wallet and Vercel's October 2026 already filed.
+3. Press **Run the demo** and watch two receipts arrive and the decision print.
+4. Press **Run the attacks**.
+5. Open the case to read the drafted claim and its public proof page.
+
+The Telegram bot uses the same account and wallet: `/start`, then `sla vercel 2026-10 400`.
+
+> **Testnet only.** Ethereum Sepolia (chain 11155111), test USDC `0xcc194e1a843B658526D0D5C431f670028582Ae17`, Telegraph devnode. Test USDC has no value. Credit rules come from your contract tiers, not legal advice.
 
 ## Status (honest)
 
 | Part | State |
 | --- | --- |
-| Code for P0 (web, API, bot, cap, Telegraph client, SLA + flight decisions, claims, Ask, leaderboard, judge mode, Attack Lab) | Built, 94 automated tests pass (Telegraph mocked in tests) |
-| Real paid Telegraph asks | **Run live on 2026-11-23** with real receipts: Gate 0 ([evidence/gate0](evidence/gate0)), smoke ask ([evidence/live](evidence/live)), Mission 9 4 asks + 5th blocked ([evidence/mission9](evidence/mission9)) |
-| Main path | **SLA credits** (Gate 0 Option B). Live: Vercel Oct 2026 99.9645% vs 99.99% → Owed, 10% credit, 2 receipts from 2 miners, 9.8 s ([evidence/sla/live-check.json](evidence/sla/live-check.json)). Flights stay as a second path, but live miners can't report a past flight's delay yet, so they end in Needs more proof |
-| Telegram bot live | Waiting for `TELEGRAM_BOT_TOKEN` ([guide 03](docs/manual/03-telegram-bot.md)) |
-| Real email sending | Optional SMTP ([guide 02](docs/manual/02-email-sending.md)); `mailto:` fallback works today |
-| Deploy | **Live (testnet):** web https://settled-orpin.vercel.app · API https://settled-5mmc.onrender.com · bot @GetSettledBot. Deployed by Adesope ([guide 04](docs/manual/04-deploy.md)) |
+| Web app, API, Telegram bot, spending cap, Telegraph client, SLA and flight decisions, claims, Ask, leaderboard, judge mode, Attack Lab | Built. 94 automated tests pass, with Telegraph mocked in tests |
+| Real paid Telegraph asks | Run live with real receipts: Gate 0 ([evidence/gate0](evidence/gate0)), smoke ask ([evidence/live](evidence/live)), mission 9 with 4 asks and a 5th blocked by the cap ([evidence/mission9](evidence/mission9)) |
+| SLA credits (main path) | Live: Vercel Oct 2026, 99.9645% vs 99.99%, Owed 40 USD, 2 receipts from 2 miners ([evidence/sla/live-check.json](evidence/sla/live-check.json)) |
+| Contract reading | Live: a pasted SLA gives 8 clauses matched word for word, filling the promised uptime, tiers and claim window ([evidence/contract](evidence/contract)) |
+| Late flights (second path) | Built, but live miners can't report a past flight's delay yet, so these cases honestly end in Needs more proof |
+| Deploy | Live on testnet: web https://settled-orpin.vercel.app, API https://settled-5mmc.onrender.com, bot @GetSettledBot |
+| Email sending | `mailto:` fallback works today. SMTP is optional ([guide 02](docs/manual/02-email-sending.md)) |
 
 See [PROJECT_STATE.md](PROJECT_STATE.md) for the phase log and [REAL_VS_MOCKED.md](REAL_VS_MOCKED.md) for what is real.
 
-## What it does
+## What else it does
 
-1. Add a flight in the web app or the bot (`BA75 2026-11-20 LHR LOS`, or forward the booking email).
-2. Settled buys proof: one routed `TRAVEL_DISRUPTION_GENERAL` ask, a second one sent directly to a **different miner**, and `WEATHER_FORECAST_GENERAL` at the departure airport. Each purchase is reserved against your cap first.
-3. It decides: **Owed** (with amount), **Not owed** (with reason), **Needs more proof**, or **Evidence conflict** (miners disagree by more than 15 minutes).
-4. If owed, it drafts the claim email with a receipts appendix and a public proof page link. A draft cannot be created if any fact lacks a paid receipt.
-5. You tap Send and confirm the exact address ("Send to …"). Track it to Paid or Rejected.
+**Mission 9, a personal agent that pays for fresh answers.** Ask for a token price, the weather, a web search or a question (the Ask page, or `/price`, `/weather`, `/search`, `/ask` in the bot). It pays from the same capped wallet and shows the receipt. An opt-in leaderboard ranks assistants by paid asks.
 
-Mission 9: ask the assistant things that need fresh data (`/price`, `/weather`, `/search`, `/ask` in the bot, or the Ask page). It pays from the same capped wallet and shows the receipt. An opt-in leaderboard shows paid asks per assistant.
+**Late flights.** Add a flight (`BA75 2026-11-20 LHR LOS`) and Settled buys `TRAVEL_DISRUPTION_GENERAL` from two different miners plus the departure weather, then decides under simplified EU261/UK261.
 
-### SLA credits (main path)
-
-1. Add a case: vendor + a finished month (web: Add a case → Cloud uptime; bot: `sla vercel 2026-10 400`). Optional: your promised uptime, monthly bill, credit tiers.
-2. Settled buys `SLA_COMPLIANCE_GENERAL` for that calendar month from a contract-scoped miner. If it shows a breach, it buys a second opinion from a **different** miner over a rolling window that covers the month (works up to 90 days back).
-3. **Owed** only if both see a breach; credit = your tier × your bill. One says breach and the other doesn't → **Evidence conflict**.
-4. Draft credit request with the receipts appendix and proof page; you confirm the address and send.
-
-Optional: paste your SLA in the form and Settled pays a Telegraph miner (`CONTRACT_OBLIGATION_AUDIT_GENERAL`) to quote its clauses, keeps only the ones found word for word in your text, and fills in the promised uptime, credit tiers and claim window for you to check ([`server/src/services/sla/terms.js`](server/src/services/sla/terms.js)).
-
-Judges: open `/judge` → **Start the demo account** → **Run the demo** (Vercel, October 2026) → **Run the attacks**.
+| | |
+| --- | --- |
+| ![Judge mode after a run](docs/img/judge-run.webp) | ![Public proof page](docs/img/proof.webp) |
 
 ## How Telegraph is used (sponsor-to-file table)
 
@@ -168,3 +195,7 @@ Live judge demo in a real browser: Owed in 8.9 s, all six attacks blocked ([evid
 - [docs/manual/](docs/manual/) — step-by-step guides for the manual tasks
 - [ROADMAP.md](ROADMAP.md) — ideas not in this build
 - [CLAUDE.md](CLAUDE.md) — rules for the coding agent
+
+## Credits
+
+Photos on the landing page are from [Unsplash](https://unsplash.com) under the Unsplash License: [server racks](https://images.unsplash.com/photo-1558494949-ef010cbdcc31) and [paperwork on a desk](https://images.unsplash.com/photo-1554224155-6726b3ff858f). Interface icons are [Lucide](https://lucide.dev). Type is IBM Plex Sans and Plex Mono.

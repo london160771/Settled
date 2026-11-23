@@ -1,0 +1,377 @@
+/* Landing page (signed out). Scene: the server room the vendor promised, at night.
+   The paper receipt is the one bright object on it. */
+.landing {
+  background: var(--bg);
+}
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  color: #f3f1ec;
+  background: #0e0f10;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 70% 50%;
+  max-width: none;
+}
+/* Tone shift inside one neutral, so text sits on calm dark space. */
+.hero-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(10, 11, 12, 0.92) 0%,
+      rgba(10, 11, 12, 0.78) 45%,
+      rgba(10, 11, 12, 0.35) 100%
+    ),
+    linear-gradient(0deg, rgba(10, 11, 12, 0.7) 0%, rgba(10, 11, 12, 0) 40%);
+}
+.hero-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 72px;
+  padding: 0 40px;
+}
+.hero-bar nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-size: 14px;
+}
+.hero-bar nav a:not(.button) {
+  color: rgba(243, 241, 236, 0.78);
+  text-decoration: none;
+  transition: color 150ms var(--ease);
+}
+.hero-bar nav a:not(.button):hover {
+  color: #fff;
+}
+.brand.on-dark,
+.brand.on-dark:hover {
+  color: #f3f1ec;
+}
+.button.light {
+  background: #f3f1ec;
+  border-color: #f3f1ec;
+  color: #141414;
+}
+.button.light:hover {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #141414;
+}
+.hero-body {
+  position: relative;
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  align-items: center;
+  gap: 64px;
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 48px 40px 96px;
+}
+.hero-copy h1 {
+  font-size: 56px;
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  font-weight: 500;
+  margin: 0 0 24px;
+  max-width: 13em;
+}
+.hero-copy p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: rgba(243, 241, 236, 0.78);
+  max-width: 34rem;
+  margin: 0 0 32px;
+}
+.hero-cta {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.hero-link {
+  color: #f3f1ec;
+  font-size: 15px;
+}
+.hero-link:hover {
+  color: #fff;
+}
+.hero-meta {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: rgba(243, 241, 236, 0.6);
+}
+
+/* The receipt object */
+.hero-receipt {
+  position: relative;
+  justify-self: end;
+  width: 100%;
+  max-width: 380px;
+  padding: 28px 28px 32px;
+  background: #fbfaf6;
+  color: var(--text);
+  border-radius: 6px 6px 0 0;
+  transform: rotate(1.5deg);
+  box-shadow:
+    0 30px 60px rgba(0, 0, 0, 0.45),
+    0 2px 6px rgba(0, 0, 0, 0.3);
+}
+.hero-receipt::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -10px;
+  height: 10px;
+  background: radial-gradient(circle at 6px 10px, transparent 5px, #fbfaf6 5.5px) 0 0 / 12px 10px
+    repeat-x;
+}
+.hr-title {
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: 8px;
+}
+.hr-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--text-2);
+  padding: 6px 0;
+}
+.hr-line .mono {
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+.hr-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.hr-total span:first-child {
+  font-size: 15px;
+  letter-spacing: 0;
+  color: var(--text-2);
+  font-weight: 400;
+}
+.hr-hashes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 16px;
+}
+.hr-foot {
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* Sections */
+.l-section {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 112px 40px 0;
+}
+.l-head {
+  max-width: 40rem;
+  margin-bottom: 48px;
+}
+.l-head h2,
+.split-copy h2,
+.l-cta h2 {
+  font-size: 36px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+}
+.l-head p,
+.split-copy p,
+.l-cta p {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--text-2);
+}
+.steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+  border-top: 1px solid var(--line-strong);
+}
+.steps li {
+  margin: 0;
+  padding-top: 24px;
+}
+.step-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.step-top svg {
+  width: 20px;
+  height: 20px;
+  color: var(--muted);
+}
+.steps h3,
+.guards h3 {
+  font-size: 18px;
+  margin: 0 0 8px;
+}
+.steps p,
+.guards p {
+  color: var(--text-2);
+  margin: 0;
+}
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.split-media img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 16px;
+}
+pre.mail {
+  margin: 24px 0 16px;
+  padding: 20px 24px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-word;
+  box-shadow: 0 8px 24px rgba(27, 26, 23, 0.06);
+}
+.guards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.guards > div {
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+.guards svg {
+  width: 20px;
+  height: 20px;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.l-cta {
+  max-width: 1080px;
+  margin: 112px auto 0;
+  padding: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+}
+.l-cta p {
+  margin: 0;
+  max-width: 36rem;
+}
+.l-foot {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 64px 40px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.l-foot .brand {
+  padding: 0;
+}
+
+@media (max-width: 960px) {
+  .hero-body {
+    grid-template-columns: 1fr;
+    gap: 56px;
+    padding: 32px 20px 72px;
+  }
+  .hero-receipt {
+    justify-self: start;
+    transform: rotate(-1deg);
+  }
+  .hero-copy h1 {
+    font-size: 40px;
+  }
+  .hero-copy p {
+    font-size: 17px;
+  }
+  .hero-bar {
+    padding: 0 16px;
+  }
+  .hero-bar nav {
+    gap: 16px;
+  }
+  .hero-bar .hide-sm {
+    display: none;
+  }
+  .l-section {
+    padding: 80px 16px 0;
+  }
+  .steps,
+  .guards,
+  .split {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .split-media img {
+    aspect-ratio: 16 / 10;
+  }
+  .l-head h2,
+  .split-copy h2,
+  .l-cta h2 {
+    font-size: 28px;
+  }
+  .l-cta {
+    margin: 80px 16px 0;
+    padding: 28px 24px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .l-foot {
+    padding: 48px 16px 40px;
+  }
+}
