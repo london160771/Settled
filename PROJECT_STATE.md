@@ -75,9 +75,9 @@ Paid part (2026-11-23, operator `0x6029…7AC5`, test user HD index 1 `0xF308…
 
 ## Next steps (now)
 
-2. Timed `/judge` Run the demo on a running server → record seconds here.
-3. Optional guide 02 (SMTP): one email to the demo inbox.
-4. `node server/scripts/reconcile.js` after the next epoch root (check #228 charges for the two HTTP 500s).
+1. Timed `/judge` Run the demo on a running server → record seconds here.
+2. Optional guide 02 (SMTP): one email to the demo inbox.
+3. `node server/scripts/reconcile.js` after the next epoch root (check #228 charges for the two HTTP 500s).
 
 ## Earlier next steps (after guide 01, mostly done)
 
