@@ -4,7 +4,7 @@ Progress log. Updated in every phase commit. Newest notes at the top of the log.
 
 ## Now
 
-- Current phase: P0 code complete (Phases 0, 2, 5–10 passed; 1 blocked; 3, 4, 7, 8, 9 passed offline with live checks pending). Stopped: next steps need Adesope.
+- Current phase: P0 complete with SLA as the main path (Gate 0 Option B). Live-verified: Gate 0, Telegraph client, Mission 9, SLA check (script + bot), bot /start. Left for the agent: timed /judge run + browser click-through, docs refresh to SLA, video script + submission draft. Left for Adesope: deploy (guide 04), optional SMTP (guide 02), video, submission, P1 go/no-go.
 - Branch: `claude/project-thread-00viqq` (session's push branch; PR to `main`)
 - Blocked on: nothing hard. Token set (guide 03 done); live `/start` passed 2026-11-23. Bot `/topup` + `sla vercel 2026-10 400` live check passed 2026-11-23 (Owed, 40 USD). Waiting (non-blocking): SMTP (guide 02, optional).
 - Deadline: Dec 1, 2026, 23:59 UTC (internal cutoff 12:00 UTC)
@@ -17,7 +17,7 @@ Progress log. Updated in every phase commit. Newest notes at the top of the log.
 | 1 | Gate 0: prove Telegraph works | Passed — Option B chosen (SLA main path) | (see log) | Real receipts saved; no miner answers a past flight's delay |
 | 2 | Data, wallets and the cap | Passed | (see log) | Models, HD wallets, escrow top-up, atomic budget, monthly reset |
 | 3 | Telegraph client | Passed (live smoke done) | (see log) | askIntent (escrow rail), #228 handling, reconcile. Live smoke needs guide 01 |
-| 4 | Flight evidence and decision | Passed offline; live run pending | (see log) | airports.json (3,245), EU261-simple, 2 distinct miners + weather, agreement check. Live run needs guide 01 + Gate 0 Option A |
+| 4 | Flight evidence and decision | Passed offline; live: miners can't report past delays (secondary path) | (see log) | airports.json (3,245), EU261-simple, 2 distinct miners + weather, agreement check. Live run needs guide 01 + Gate 0 Option A |
 | 5 | Claims and proof page | Passed (mailto path); SMTP live send pending | (see log) | Draft from backed facts only, 2-step confirm, SMTP/mailto, Paid/Rejected, proof data. SMTP: guide 02 (optional) |
 | 6 | Web app | Passed | (see log) | Auth (cookie JWT), API, all §4.1 pages except Judge/Ask/Leaderboard |
 | 7 | Telegram bot | Passed (live /start 2026-11-23) | (see log) | grammY bot in-process, all §4.2 commands, due-case worker. Token: guide 03 |
