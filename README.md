@@ -19,7 +19,7 @@ Core guarantee: **no claim without a paid receipt behind every fact in it, and s
 | Main path | **SLA credits** (Gate 0 Option B). Live: Vercel Oct 2026 99.9645% vs 99.99% → Owed, 10% credit, 2 receipts from 2 miners, 9.8 s ([evidence/sla/live-check.json](evidence/sla/live-check.json)). Flights stay as a second path, but live miners can't report a past flight's delay yet, so they end in Needs more proof |
 | Telegram bot live | Waiting for `TELEGRAM_BOT_TOKEN` ([guide 03](docs/manual/03-telegram-bot.md)) |
 | Real email sending | Optional SMTP ([guide 02](docs/manual/02-email-sending.md)); `mailto:` fallback works today |
-| Deploy | Not done by the agent. [Guide 04](docs/manual/04-deploy.md) |
+| Deploy | **Live (testnet):** web https://settled-orpin.vercel.app · API https://settled-5mmc.onrender.com · bot @GetSettledBot. Deployed by Adesope ([guide 04](docs/manual/04-deploy.md)) |
 
 See [PROJECT_STATE.md](PROJECT_STATE.md) for the phase log and [REAL_VS_MOCKED.md](REAL_VS_MOCKED.md) for what is real.
 
@@ -156,7 +156,7 @@ Live judge demo in a real browser: Owed in 8.9 s, all six attacks blocked ([evid
 2. **What it improves:** proving the outage is the tedious part. Settled buys the month's uptime from one Telegraph miner, asks a different miner for a second opinion, works out the credit from your contract tiers, and writes the request with every receipt attached, so you only tap Send.
 3. **What it does today (testnet):** web + Telegram, per-user capped wallet, two-miner SLA evidence with agreement check, credit calculation, receipt-backed drafts, confirmed sending, public proof pages, mission 9 paid asks, judge mode with six blocked attacks. Live: Vercel Oct 2026 → Owed, 40 USD credit on a 400 USD bill, 0.02 test USDC of evidence, under 10 s.
 4. **Why adopt:** credits go unclaimed because checking is a chore; a claim backed by verifiable receipts from two independent sources is hard to brush off; the user stays in control (hard cap, nothing sent without a tap); evidence costs cents.
-5. **How to try it:** open `/judge` on the deployed app (link added at deploy), or run it locally with the steps above. Pricing idea (ROADMAP): user pays only the evidence cost, plus an optional success fee on credits received.
+5. **How to try it:** open https://settled-orpin.vercel.app/judge, or message @GetSettledBot, or run it locally with the steps above. Pricing idea (ROADMAP): user pays only the evidence cost, plus an optional success fee on credits received.
 
 ## Docs
 
