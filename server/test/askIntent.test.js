@@ -64,6 +64,19 @@ describe('askIntent (mocked HTTP)', () => {
     expect(await Receipt.countDocuments({ askId: out.askId })).toBe(2);
   });
 
+  it('200 without a receipt header still counts the quoted price (seen live)', async () => {
+    const u = await createUser(config);
+    const fake = fakeTelegraph({
+      handler: ({ body }) => ({
+        status: 200,
+        body: { intent: body.intent, result: { answer: 'x' }, cost_usd: 0 },
+      }),
+    });
+    const out = await ask(u, fake, { budgetUusdc: 10000 });
+    expect(out.receipt.costUusdc).toBe(10000);
+    expect((await getBudget(u._id)).spentUusdc).toBe(10000);
+  });
+
   it('direct ask to a chosen miner sends no budget', async () => {
     const u = await createUser(config);
     const fake = fakeTelegraph({

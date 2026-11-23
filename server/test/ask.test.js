@@ -36,7 +36,9 @@ describe('ask router', () => {
     expect(route('price', 'eth').build('e t h!')).toEqual({ params: { symbol: 'ETH' } });
     expect(route('weather', 'Lagos').intent).toBe('WEATHER_CHECK_TEMPERATURE');
     expect(route('search', 'x').intent).toBe('WEB_SEARCH_GENERAL');
-    expect(route('ask', 'x').build('What is 2+2?')).toEqual({ query: 'What is 2+2?' });
+    expect(route('ask', 'x').build('What is 2+2?')).toEqual({
+      params: { message: 'What is 2+2?' },
+    });
     expect(() => route('nope', 'x')).toThrow(/Unknown ask type/);
     expect(() => route('price', ' ')).toThrow(/Say what/);
     expect(summarize('CRYPTO_PRICE_USD', { price_usd: 3120.55 })).toBe('$3,120.55');
@@ -89,16 +91,6 @@ describe('mission 9: 4 paid asks, 4 receipts, 5th blocked by the cap', () => {
     expect((await request(app).get('/api/leaderboard')).body.rows).toHaveLength(0);
     await User.updateOne({ email: 'x@example.com' }, { $set: { leaderboardOptIn: true } });
     expect((await request(app).get('/api/leaderboard')).body.rows[0].name).toBe('anonymous');
-  });
-
-  it('/ask falls back for free when the first Intent is refused before payment', async () => {
-    const fake = node({ known: ['CHAT_COMPLETION_GENERAL'] });
-    const app = createApp(config, { telegraph: { fetchImpl: fake.fetch } });
-    const a = request.agent(app);
-    await a.post('/api/auth/signup').send({ email: 'f@example.com', password: 'longpassword' });
-    const res = await a.post('/api/ask').send({ kind: 'ask', input: 'Capital of France?' });
-    expect(res.body).toMatchObject({ answer: 'Paris.', intent: 'CHAT_COMPLETION_GENERAL' });
-    expect(fake.paid).toBe(1);
   });
 
   it('bot /price answers with its receipt line', async () => {

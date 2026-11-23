@@ -75,6 +75,7 @@ export function fakeTelegraph({
     'CRYPTO_PRICE_USD',
     'WEB_SEARCH_GENERAL',
     'QUESTION_ANSWERING_GENERAL',
+    'CHAT_COMPLETION_GENERAL',
   ],
   preHandler,
 } = {}) {

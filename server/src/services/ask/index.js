@@ -27,14 +27,11 @@ export const ROUTES = {
     intent: 'WEB_SEARCH_GENERAL',
     build: (x) => ({ params: { query: x.trim().slice(0, 500) } }),
   },
+  // Gate 0 (live): QUESTION_ANSWERING_GENERAL answered with cost 0, no receipt and an "openai"
+  // miner, so it is not a paid, receipted ask. CHAT_COMPLETION_GENERAL is active and receipted.
   ask: {
-    intent: 'QUESTION_ANSWERING_GENERAL',
-    build: (x) => ({ query: x.trim().slice(0, 1000) }),
-    // Free fallback (refused before payment) if the node no longer serves the first Intent.
-    fallback: {
-      intent: 'CHAT_COMPLETION_GENERAL',
-      build: (x) => ({ params: { message: x.trim().slice(0, 1000) } }),
-    },
+    intent: 'CHAT_COMPLETION_GENERAL',
+    build: (x) => ({ params: { message: x.trim().slice(0, 1000) } }),
   },
 };
 

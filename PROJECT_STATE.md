@@ -6,7 +6,7 @@ Progress log. Updated in every phase commit. Newest notes at the top of the log.
 
 - Current phase: P0 code complete (Phases 0, 2, 5–10 passed; 1 blocked; 3, 4, 7, 8, 9 passed offline with live checks pending). Stopped: next steps need Adesope.
 - Branch: `claude/project-thread-00viqq` (session's push branch; PR to `main`)
-- Blocked on: `MASTER_MNEMONIC` + Sepolia ETH for the operator — see docs/manual/01-gate0-wallet-and-network.md. Also waiting (non-blocking): `TELEGRAM_BOT_TOKEN` (guide 03), SMTP (guide 02, optional).
+- Blocked on: Adesope's choice of Option B (switch main path to SLA/uptime claims, Phase 11 into P0). Wallet is done. Also waiting (non-blocking): `TELEGRAM_BOT_TOKEN` (guide 03), SMTP (guide 02, optional).
 - Deadline: Dec 1, 2026, 23:59 UTC (internal cutoff 12:00 UTC)
 
 ## Phases
@@ -14,14 +14,14 @@ Progress log. Updated in every phase commit. Newest notes at the top of the log.
 | Phase | Name | Status | Commit | Notes |
 | --- | --- | --- | --- | --- |
 | 0 | Repo setup | Passed | (see log) | Workspaces, ESLint+Prettier, Vitest, config validation, CI, /api/health |
-| 1 | Gate 0: prove Telegraph works | Blocked | | Free part done (schemas, rails, escrow signature check). Paid asks need guide 01 |
+| 1 | Gate 0: prove Telegraph works | Passed — Option A fails, Option B awaiting Adesope | (see log) | Real receipts saved; no miner answers a past flight's delay |
 | 2 | Data, wallets and the cap | Passed | (see log) | Models, HD wallets, escrow top-up, atomic budget, monthly reset |
-| 3 | Telegraph client | Passed offline; live smoke pending | (see log) | askIntent (escrow rail), #228 handling, reconcile. Live smoke needs guide 01 |
+| 3 | Telegraph client | Passed (live smoke done) | (see log) | askIntent (escrow rail), #228 handling, reconcile. Live smoke needs guide 01 |
 | 4 | Flight evidence and decision | Passed offline; live run pending | (see log) | airports.json (3,245), EU261-simple, 2 distinct miners + weather, agreement check. Live run needs guide 01 + Gate 0 Option A |
 | 5 | Claims and proof page | Passed (mailto path); SMTP live send pending | (see log) | Draft from backed facts only, 2-step confirm, SMTP/mailto, Paid/Rejected, proof data. SMTP: guide 02 (optional) |
 | 6 | Web app | Passed | (see log) | Auth (cookie JWT), API, all §4.1 pages except Judge/Ask/Leaderboard |
 | 7 | Telegram bot | Passed offline; live /start pending | (see log) | grammY bot in-process, all §4.2 commands, due-case worker. Token: guide 03 |
-| 8 | Mission 9: Ask and leaderboard | Passed offline; live 4-ask run pending | (see log) | Router, /ask /price /weather /search (web + bot), opt-in leaderboard. Live: `node server/scripts/mission9.js` after guide 01 |
+| 8 | Mission 9: Ask and leaderboard | Passed (live: 4 receipts, 5th CAP_EXCEEDED) | (see log) | Router, /ask /price /weather /search (web + bot), opt-in leaderboard. Live: `node server/scripts/mission9.js` after guide 01 |
 | 9 | Judge mode and Attack Lab | Passed offline; real timed run pending | (see log) | /judge, seed-judge.js, Run the demo, 6 attacks, daily limit. Real timing needs guide 01 |
 | 10 | Release readiness (no deploy) | Passed (refresh numbers after live runs) | (see log) | README, REAL_VS_MOCKED, tutorial draft, deploy guide 04, clean clone verified |
 | 11 | P1: SLA / uptime claims | Waiting for go | | Only when Adesope says |
@@ -41,9 +41,22 @@ Free part (2026-11-22, run `node server/scripts/gate0.js --free-only`):
 - **Test USDC mint:** public `mint(address,uint256)` on `0xcc19…Ae17` (simulated OK). Needs gas only.
 - **Unknown intent:** `GET /engine/v1/intents/X` → 200 with `miner_count: 0`, `request: null`. A POST with an unknown name returns 402 first (payment gate runs first), so we check the free GET before paying.
 - **Risk for Option A:** most TRAVEL_DISRUPTION miners are US airport-level, *current* status (FAA, METAR, NWS). Only generalists (TxLens, ChainSight, ReferenceForge, PREFLIGHT) might answer a past individual flight. The paid asks decide A vs B.
-- Still open (paid part): Option A or B, first receipt_hash, weather answer.
+
+Paid part (2026-11-23, operator `0x6029…7AC5`, test user HD index 1 `0xF308…Dfb8`, escrow funded 0.50 test USDC via mint + `depositUSDCFor`, `evidence/gate0/funding.json`):
+
+- **First receipt_hash:** `0x1225169aa60e9461918e68d3984390367b43838c8ae2c3d40722a1ef66a91f9c` (TRAVEL_DISRUPTION_GENERAL, TxLens, 0.01, 626 ms, epoch 43).
+- **Weather:** WEATHER_CHECK_TEMPERATURE London → 7 °C (PREFLIGHT, receipt `0xa4ce76b8…81ac`).
+- **Travel answers for BA75 LHR–LOS 2026-11-20** (`evidence/gate0/ask-travel-*.json`, `probe-*.json`): no miner returned `delay_minutes`. TxLens: "route operating normally" (disrupted false, delay missing). ChainSight (302): "On time", delay missing. PREFLIGHT: "LHR and LOS is not a US airport this miner covers… unknown". FAA miner 82001: HTTP 500 (FAA site 403). ReferenceForge: HTTP 500 (Boston transit only). A routed ask with a 0.04 budget did not recover the missing field either.
+- **Verdict: Option A fails for this case** (miners can't give a past flight's delay; the generalist answers look like generic text, not flight data). Option B (SLA path) is recommended; waiting for Adesope's go because it brings Phase 11 into P0.
+- **Billing seen:** ledger `unbilled` 150000 μUSDC after 15 attempted paid asks. QUESTION_ANSWERING_GENERAL answered with miner "openai", cost 0 and **no receipt header**, so `/ask` now routes to CHAT_COMPLETION_GENERAL (receipted). `askIntent()` now counts the quoted price when a 200 has no receipt (was 0). Whether one of the two HTTP 500s was charged (#228) will show once the epoch root lands: run `node server/scripts/reconcile.js` later.
+- Live Phase 3 smoke: `evidence/live/phase3-smoke.json` (CRYPTO_PRICE_USD, receipt `0x6c882320…6ee6f`).
+- Live Mission 9: `evidence/mission9/run.json` — 4 paid asks, 4 receipts (price, weather, search, ask), 5th refused `CAP_EXCEEDED`. Earlier runs kept for honesty: `run-1-cap-bug.json` (QA ask counted 0 so the 5th slipped through; fixed), `run-2-qa-no-receipt.json`.
 
 ## Evidence index
+
+- `evidence/gate0/ask-*.json`, `probe-*.json`, `summary-paid.json`, `funding.json` — paid Gate 0 asks and escrow funding (2026-11-23).
+- `evidence/live/phase3-smoke.json` — Phase 3 live smoke ask.
+- `evidence/mission9/run.json` — live Mission 9 run (4 receipts + CAP_EXCEEDED); `run-1-*.json`, `run-2-*.json` earlier runs.
 
 - `evidence/gate0/intents.json` — all live Intents with miner counts.
 - `evidence/gate0/schemas/*.json` — schemas for every Intent in PRD §7.
@@ -53,6 +66,7 @@ Free part (2026-11-22, run `node server/scripts/gate0.js --free-only`):
 
 ## Log
 
+- 2026-11-23: Wallet set (guide 01 done). Paid Gate 0, Phase 3 live smoke and Mission 9 live run done; see Gate 0 results. Fixes found live: 200-without-receipt counted as quoted price; `/ask` → CHAT_COMPLETION_GENERAL. Checks: `npm test` 75 pass / 1 skipped; live smoke 1/1. Option A fails for BA75; asking Adesope about Option B.
 - 2026-11-22: Phase 10 passed. README (what, status, sponsor-to-file table, run, env, sample request, costs, limits, troubleshooting, mainnet switch, commercial summary), REAL_VS_MOCKED final for this point, `docs/tutorial.md` draft, `docs/manual/04-deploy.md` (Render + Vercel + Atlas), CONCEPT-BRIEF.md removed (PRD carries it). Root `npm run dev` now starts API and web together. Checks: fresh clone of the branch → `npm ci`, `npm run lint` pass, `npm test` 75 pass / 1 skipped, `npm run build` pass; `npm run dev` served `/api/health` on :4000 and the web on :5173 (proxy OK). README states no live numbers yet; every number it gives is a constant from code or the mocked example, labelled as such. **After the live runs, refresh README/REAL_VS_MOCKED with evidence numbers.**
 
 ## Next steps (in order, after guide 01)

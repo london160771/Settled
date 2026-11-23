@@ -1,0 +1,357 @@
+{
+  "at": "2026-11-23T13:23:21.106Z",
+  "request": {
+    "intent": "WEATHER_CHECK_TEMPERATURE",
+    "params": {
+      "location": "London"
+    },
+    "max_budget_usdc": 10000
+  },
+  "status": 200,
+  "body": {
+    "miner_id": "20260828",
+    "miner_name": "PREFLIGHT Infrastructure Signals",
+    "endpoint": "/weather",
+    "result": {
+      "temperature_c": 7
+    },
+    "result_shape": "intent",
+    "format_version": 1,
+    "field_status": {
+      "temperature_c": "ok"
+    },
+    "input": {
+      "location": "London"
+    },
+    "input_schema_version": 3,
+    "cost_usd": 0.01,
+    "duration_ms": 1273,
+    "timestamp": "2026-11-23T13:23:20.010681161Z",
+    "reasoning": "Intent: intent given by the caller\nMiner: The user is asking for the current temperature in London. The '/weather' endpoint serves the WEATHER_CHECK_TEMPERATURE intent and accepts a 'location' parameter. The 'query' parameter is required and should contain the verbatim question, which is constructed here to include the location.",
+    "intent": "WEATHER_CHECK_TEMPERATURE",
+    "intent_version": 1,
+    "signal_hash": "0x5c32787e3f64adac5b436f56066c1009a48ce85833a3015e97f83e9090fbadbd",
+    "payments": [
+      {
+        "miner": "a1-preflight",
+        "intent": "WEATHER_CHECK_TEMPERATURE",
+        "amount_uusdc": 10000,
+        "receipt_hash": "0xa4ce76b86411905a9920b7bcb0a56600fb8f03b6d200f93ead36587fd38f81ac"
+      }
+    ],
+    "cost_usd_total": 0.01,
+    "delivery": "specialist",
+    "served_rank": 1,
+    "sources": [
+      {
+        "miner": "a1-preflight",
+        "intent": "WEATHER_CHECK_TEMPERATURE"
+      }
+    ],
+    "findings": {
+      "items": [
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "2026-11-23T13:23:19.014Z",
+          "name": "checked_at",
+          "path": "$.checked_at",
+          "type": "date",
+          "value": "2026-11-23T13:23:19.014Z"
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "clear sky",
+          "name": "condition",
+          "path": "$.condition",
+          "type": "string",
+          "value": "clear sky"
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "0.9",
+          "name": "confidence",
+          "path": "$.confidence",
+          "type": "number",
+          "value": 0.9
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "true",
+          "name": "found",
+          "path": "$.found",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "51.50853",
+          "name": "latitude",
+          "path": "$.latitude",
+          "type": "number",
+          "value": 51.50853
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "London, England, United Kingdom",
+          "name": "location",
+          "path": "$.location",
+          "type": "string",
+          "value": "London, England, United Kingdom"
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "-0.12574",
+          "name": "longitude",
+          "path": "$.longitude",
+          "type": "number",
+          "value": -0.12574
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "2026-11-23T13:15Z",
+          "name": "observed_at",
+          "path": "$.observed_at",
+          "type": "date",
+          "value": "2026-11-23T13:15Z"
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "29.2",
+          "name": "peak_gust_kmh",
+          "path": "$.peak_gust_kmh",
+          "type": "number",
+          "value": 29.2
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "13",
+          "name": "peak_wind_kmh",
+          "path": "$.peak_wind_kmh",
+          "type": "integer",
+          "value": 13
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "0.1",
+          "name": "precipitation_mm",
+          "path": "$.precipitation_mm",
+          "type": "number",
+          "value": 0.1
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "6",
+          "name": "precipitation_probability_pct",
+          "path": "$.precipitation_probability_pct",
+          "type": "integer",
+          "value": 6
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "The current air temperature in London, England, United Kingdom is 7 °C, per Open-Meteo at 2026-11-23T13:15Z; MET Norway Locationforecast reads 6.4 °C and NOAA METAR (EGLC, 12.5 km away) reads 8 °C, within 1 °C of it. Over the next 24 ho...",
+          "name": "reason",
+          "path": "$.reason",
+          "type": "string",
+          "value": "The current air temperature in London, England, United Kingdom is 7 °C, per Open-Meteo at 2026-11-23T13:15Z; MET Norway Locationforecast reads 6.4 °C and NOAA METAR (EGLC, 12.5 km away) reads 8 °C, within 1 °C of it. Over the next 24 hours expect clear sky, a high of 7.4 °C and a low of 3.6 °C, up to 6% chance of precipitation totalling 0.1 mm, and gusts up to 29.2 km/h; storm risk is LOW (0.001)."
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "LOW",
+          "name": "risk_level",
+          "path": "$.risk_level",
+          "type": "string",
+          "value": "LOW"
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "0.001",
+          "name": "risk_score",
+          "path": "$.risk_score",
+          "type": "number",
+          "value": 0.001
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "Open-Meteo, MET Norway, NOAA METAR",
+          "name": "source",
+          "path": "$.source",
+          "type": "string",
+          "value": "Open-Meteo, MET Norway, NOAA METAR"
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "7.4",
+          "name": "temp_max_c",
+          "path": "$.temp_max_c",
+          "type": "number",
+          "value": 7.4
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "3.6",
+          "name": "temp_min_c",
+          "path": "$.temp_min_c",
+          "type": "number",
+          "value": 3.6
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "7",
+          "name": "temperature_c",
+          "path": "$.temperature_c",
+          "type": "integer",
+          "value": 7
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "2026-11-23T13:15Z",
+          "name": "at",
+          "path": "$.temperature_sources[0].at",
+          "type": "date",
+          "value": "2026-11-23T13:15Z"
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "Open-Meteo",
+          "name": "source",
+          "path": "$.temperature_sources[0].source",
+          "type": "string",
+          "value": "Open-Meteo"
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "2026-11-23T13:00:00Z",
+          "name": "at",
+          "path": "$.temperature_sources[1].at",
+          "type": "date",
+          "value": "2026-11-23T13:00:00Z"
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "MET Norway Locationforecast",
+          "name": "source",
+          "path": "$.temperature_sources[1].source",
+          "type": "string",
+          "value": "MET Norway Locationforecast"
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "6.4",
+          "name": "temperature_c",
+          "path": "$.temperature_sources[1].temperature_c",
+          "type": "number",
+          "value": 6.4
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "2026-11-23T12:50:00.000Z",
+          "name": "at",
+          "path": "$.temperature_sources[2].at",
+          "type": "date",
+          "value": "2026-11-23T12:50:00.000Z"
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "EGLC, 12.5 km away",
+          "name": "detail",
+          "path": "$.temperature_sources[2].detail",
+          "type": "string",
+          "value": "EGLC, 12.5 km away"
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "NOAA METAR",
+          "name": "source",
+          "path": "$.temperature_sources[2].source",
+          "type": "string",
+          "value": "NOAA METAR"
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "8",
+          "name": "temperature_c",
+          "path": "$.temperature_sources[2].temperature_c",
+          "type": "integer",
+          "value": 8
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "found",
+          "name": "verdict",
+          "path": "$.verdict",
+          "type": "string",
+          "value": "found"
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "the next 24 hours",
+          "name": "when",
+          "path": "$.when",
+          "type": "string",
+          "value": "the next 24 hours"
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "2026-11-23T13:00Z to 2026-11-24T12:00Z (24 hours)",
+          "name": "window",
+          "path": "$.window",
+          "type": "string",
+          "value": "2026-11-23T13:00Z to 2026-11-24T12:00Z (24 hours)"
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "24",
+          "name": "window_hours",
+          "path": "$.window_hours",
+          "type": "integer",
+          "value": 24
+        }
+      ],
+      "raw_sha256": "73306d26c83d4b38360dce2ff8d85461c8897fc61a15d3d534fbc01c1b91658f"
+    }
+  },
+  "receipt": {
+    "receipt_hash": "0xa4ce76b86411905a9920b7bcb0a56600fb8f03b6d200f93ead36587fd38f81ac",
+    "rail": "escrow",
+    "payer": "0xf308f872796f5c1ca01c28541a366f7f9393dfb8",
+    "miner": "5311",
+    "intent": "WEATHER_CHECK_TEMPERATURE",
+    "amount_uusdc": "10000",
+    "epoch_id": 43,
+    "settlement": "epoch",
+    "chain": "telegraph",
+    "timestamp": 1795440200
+  }
+}

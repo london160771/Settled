@@ -15,8 +15,10 @@ function chargedFrom(body, receipt, quoted) {
   const rows = body?.fulfillment?.payments;
   if (Array.isArray(rows) && rows.length)
     return rows.reduce((s, p) => s + Number(p.amount_uusdc || 0), 0);
-  if (receipt?.amount_uusdc != null) return Number(receipt.amount_uusdc);
-  if (typeof body?.cost_usd === 'number') return Math.round(body.cost_usd * 1e6);
+  if (receipt?.amount_uusdc != null && Number(receipt.amount_uusdc) > 0)
+    return Number(receipt.amount_uusdc);
+  // No receipt header (seen live on QUESTION_ANSWERING_GENERAL, which the ledger still billed):
+  // count the quoted price, never 0. Reconcile corrects it against the ledger later.
   return quoted;
 }
 

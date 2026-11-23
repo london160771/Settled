@@ -1,0 +1,16 @@
+{
+  "at": "2026-11-23T13:24:08.876Z",
+  "request": {
+    "intent": "TRAVEL_DISRUPTION_GENERAL",
+    "params": {
+      "route_or_flight": "BA75 LHR-LOS 2026-11-20"
+    }
+  },
+  "status": 500,
+  "body": {
+    "error": "upstream error 422: {\"status\":\"error\",\"mode\":\"refusal\",\"fallback\":false,\"error\":{\"code\":\"UNSUPPORTED_TRANSIT_ROUTE\",\"message\":\"Use MBTA Red, Orange, Blue, Green-B/C/D/E, or Mattapan.\"},\"verified_answer\":false}",
+    "intent": "TRAVEL_DISRUPTION_GENERAL",
+    "miner_id": "1900999000"
+  },
+  "receipt": null
+}

@@ -1,10 +1,10 @@
 {
-  "fetched_at": "2026-11-22T17:46:40.419Z",
+  "fetched_at": "2026-11-23T13:22:06.624Z",
   "count": 136,
   "intents": [
     {
       "name": "ACADEMIC_SEARCH_GENERAL",
-      "miner_count": 18,
+      "miner_count": 19,
       "lifecycle_state": "active"
     },
     {
@@ -29,7 +29,7 @@
     },
     {
       "name": "ASSET_RESERVE_ATTESTATION_GENERAL",
-      "miner_count": 23,
+      "miner_count": 24,
       "lifecycle_state": "active"
     },
     {
@@ -49,7 +49,7 @@
     },
     {
       "name": "CHAT_COMPLETION_GENERAL",
-      "miner_count": 17,
+      "miner_count": 18,
       "lifecycle_state": "active"
     },
     {
@@ -64,7 +64,7 @@
     },
     {
       "name": "CODE_PATCH_VERIFY_GENERAL",
-      "miner_count": 24,
+      "miner_count": 25,
       "lifecycle_state": "active"
     },
     {
@@ -99,7 +99,7 @@
     },
     {
       "name": "CORPORATE_REGISTRY_LOOKUP_GENERAL",
-      "miner_count": 27,
+      "miner_count": 29,
       "lifecycle_state": "active"
     },
     {
@@ -109,17 +109,17 @@
     },
     {
       "name": "CROSS_CHAIN_STATE_VERIFY_GENERAL",
-      "miner_count": 28,
+      "miner_count": 29,
       "lifecycle_state": "active"
     },
     {
       "name": "CRYPTO_PRICE_USD",
-      "miner_count": 56,
+      "miner_count": 58,
       "lifecycle_state": "active"
     },
     {
       "name": "CRYPTO_TRANSFER_VERIFY_GENERAL",
-      "miner_count": 24,
+      "miner_count": 25,
       "lifecycle_state": "registered"
     },
     {
@@ -129,7 +129,7 @@
     },
     {
       "name": "CURRENCY_EXCHANGE_CONVERT",
-      "miner_count": 22,
+      "miner_count": 24,
       "lifecycle_state": "active"
     },
     {
@@ -139,7 +139,7 @@
     },
     {
       "name": "CVE_LOOKUP_CVSS",
-      "miner_count": 21,
+      "miner_count": 23,
       "lifecycle_state": "active"
     },
     {
@@ -159,7 +159,7 @@
     },
     {
       "name": "DNS_RECORD_LOOKUP_GENERAL",
-      "miner_count": 26,
+      "miner_count": 28,
       "lifecycle_state": "active"
     },
     {
@@ -169,7 +169,7 @@
     },
     {
       "name": "EMAIL_SECURITY_GENERAL",
-      "miner_count": 21,
+      "miner_count": 22,
       "lifecycle_state": "active"
     },
     {
@@ -184,7 +184,7 @@
     },
     {
       "name": "EVENT_OUTCOME_RESOLUTION_GENERAL",
-      "miner_count": 39,
+      "miner_count": 41,
       "lifecycle_state": "active"
     },
     {
@@ -199,7 +199,7 @@
     },
     {
       "name": "FINANCIAL_DATA_GENERAL",
-      "miner_count": 21,
+      "miner_count": 22,
       "lifecycle_state": "active"
     },
     {
@@ -219,17 +219,17 @@
     },
     {
       "name": "FX_NOW_CAD",
-      "miner_count": 18,
+      "miner_count": 20,
       "lifecycle_state": "active"
     },
     {
       "name": "FX_NOW_EUR",
-      "miner_count": 18,
+      "miner_count": 20,
       "lifecycle_state": "active"
     },
     {
       "name": "FX_NOW_SEK",
-      "miner_count": 18,
+      "miner_count": 20,
       "lifecycle_state": "active"
     },
     {
@@ -239,7 +239,7 @@
     },
     {
       "name": "GAS_PRICE_GENERAL",
-      "miner_count": 29,
+      "miner_count": 31,
       "lifecycle_state": "active"
     },
     {
@@ -274,7 +274,7 @@
     },
     {
       "name": "IP_GEOLOCATION_GENERAL",
-      "miner_count": 15,
+      "miner_count": 16,
       "lifecycle_state": "active"
     },
     {
@@ -299,7 +299,7 @@
     },
     {
       "name": "LIQUIDITY_DEPTH_VERIFY_GENERAL",
-      "miner_count": 40,
+      "miner_count": 42,
       "lifecycle_state": "active"
     },
     {
@@ -324,12 +324,12 @@
     },
     {
       "name": "MACRO_ECONOMIC_INDICATOR_GENERAL",
-      "miner_count": 29,
+      "miner_count": 30,
       "lifecycle_state": "active"
     },
     {
       "name": "MALWARE_DETECTION_HASH",
-      "miner_count": 16,
+      "miner_count": 17,
       "lifecycle_state": "active"
     },
     {
@@ -344,17 +344,17 @@
     },
     {
       "name": "MINING_HASHPRICE_VERIFY_GENERAL",
-      "miner_count": 31,
+      "miner_count": 32,
       "lifecycle_state": "active"
     },
     {
       "name": "NEWS_HEADLINES_GENERAL",
-      "miner_count": 18,
+      "miner_count": 19,
       "lifecycle_state": "active"
     },
     {
       "name": "NEWS_SEARCH_GENERAL",
-      "miner_count": 21,
+      "miner_count": 22,
       "lifecycle_state": "active"
     },
     {
@@ -379,7 +379,7 @@
     },
     {
       "name": "PAYMENT_METHOD_VERIFY_GENERAL",
-      "miner_count": 21,
+      "miner_count": 22,
       "lifecycle_state": "active"
     },
     {
@@ -414,12 +414,12 @@
     },
     {
       "name": "REGULATORY_FILING_MONITOR_GENERAL",
-      "miner_count": 24,
+      "miner_count": 25,
       "lifecycle_state": "active"
     },
     {
       "name": "RESEARCH_QUERY_GENERAL",
-      "miner_count": 32,
+      "miner_count": 33,
       "lifecycle_state": "active"
     },
     {
@@ -429,17 +429,17 @@
     },
     {
       "name": "RETURN_POLICY_VERIFY_GENERAL",
-      "miner_count": 19,
+      "miner_count": 20,
       "lifecycle_state": "active"
     },
     {
       "name": "ROUTE_ETA_GENERAL",
-      "miner_count": 19,
+      "miner_count": 20,
       "lifecycle_state": "active"
     },
     {
       "name": "SANCTIONS_SCREENING_MATCH_GENERAL",
-      "miner_count": 29,
+      "miner_count": 31,
       "lifecycle_state": "active"
     },
     {
@@ -449,7 +449,7 @@
     },
     {
       "name": "SECURITY_REVIEW_GENERAL",
-      "miner_count": 35,
+      "miner_count": 36,
       "lifecycle_state": "active"
     },
     {
@@ -469,7 +469,7 @@
     },
     {
       "name": "SERVER_UPTIME_MONITOR_GENERAL",
-      "miner_count": 19,
+      "miner_count": 20,
       "lifecycle_state": "registered"
     },
     {
@@ -489,7 +489,7 @@
     },
     {
       "name": "SLA_COMPLIANCE_GENERAL",
-      "miner_count": 22,
+      "miner_count": 25,
       "lifecycle_state": "active"
     },
     {
@@ -509,22 +509,22 @@
     },
     {
       "name": "SPORTS_SCORE_GENERAL",
-      "miner_count": 15,
+      "miner_count": 16,
       "lifecycle_state": "active"
     },
     {
       "name": "SSL_VERIFICATION_CERT",
-      "miner_count": 22,
+      "miner_count": 24,
       "lifecycle_state": "active"
     },
     {
       "name": "STOCK_PRICE_US_EQUITY",
-      "miner_count": 27,
+      "miner_count": 28,
       "lifecycle_state": "active"
     },
     {
       "name": "STORM_ALERT_GENERAL",
-      "miner_count": 20,
+      "miner_count": 21,
       "lifecycle_state": "active"
     },
     {
@@ -569,7 +569,7 @@
     },
     {
       "name": "THREAT_INTELLIGENCE_INDICATOR",
-      "miner_count": 20,
+      "miner_count": 22,
       "lifecycle_state": "active"
     },
     {
@@ -579,22 +579,22 @@
     },
     {
       "name": "TOKEN_HOLDER_COUNT_GENERAL",
-      "miner_count": 22,
+      "miner_count": 24,
       "lifecycle_state": "active"
     },
     {
       "name": "TOKEN_TOTAL_SUPPLY_VERIFY_GENERAL",
-      "miner_count": 28,
+      "miner_count": 29,
       "lifecycle_state": "active"
     },
     {
       "name": "TRANSACTION_RISK_GENERAL",
-      "miner_count": 17,
+      "miner_count": 18,
       "lifecycle_state": "active"
     },
     {
       "name": "TRAVEL_DISRUPTION_GENERAL",
-      "miner_count": 18,
+      "miner_count": 19,
       "lifecycle_state": "active"
     },
     {
@@ -604,7 +604,7 @@
     },
     {
       "name": "TVL_LOOKUP_GENERAL",
-      "miner_count": 24,
+      "miner_count": 25,
       "lifecycle_state": "active"
     },
     {
@@ -614,12 +614,12 @@
     },
     {
       "name": "URL_SAFE_GENERAL",
-      "miner_count": 20,
+      "miner_count": 21,
       "lifecycle_state": "active"
     },
     {
       "name": "URL_SCAN_VERDICT",
-      "miner_count": 22,
+      "miner_count": 24,
       "lifecycle_state": "active"
     },
     {
@@ -629,7 +629,7 @@
     },
     {
       "name": "VENDOR_VERIFY_GENERAL",
-      "miner_count": 26,
+      "miner_count": 27,
       "lifecycle_state": "active"
     },
     {
@@ -644,12 +644,12 @@
     },
     {
       "name": "VULNERABILITY_TRIAGE_GENERAL",
-      "miner_count": 39,
+      "miner_count": 41,
       "lifecycle_state": "active"
     },
     {
       "name": "WALLET_BALANCE_CHECK_GENERAL",
-      "miner_count": 24,
+      "miner_count": 25,
       "lifecycle_state": "active"
     },
     {
@@ -664,12 +664,12 @@
     },
     {
       "name": "WEATHER_CHECK_TEMPERATURE",
-      "miner_count": 32,
+      "miner_count": 34,
       "lifecycle_state": "active"
     },
     {
       "name": "WEATHER_FORECAST_GENERAL",
-      "miner_count": 26,
+      "miner_count": 28,
       "lifecycle_state": "active"
     },
     {
@@ -679,7 +679,7 @@
     },
     {
       "name": "WEB_SEARCH_GENERAL",
-      "miner_count": 29,
+      "miner_count": 30,
       "lifecycle_state": "active"
     }
   ]

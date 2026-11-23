@@ -9,17 +9,17 @@
   "intent_name": "SLA_COMPLIANCE_GENERAL",
   "lifecycle": {
     "reasons": [],
-    "since": "2026-11-17T14:17:24.71617Z",
+    "since": "2026-11-22T22:09:14.745653Z",
     "state": "active"
   },
-  "miner_count": 22,
+  "miner_count": 25,
   "miners": [
     {
-      "id": "781346",
-      "name": "Source-Verified Whole-Day Availability Durations",
-      "slug": "zk-sla-elapsed",
-      "description": "Keyless public monitoring availability for Google homepage, English Wikipedia homepage, Hacker News homepage and the GitHub API root. Explicit elapsed durations in whole days, hours, minutes or seconds are normalized to supported day periods. Results are published statistics or estimates from source-rounded daily incident minutes, with dates, source revisions, precision and ODbL attribution. Ambiguous first-day allocations return bounds and null uptime, never a guessed point. These single-monitor observations are not provider-wide availability or customer-contract SLA compliance.",
-      "base_url": "https://telegraph-ship.margyn.workers.dev",
+      "id": "2611217",
+      "name": "MONEY OWED Contract SLA Check",
+      "slug": "moneyowed-sla",
+      "description": "Contract-scoped SLA compliance for 17 vendors with written uptime commitments: GitHub Enterprise Cloud, Jira, Confluence, Jira Service Management, Bitbucket, Vercel, DigitalOcean, Twilio, Linode, Mailgun, Sanity, Prisma, Mapbox, Buildkite, AWS, Google Cloud and Microsoft Azure. Uptime is computed from the vendor's own public incident history, counting only time the vendor marked a covered service as down (degraded performance and scheduled maintenance excluded), and compared with the target in the vendor's published SLA. Calendar months and quarters match the billing period the SLA uses and also return the service credit owed and the claim deadline. Every answer lists each incident with whether it counted and why.",
+      "base_url": "https://moneyowed.38-49-216-59.sslip.io",
       "capabilities": [
         "SLA_COMPLIANCE_GENERAL"
       ],
@@ -30,6 +30,105 @@
       "mapping": "code",
       "compatible_endpoints": [
         "/sla-compliance"
+      ]
+    },
+    {
+      "id": "302",
+      "name": "ChainSight — Universal Intelligence & Data Oracle",
+      "slug": "chainsight-oracle",
+      "description": "A single high-reliability provider that answers ANY request across conversation, search, research, verification, language, finance, crypto/on-chain, security, weather, logistics and IoT. Routes here for: general conversational questions and chat; open-ended Q&A and knowledge; web search and current news; deep research and academic/scholarly lookups; fact-checking and claim/content verification; translation, summarization, rewriting and text generation; sentiment, classification, moderation, AI-text and authenticity detection; live crypto prices, market cap, DeFi TVL and yields, fiat FX, gas, wallet balances, on-chain transactions, token supply and holders; stock and macro indicators; fraud, sanctions, threat-intel, CVE and vulnerability, URL/email/SSL security, code review and generation; weather, air-quality and geolocation; shipping, port, warehouse, package and vessel logistics; sensor, grid, datacenter and validator telemetry. Every answer is direct, grounded in a real source, number-first for quantitative intents, low-latency and never empty. Broad coverage with specialist-grade quality on each intent — a reliable default the router can trust for almost any question.",
+      "base_url": "https://hub.shadrakbessanh.me",
+      "capabilities": [
+        "MEDIA_AUTHENTICITY_CHECK_GENERAL",
+        "MEDIA_FORENSIC_VERIFY_GENERAL",
+        "MINING_HASHPRICE_VERIFY_GENERAL",
+        "NEWS_HEADLINES_GENERAL",
+        "NEWS_SEARCH_GENERAL",
+        "ONCHAIN_METRIC_VERIFY_GENERAL",
+        "ONCHAIN_TX_LOOKUP_GENERAL",
+        "OPTIMAL_EXECUTION_ROUTE_GENERAL",
+        "PACKAGE_STATUS_GENERAL",
+        "PAYMENT_METHOD_VERIFY_GENERAL",
+        "PLAGIARISM_DETECTION_GENERAL",
+        "PORT_SCAN_AUDIT_GENERAL",
+        "PRODUCT_AUTHENTICITY_GENERAL",
+        "QUESTION_ANSWERING_GENERAL",
+        "REGRESSION_VERIFY_GENERAL",
+        "REGULATORY_FILING_MONITOR_GENERAL",
+        "RESEARCH_QUERY_GENERAL",
+        "RESEARCH_SYNTHESIS_GENERAL",
+        "RETURN_POLICY_VERIFY_GENERAL",
+        "ROUTE_ETA_GENERAL",
+        "SANCTIONS_SCREENING_MATCH_GENERAL",
+        "SATELLITE_IMAGERY_ANALYSIS_GENERAL",
+        "SECURITY_REVIEW_GENERAL",
+        "SEMANTIC_SIMILARITY_GENERAL",
+        "SENSOR_TELEMETRY_VERIFY_GENERAL",
+        "SENTIMENT_ANALYSIS_GENERAL",
+        "SERVER_UPTIME_MONITOR_GENERAL",
+        "SHIPMENT_DELAY_RISK_GENERAL",
+        "SHIP_RATE_ETA_GENERAL",
+        "SKU_IN_STOCK_GENERAL",
+        "SLA_COMPLIANCE_GENERAL",
+        "SMART_CONTRACT_AUDIT_GENERAL",
+        "SOCIAL_BOT_DETECTION_GENERAL",
+        "SSL_VERIFICATION_CERT",
+        "STOCK_PRICE_US_EQUITY",
+        "STORM_ALERT_GENERAL",
+        "TASK_EXECUTION_QUALITY_GENERAL",
+        "TELEGRAPH_KNOWLEDGE_GENERAL",
+        "TEXT_AUTHENTICITY_CHECK_GENERAL",
+        "TEXT_CLASSIFICATION_GENERAL",
+        "TEXT_GENERATION_GENERAL",
+        "TEXT_SUMMARIZATION_GENERAL",
+        "THREAT_INTELLIGENCE_INDICATOR",
+        "THREAT_IP_REPUTATION_GENERAL",
+        "TOKEN_HOLDER_COUNT_GENERAL",
+        "TOKEN_TOTAL_SUPPLY_VERIFY_GENERAL",
+        "TRANSACTION_RISK_GENERAL",
+        "TRAVEL_DISRUPTION_GENERAL",
+        "TRAVEL_TRANSIT_LOCK_GENERAL",
+        "TVL_LOOKUP_GENERAL",
+        "URL_SAFE_GENERAL",
+        "URL_SCAN_VERDICT",
+        "VALIDATOR_PERFORMANCE_VERIFY_GENERAL",
+        "VENDOR_VERIFY_GENERAL",
+        "VESSEL_TELEMETRY_VERIFY_GENERAL",
+        "VIDEO_VERIFICATION_GENERAL",
+        "VULNERABILITY_TRIAGE_GENERAL",
+        "WALLET_BALANCE_CHECK_GENERAL",
+        "WAREHOUSE_INVENTORY_GENERAL",
+        "WASH_TRADING_DETECTION_GENERAL",
+        "WEATHER_CHECK_TEMPERATURE",
+        "WEATHER_FORECAST_GENERAL",
+        "WEATHER_FORECAST_VERIFY_GENERAL",
+        "WEB_SEARCH_GENERAL"
+      ],
+      "cost_per_call": "0.00",
+      "protocol": "generic",
+      "compatible": true,
+      "compatibility_reason": "request builder, no declared field for: /sla has no field for required param(s) service, period",
+      "mapping": "llm",
+      "compatible_endpoints": [
+        "/sla"
+      ]
+    },
+    {
+      "id": "103007",
+      "name": "Stripe Status SLA",
+      "slug": "sla-stripe",
+      "description": "Stripe current status SLA. Intent SLA_COMPLIANCE.\n",
+      "base_url": "https://status.stripe.com",
+      "capabilities": [
+        "SLA_COMPLIANCE_GENERAL"
+      ],
+      "cost_per_call": "0.00",
+      "protocol": "generic",
+      "compatible": true,
+      "compatibility_reason": "request builder: /query declares no request fields",
+      "mapping": "llm",
+      "compatible_endpoints": [
+        "/query"
       ]
     },
     {
@@ -51,10 +150,189 @@
       ]
     },
     {
-      "id": "781306",
-      "name": "GitHub Component Uptime Research Candidate",
-      "slug": "zk-gh-uptime",
-      "description": "Unregistered research candidate for provider-reported GitHub component availability. Returns the published Statuspage uptime percentage for last 30, 60 or 90 days, with source URL and reported timeline dates. These rounded, component-state-based figures are not customer-specific contractual SLA compliance. A target and compliance decision remain unavailable when no applicable agreement is supplied. Requires source-licence clearance and candidate worker deployment before registration.",
+      "id": "103008",
+      "name": "HTTPBin Probe SLA",
+      "slug": "sla-httpbin",
+      "description": "HTTPBin 200 probe SLA check. Intent SLA_COMPLIANCE.\n",
+      "base_url": "https://httpbin.org",
+      "capabilities": [
+        "SLA_COMPLIANCE_GENERAL"
+      ],
+      "cost_per_call": "0.00",
+      "protocol": "generic",
+      "compatible": true,
+      "compatibility_reason": "request builder: /query declares no request fields",
+      "mapping": "llm",
+      "compatible_endpoints": [
+        "/query"
+      ]
+    },
+    {
+      "id": "7410311",
+      "name": "Statuspage SLA Auditor",
+      "slug": "sla-miner",
+      "description": "Historical SLA compliance for named cloud providers (GitHub, Cloudflare, Vercel, Twilio, DigitalOcean, Discord). Computes uptime over a past window (1-90 days) from the provider's own public Statuspage incident history, counting only time components were in partial or major outage, and compares it to the provider's published SLA target. Not a current-status check or homepage probe. Optional component scope (e.g. \"GitHub Actions\"). Returns the outage windows and sources as evidence.",
+      "base_url": "https://clawback-eta.vercel.app",
+      "capabilities": [
+        "SLA_COMPLIANCE_GENERAL"
+      ],
+      "cost_per_call": "0.00",
+      "protocol": "generic",
+      "compatible": true,
+      "compatibility_reason": "request builder: service needs the request builder",
+      "mapping": "llm",
+      "compatible_endpoints": [
+        "/sla"
+      ]
+    },
+    {
+      "id": "103006",
+      "name": "Discord Status Only",
+      "slug": "sla-discord-st",
+      "description": "Discord status endpoint SLA. Intent SLA_COMPLIANCE.\n",
+      "base_url": "https://discordstatus.com",
+      "capabilities": [
+        "SLA_COMPLIANCE_GENERAL"
+      ],
+      "cost_per_call": "0.00",
+      "protocol": "generic",
+      "compatible": true,
+      "compatibility_reason": "request builder: /query declares no request fields",
+      "mapping": "llm",
+      "compatible_endpoints": [
+        "/query"
+      ]
+    },
+    {
+      "id": "103004",
+      "name": "Cloudflare Summary SLA",
+      "slug": "sla-cf-sum",
+      "description": "Cloudflare status summary SLA. Intent SLA_COMPLIANCE.\n",
+      "base_url": "https://www.cloudflarestatus.com",
+      "capabilities": [
+        "SLA_COMPLIANCE_GENERAL"
+      ],
+      "cost_per_call": "0.00",
+      "protocol": "generic",
+      "compatible": true,
+      "compatibility_reason": "request builder: /query declares no request fields",
+      "mapping": "llm",
+      "compatible_endpoints": [
+        "/query"
+      ]
+    },
+    {
+      "id": "5530",
+      "name": "Telegraph Verity Intelligence",
+      "slug": "telegraph-verity-intelligence",
+      "description": "Evidence-grounded intelligence provider for research, content verification, media authenticity, and cybersecurity analysis.\n",
+      "base_url": "https://telegraph-verity-intelligence-api.onrender.com",
+      "capabilities": [
+        "FACT_CHECK_GENERAL",
+        "RESEARCH_QUERY_GENERAL",
+        "RESEARCH_SYNTHESIS_GENERAL",
+        "NEWS_HEADLINES_GENERAL",
+        "NEWS_SEARCH_GENERAL",
+        "WEB_SEARCH_GENERAL",
+        "TWITTER_SEARCH_GENERAL",
+        "SENTIMENT_ANALYSIS_GENERAL",
+        "ONCHAIN_METRIC_VERIFY_GENERAL",
+        "SLA_COMPLIANCE_GENERAL",
+        "ACADEMIC_SEARCH_GENERAL",
+        "CONTENT_EXTRACTION_GENERAL",
+        "CONTENT_VERIFICATION_GENERAL",
+        "TEXT_AUTHENTICITY_CHECK_GENERAL",
+        "AI_TEXT_DETECTION_GENERAL",
+        "DEEPFAKE_DETECTION_GENERAL",
+        "MEDIA_AUTHENTICITY_CHECK_GENERAL",
+        "IMAGE_VERIFICATION_GENERAL",
+        "VIDEO_VERIFICATION_GENERAL",
+        "CONTENT_MODERATION_GENERAL",
+        "URL_SCAN_VERDICT",
+        "EMAIL_SECURITY_GENERAL",
+        "MALWARE_DETECTION_HASH",
+        "CVE_LOOKUP_CVSS",
+        "SSL_VERIFICATION_CERT",
+        "DNS_RECORD_LOOKUP_GENERAL",
+        "CODE_REVIEW_GENERAL",
+        "URL_SAFE_GENERAL",
+        "THREAT_IP_REPUTATION_GENERAL",
+        "THREAT_INTELLIGENCE_INDICATOR",
+        "PLAGIARISM_DETECTION_GENERAL",
+        "SECURITY_REVIEW_GENERAL",
+        "REGRESSION_VERIFY_GENERAL",
+        "CODE_PATCH_VERIFY_GENERAL",
+        "VULNERABILITY_TRIAGE_GENERAL"
+      ],
+      "cost_per_call": "0.00",
+      "protocol": "generic",
+      "compatible": true,
+      "compatibility_reason": "request builder: required field intent has no canonical param",
+      "mapping": "llm",
+      "compatible_endpoints": [
+        "/v1/intent"
+      ]
+    },
+    {
+      "id": "103005",
+      "name": "Discord Status SLA",
+      "slug": "sla-discord",
+      "description": "Discord status summary SLA. Intent SLA_COMPLIANCE.\n",
+      "base_url": "https://discordstatus.com",
+      "capabilities": [
+        "SLA_COMPLIANCE_GENERAL"
+      ],
+      "cost_per_call": "0.00",
+      "protocol": "generic",
+      "compatible": true,
+      "compatibility_reason": "request builder: /query declares no request fields",
+      "mapping": "llm",
+      "compatible_endpoints": [
+        "/query"
+      ]
+    },
+    {
+      "id": "781308",
+      "name": "Public Homepage Availability — Bounded Day Windows",
+      "slug": "zk-sla-days",
+      "description": "Reports Upptime's ODbL-licensed availability observations for Google homepage, English Wikipedia homepage, and Hacker News homepage. Supports fixed last N days for integer N from 1 through 365, plus the provider's last 24 hours, last 7 days, last month and last year statistics. Fixed-day results are two-decimal estimates from rounded daily incident minutes, with bounded partial-day allocations; ambiguous estimates abstain. These are single-monitor homepage observations, not product-wide availability or customer-specific contractual SLA compliance. Source revision, publication time, measurement basis and licence accompany each answer. No SLA target or compliance decision is presumed.",
+      "base_url": "https://telegraph-ship.margyn.workers.dev",
+      "capabilities": [
+        "SLA_COMPLIANCE_GENERAL"
+      ],
+      "cost_per_call": "0.00",
+      "protocol": "generic",
+      "compatible": true,
+      "compatibility_reason": "mapped in code to /sla-compliance",
+      "mapping": "code",
+      "compatible_endpoints": [
+        "/sla-compliance"
+      ]
+    },
+    {
+      "id": "23112026",
+      "name": "downproof-uptime",
+      "slug": "downproof",
+      "description": "Deterministic server uptime and SLA compliance checks. Probes a URL live at request time and returns its status, latency and an SLA verdict. No AI in the measurement.",
+      "base_url": "https://downproof.vercel.app",
+      "capabilities": [
+        "SERVER_UPTIME_MONITOR_GENERAL",
+        "SLA_COMPLIANCE_GENERAL"
+      ],
+      "cost_per_call": "0.00",
+      "protocol": "generic",
+      "compatible": true,
+      "compatibility_reason": "request builder, no declared field for: /query has no field for required param(s) service",
+      "mapping": "llm",
+      "compatible_endpoints": [
+        "/query"
+      ]
+    },
+    {
+      "id": "781346",
+      "name": "Source-Verified Whole-Day Availability Durations",
+      "slug": "zk-sla-elapsed",
+      "description": "Keyless public monitoring availability for Google homepage, English Wikipedia homepage, Hacker News homepage and the GitHub API root. Explicit elapsed durations in whole days, hours, minutes or seconds are normalized to supported day periods. Results are published statistics or estimates from source-rounded daily incident minutes, with dates, source revisions, precision and ODbL attribution. Ambiguous first-day allocations return bounds and null uptime, never a guessed point. These single-monitor observations are not provider-wide availability or customer-contract SLA compliance.",
       "base_url": "https://telegraph-ship.margyn.workers.dev",
       "capabilities": [
         "SLA_COMPLIANCE_GENERAL"
@@ -82,6 +360,92 @@
       "compatible": true,
       "compatibility_reason": "mapped in code to /sla-compliance",
       "mapping": "code",
+      "compatible_endpoints": [
+        "/sla-compliance"
+      ]
+    },
+    {
+      "id": "781306",
+      "name": "GitHub Component Uptime Research Candidate",
+      "slug": "zk-gh-uptime",
+      "description": "Unregistered research candidate for provider-reported GitHub component availability. Returns the published Statuspage uptime percentage for last 30, 60 or 90 days, with source URL and reported timeline dates. These rounded, component-state-based figures are not customer-specific contractual SLA compliance. A target and compliance decision remain unavailable when no applicable agreement is supplied. Requires source-licence clearance and candidate worker deployment before registration.",
+      "base_url": "https://telegraph-ship.margyn.workers.dev",
+      "capabilities": [
+        "SLA_COMPLIANCE_GENERAL"
+      ],
+      "cost_per_call": "0.00",
+      "protocol": "generic",
+      "compatible": true,
+      "compatibility_reason": "mapped in code to /sla-compliance",
+      "mapping": "code",
+      "compatible_endpoints": [
+        "/sla-compliance"
+      ]
+    },
+    {
+      "id": "83159274",
+      "name": "TelegraphIntent",
+      "slug": "telegraph-intent-miner",
+      "description": "One miner serving 33 Telegraph intents. FRAUD_RISK_GENERAL fuses IP reputation, Tor/VPN exposure, domain and phishing-feed reputation, card-BIN metadata and behavioural pattern rules into a graded risk level and abstains honestly when evidence is insufficient. FACT_CHECK_GENERAL checks a specific factual claim against multiple independent sources and returns a verdict with cited sources, abstaining when evidence is insufficient. CONTRACT_OBLIGATION_AUDIT_GENERAL extracts a contract's obligations, judges compliance and cites only clause wording verified to occur verbatim in the supplied contract (accepts the text or a link to an HTML or PDF). IP_GEOLOCATION_GENERAL locates an IP address by consensus of several keyless geolocation providers. EMAIL_SECURITY_GENERAL reports whether a DNS lookup of a given record type for a mail domain succeeds (DNS status NOERROR). URL_SAFE_GENERAL checks a URL against OpenPhish's live phishing feed and Cloudflare's malware and phishing DNS filter, counting the sources that flag it. MALWARE_DETECTION_HASH reports whether a file hash (MD5, SHA-1 or SHA-256), domain or IP address is flagged as malicious by CIRCL hashlookup, Team Cymru's malware hash registry, AlienVault OTX, OpenPhish and Cloudflare's security DNS. SANCTIONS_SCREENING_MATCH_GENERAL screens a name against OFAC's SDN and consolidated sanctions lists with fuzzy matching. CRYPTO_PRICE_USD returns a crypto asset's current dollar price as the consensus of several public exchanges. REGULATORY_FILING_MONITOR_GENERAL counts and lists SEC EDGAR filings in a period. CORPORATE_REGISTRY_LOOKUP_GENERAL looks a company up in GLEIF's LEI registry. SSL_VERIFICATION_CERT checks a host's TLS certificate with a real handshake. CVE_LOOKUP_CVSS returns a CVE's CVSS score and details from NVD. VULNERABILITY_TRIAGE_GENERAL returns a CVE's NVD CVSS base score. WEATHER_CHECK_TEMPERATURE returns a place's current air temperature in Celsius. WEATHER_FORECAST_GENERAL returns a place's forecast high, low, rain chance and condition. GAS_PRICE_GENERAL returns an EVM chain's gas price in gwei and the cost of a transfer. URL_SCAN_VERDICT says whether a URL is safe to visit. THREAT_INTELLIGENCE_INDICATOR reports whether an IP, domain or hash is flagged in public threat feeds. CURRENCY_EXCHANGE_CONVERT converts an amount between two currencies. FX_NOW_CAD returns the current USD/CAD exchange rate. FX_NOW_EUR returns the current USD/EUR exchange rate. FX_NOW_SEK returns the current USD/SEK exchange rate. DNS_RECORD_LOOKUP_GENERAL reports whether a name has a record of a given DNS type. TVL_LOOKUP_GENERAL returns the total value locked of a DeFi protocol or chain. WEB_SEARCH_GENERAL answers current-information queries from live web sources, citing them. CHAT_COMPLETION_GENERAL replies to general questions and conversation. RESEARCH_QUERY_GENERAL answers research questions with cited scholarly sources. SECURITY_REVIEW_GENERAL reviews code, dependencies, contracts, repositories and websites for security findings. EVENT_OUTCOME_RESOLUTION_GENERAL resolves named real-world events from settled markets and cited evidence. TOKEN_HOLDER_COUNT_GENERAL returns the number of addresses holding a token. SLA_COMPLIANCE_GENERAL returns a service's published uptime for a period and whether it met a stated target. RETURN_POLICY_VERIFY_GENERAL reads a retailer's return window and conditions from its own policy page.",
+      "base_url": "https://fraudrisk.onrender.com",
+      "capabilities": [
+        "FRAUD_RISK_GENERAL",
+        "FACT_CHECK_GENERAL",
+        "CONTRACT_OBLIGATION_AUDIT_GENERAL",
+        "IP_GEOLOCATION_GENERAL",
+        "EMAIL_SECURITY_GENERAL",
+        "URL_SAFE_GENERAL",
+        "MALWARE_DETECTION_HASH",
+        "SANCTIONS_SCREENING_MATCH_GENERAL",
+        "CRYPTO_PRICE_USD",
+        "REGULATORY_FILING_MONITOR_GENERAL",
+        "CORPORATE_REGISTRY_LOOKUP_GENERAL",
+        "SSL_VERIFICATION_CERT",
+        "CVE_LOOKUP_CVSS",
+        "VULNERABILITY_TRIAGE_GENERAL",
+        "WEATHER_CHECK_TEMPERATURE",
+        "WEATHER_FORECAST_GENERAL",
+        "GAS_PRICE_GENERAL",
+        "URL_SCAN_VERDICT",
+        "THREAT_INTELLIGENCE_INDICATOR",
+        "CURRENCY_EXCHANGE_CONVERT",
+        "FX_NOW_CAD",
+        "FX_NOW_EUR",
+        "FX_NOW_SEK",
+        "DNS_RECORD_LOOKUP_GENERAL",
+        "TVL_LOOKUP_GENERAL",
+        "WEB_SEARCH_GENERAL",
+        "CHAT_COMPLETION_GENERAL",
+        "RESEARCH_QUERY_GENERAL",
+        "SECURITY_REVIEW_GENERAL",
+        "EVENT_OUTCOME_RESOLUTION_GENERAL",
+        "TOKEN_HOLDER_COUNT_GENERAL",
+        "SLA_COMPLIANCE_GENERAL",
+        "RETURN_POLICY_VERIFY_GENERAL"
+      ],
+      "cost_per_call": "0.00",
+      "protocol": "generic",
+      "compatible": true,
+      "compatibility_reason": "mapped in code to /sla-compliance",
+      "mapping": "code",
+      "compatible_endpoints": [
+        "/sla-compliance"
+      ]
+    },
+    {
+      "id": "7606",
+      "name": "ShipWire SLA Compliance",
+      "slug": "shipwire-sla-compliance",
+      "description": "Service-level-agreement compliance check, answered by a language model at request time. Send the agreed SLA terms and the measured results such as uptime, response time, resolution time or an on-time rate and the miner returns a clear verdict (compliant, breached, at risk or insufficient information) naming the metric that decides it, the agreed target, the measured value and the margin or shortfall. This is judgement over the numbers in the request. The answer is produced with MiniMax under a commercial plan held by the operator, so this miner is not keyless. Serves the SLA_COMPLIANCE intent.\n",
+      "base_url": "https://telegraph-ship.margyn.workers.dev",
+      "capabilities": [
+        "SLA_COMPLIANCE_GENERAL"
+      ],
+      "cost_per_call": "0.00",
+      "protocol": "generic",
+      "compatible": true,
+      "compatibility_reason": "request builder: /sla-compliance declares no request fields",
+      "mapping": "llm",
       "compatible_endpoints": [
         "/sla-compliance"
       ]
@@ -207,208 +571,69 @@
       ]
     },
     {
-      "id": "781308",
-      "name": "Public Homepage Availability — Bounded Day Windows",
-      "slug": "zk-sla-days",
-      "description": "Reports Upptime's ODbL-licensed availability observations for Google homepage, English Wikipedia homepage, and Hacker News homepage. Supports fixed last N days for integer N from 1 through 365, plus the provider's last 24 hours, last 7 days, last month and last year statistics. Fixed-day results are two-decimal estimates from rounded daily incident minutes, with bounded partial-day allocations; ambiguous estimates abstain. These are single-monitor homepage observations, not product-wide availability or customer-specific contractual SLA compliance. Source revision, publication time, measurement basis and licence accompany each answer. No SLA target or compliance decision is presumed.",
-      "base_url": "https://telegraph-ship.margyn.workers.dev",
+      "id": "774921",
+      "name": "VeriReceipt Deterministic Oracle",
+      "slug": "verireceipt",
+      "description": "Zero-LLM deterministic provider with a SHA-256 receipt on every answer (raw_response_sha256: 64 lowercase hex characters, no 0x prefix, over the exact evidence bytes served at /receipts/{receipt_id}/raw): seven named EVM transaction chains, SEC EDGAR filing counts by company, exact form and inclusive filing-date period, DeFiLlama protocol or chain TVL, a canonical fixed-size Ethereum mainnet ETH/USDC execution quote, supported CAISO/NYISO/Elering grid prices, and finalized-root Ethereum validator effective balances. Unsupported, ambiguous or unavailable evidence is refused rather than guessed. Additional receipt-backed endpoints provide named-chain gas and balances, explicit-chain ERC20 supply, World Bank unemployment, DNS record observations, dated currency conversion, TLS certificate validity and DNS response status. Thirty-one further receipt-backed endpoints provide academic search, Chainlink reserve attestations, GitHub CI patch verification, SEC corporate registry lookup, cross-chain transaction-state agreement, CVE records, resolved prediction-market outcomes, market data, current FX rates, IP geolocation, pool liquidity, malware and threat-intelligence blocklist reads, news headlines and search, card BIN lookup, driving ETAs, sanctions screening, delivered-uptime reads, sports scores, US equity quotes, token holder counts, transaction risk reads, US airport disruption status, URL safety reads, EU VAT verification, CVE triage and weather forecasts. Declared source, scope and freshness limits apply.",
+      "base_url": "https://verireceipt.onrender.com",
       "capabilities": [
-        "SLA_COMPLIANCE_GENERAL"
-      ],
-      "cost_per_call": "0.00",
-      "protocol": "generic",
-      "compatible": true,
-      "compatibility_reason": "mapped in code to /sla-compliance",
-      "mapping": "code",
-      "compatible_endpoints": [
-        "/sla-compliance"
-      ]
-    },
-    {
-      "id": "2611217",
-      "name": "MONEY OWED Contract SLA Check",
-      "slug": "moneyowed-sla",
-      "description": "Contract-scoped SLA compliance for 17 vendors with written uptime commitments: GitHub Enterprise Cloud, Jira, Confluence, Jira Service Management, Bitbucket, Vercel, DigitalOcean, Twilio, Linode, Mailgun, Sanity, Prisma, Mapbox, Buildkite, AWS, Google Cloud and Microsoft Azure. Uptime is computed from the vendor's own public incident history, counting only time the vendor marked a covered service as down (degraded performance and scheduled maintenance excluded), and compared with the target in the vendor's published SLA. Calendar months and quarters match the billing period the SLA uses and also return the service credit owed and the claim deadline. Every answer lists each incident with whether it counted and why.",
-      "base_url": "https://moneyowed.38-49-216-59.sslip.io",
-      "capabilities": [
-        "SLA_COMPLIANCE_GENERAL"
-      ],
-      "cost_per_call": "0.00",
-      "protocol": "generic",
-      "compatible": true,
-      "compatibility_reason": "mapped in code to /sla-compliance",
-      "mapping": "code",
-      "compatible_endpoints": [
-        "/sla-compliance"
-      ]
-    },
-    {
-      "id": "103003",
-      "name": "Cloudflare Status SLA",
-      "slug": "sla-cf",
-      "description": "Cloudflare status SLA signal. Intent SLA_COMPLIANCE.\n",
-      "base_url": "https://www.cloudflarestatus.com",
-      "capabilities": [
-        "SLA_COMPLIANCE_GENERAL"
-      ],
-      "cost_per_call": "0.00",
-      "protocol": "generic",
-      "compatible": true,
-      "compatibility_reason": "request builder: /query declares no request fields",
-      "mapping": "llm",
-      "compatible_endpoints": [
-        "/query"
-      ]
-    },
-    {
-      "id": "302",
-      "name": "ChainSight — Universal Intelligence & Data Oracle",
-      "slug": "chainsight-oracle",
-      "description": "A single high-reliability provider that answers ANY request across conversation, search, research, verification, language, finance, crypto/on-chain, security, weather, logistics and IoT. Routes here for: general conversational questions and chat; open-ended Q&A and knowledge; web search and current news; deep research and academic/scholarly lookups; fact-checking and claim/content verification; translation, summarization, rewriting and text generation; sentiment, classification, moderation, AI-text and authenticity detection; live crypto prices, market cap, DeFi TVL and yields, fiat FX, gas, wallet balances, on-chain transactions, token supply and holders; stock and macro indicators; fraud, sanctions, threat-intel, CVE and vulnerability, URL/email/SSL security, code review and generation; weather, air-quality and geolocation; shipping, port, warehouse, package and vessel logistics; sensor, grid, datacenter and validator telemetry. Every answer is direct, grounded in a real source, number-first for quantitative intents, low-latency and never empty. Broad coverage with specialist-grade quality on each intent — a reliable default the router can trust for almost any question.",
-      "base_url": "https://hub.shadrakbessanh.me",
-      "capabilities": [
-        "MEDIA_AUTHENTICITY_CHECK_GENERAL",
-        "MEDIA_FORENSIC_VERIFY_GENERAL",
+        "ONCHAIN_TX_LOOKUP_GENERAL",
+        "REGULATORY_FILING_MONITOR_GENERAL",
+        "TVL_LOOKUP_GENERAL",
+        "OPTIMAL_EXECUTION_ROUTE_GENERAL",
+        "GRID_POWER_PRICE_GENERAL",
+        "VALIDATOR_PERFORMANCE_VERIFY_GENERAL",
+        "GAS_PRICE_GENERAL",
+        "WALLET_BALANCE_CHECK_GENERAL",
+        "TOKEN_TOTAL_SUPPLY_VERIFY_GENERAL",
+        "MACRO_ECONOMIC_INDICATOR_GENERAL",
+        "DNS_RECORD_LOOKUP_GENERAL",
+        "CURRENCY_EXCHANGE_CONVERT",
+        "SSL_VERIFICATION_CERT",
+        "EMAIL_SECURITY_GENERAL",
+        "ACADEMIC_SEARCH_GENERAL",
+        "ASSET_RESERVE_ATTESTATION_GENERAL",
+        "CODE_PATCH_VERIFY_GENERAL",
+        "CORPORATE_REGISTRY_LOOKUP_GENERAL",
+        "CROSS_CHAIN_STATE_VERIFY_GENERAL",
+        "CRYPTO_PRICE_USD",
+        "CVE_LOOKUP_CVSS",
+        "EVENT_OUTCOME_RESOLUTION_GENERAL",
+        "FINANCIAL_DATA_GENERAL",
+        "FX_NOW_CAD",
+        "FX_NOW_EUR",
+        "FX_NOW_SEK",
+        "IP_GEOLOCATION_GENERAL",
+        "LIQUIDITY_DEPTH_VERIFY_GENERAL",
+        "MALWARE_DETECTION_HASH",
         "MINING_HASHPRICE_VERIFY_GENERAL",
         "NEWS_HEADLINES_GENERAL",
         "NEWS_SEARCH_GENERAL",
-        "ONCHAIN_METRIC_VERIFY_GENERAL",
-        "ONCHAIN_TX_LOOKUP_GENERAL",
-        "OPTIMAL_EXECUTION_ROUTE_GENERAL",
-        "PACKAGE_STATUS_GENERAL",
         "PAYMENT_METHOD_VERIFY_GENERAL",
-        "PLAGIARISM_DETECTION_GENERAL",
-        "PORT_SCAN_AUDIT_GENERAL",
-        "PRODUCT_AUTHENTICITY_GENERAL",
-        "QUESTION_ANSWERING_GENERAL",
-        "REGRESSION_VERIFY_GENERAL",
-        "REGULATORY_FILING_MONITOR_GENERAL",
-        "RESEARCH_QUERY_GENERAL",
-        "RESEARCH_SYNTHESIS_GENERAL",
-        "RETURN_POLICY_VERIFY_GENERAL",
         "ROUTE_ETA_GENERAL",
         "SANCTIONS_SCREENING_MATCH_GENERAL",
-        "SATELLITE_IMAGERY_ANALYSIS_GENERAL",
-        "SECURITY_REVIEW_GENERAL",
-        "SEMANTIC_SIMILARITY_GENERAL",
-        "SENSOR_TELEMETRY_VERIFY_GENERAL",
-        "SENTIMENT_ANALYSIS_GENERAL",
-        "SERVER_UPTIME_MONITOR_GENERAL",
-        "SHIPMENT_DELAY_RISK_GENERAL",
-        "SHIP_RATE_ETA_GENERAL",
-        "SKU_IN_STOCK_GENERAL",
         "SLA_COMPLIANCE_GENERAL",
-        "SMART_CONTRACT_AUDIT_GENERAL",
-        "SOCIAL_BOT_DETECTION_GENERAL",
-        "SSL_VERIFICATION_CERT",
-        "STOCK_PRICE_US_EQUITY",
+        "SPORTS_SCORE_GENERAL",
         "STORM_ALERT_GENERAL",
-        "TASK_EXECUTION_QUALITY_GENERAL",
-        "TELEGRAPH_KNOWLEDGE_GENERAL",
-        "TEXT_AUTHENTICITY_CHECK_GENERAL",
-        "TEXT_CLASSIFICATION_GENERAL",
-        "TEXT_GENERATION_GENERAL",
-        "TEXT_SUMMARIZATION_GENERAL",
+        "STOCK_PRICE_US_EQUITY",
         "THREAT_INTELLIGENCE_INDICATOR",
-        "THREAT_IP_REPUTATION_GENERAL",
         "TOKEN_HOLDER_COUNT_GENERAL",
-        "TOKEN_TOTAL_SUPPLY_VERIFY_GENERAL",
         "TRANSACTION_RISK_GENERAL",
         "TRAVEL_DISRUPTION_GENERAL",
-        "TRAVEL_TRANSIT_LOCK_GENERAL",
-        "TVL_LOOKUP_GENERAL",
         "URL_SAFE_GENERAL",
         "URL_SCAN_VERDICT",
-        "VALIDATOR_PERFORMANCE_VERIFY_GENERAL",
         "VENDOR_VERIFY_GENERAL",
-        "VESSEL_TELEMETRY_VERIFY_GENERAL",
-        "VIDEO_VERIFICATION_GENERAL",
         "VULNERABILITY_TRIAGE_GENERAL",
-        "WALLET_BALANCE_CHECK_GENERAL",
-        "WAREHOUSE_INVENTORY_GENERAL",
-        "WASH_TRADING_DETECTION_GENERAL",
         "WEATHER_CHECK_TEMPERATURE",
-        "WEATHER_FORECAST_GENERAL",
-        "WEATHER_FORECAST_VERIFY_GENERAL",
-        "WEB_SEARCH_GENERAL"
+        "WEATHER_FORECAST_GENERAL"
       ],
       "cost_per_call": "0.00",
       "protocol": "generic",
       "compatible": true,
-      "compatibility_reason": "request builder, no declared field for: /sla has no field for required param(s) service, period",
-      "mapping": "llm",
+      "compatibility_reason": "mapped in code to /v1/sla-compliance",
+      "mapping": "code",
       "compatible_endpoints": [
-        "/sla"
-      ]
-    },
-    {
-      "id": "5530",
-      "name": "Telegraph Verity Intelligence",
-      "slug": "telegraph-verity-intelligence",
-      "description": "Evidence-grounded intelligence provider for research, content verification, media authenticity, and cybersecurity analysis.\n",
-      "base_url": "https://telegraph-verity-intelligence-api.onrender.com",
-      "capabilities": [
-        "FACT_CHECK_GENERAL",
-        "RESEARCH_QUERY_GENERAL",
-        "RESEARCH_SYNTHESIS_GENERAL",
-        "NEWS_HEADLINES_GENERAL",
-        "NEWS_SEARCH_GENERAL",
-        "WEB_SEARCH_GENERAL",
-        "TWITTER_SEARCH_GENERAL",
-        "SENTIMENT_ANALYSIS_GENERAL",
-        "ONCHAIN_METRIC_VERIFY_GENERAL",
-        "SLA_COMPLIANCE_GENERAL",
-        "ACADEMIC_SEARCH_GENERAL",
-        "CONTENT_EXTRACTION_GENERAL",
-        "CONTENT_VERIFICATION_GENERAL",
-        "TEXT_AUTHENTICITY_CHECK_GENERAL",
-        "AI_TEXT_DETECTION_GENERAL",
-        "DEEPFAKE_DETECTION_GENERAL",
-        "MEDIA_AUTHENTICITY_CHECK_GENERAL",
-        "IMAGE_VERIFICATION_GENERAL",
-        "VIDEO_VERIFICATION_GENERAL",
-        "CONTENT_MODERATION_GENERAL",
-        "URL_SCAN_VERDICT",
-        "EMAIL_SECURITY_GENERAL",
-        "MALWARE_DETECTION_HASH",
-        "CVE_LOOKUP_CVSS",
-        "SSL_VERIFICATION_CERT",
-        "DNS_RECORD_LOOKUP_GENERAL",
-        "CODE_REVIEW_GENERAL",
-        "URL_SAFE_GENERAL",
-        "THREAT_IP_REPUTATION_GENERAL",
-        "THREAT_INTELLIGENCE_INDICATOR",
-        "PLAGIARISM_DETECTION_GENERAL",
-        "SECURITY_REVIEW_GENERAL",
-        "REGRESSION_VERIFY_GENERAL",
-        "CODE_PATCH_VERIFY_GENERAL",
-        "VULNERABILITY_TRIAGE_GENERAL"
-      ],
-      "cost_per_call": "0.00",
-      "protocol": "generic",
-      "compatible": true,
-      "compatibility_reason": "request builder: required field intent has no canonical param",
-      "mapping": "llm",
-      "compatible_endpoints": [
-        "/v1/intent"
-      ]
-    },
-    {
-      "id": "103007",
-      "name": "Stripe Status SLA",
-      "slug": "sla-stripe",
-      "description": "Stripe current status SLA. Intent SLA_COMPLIANCE.\n",
-      "base_url": "https://status.stripe.com",
-      "capabilities": [
-        "SLA_COMPLIANCE_GENERAL"
-      ],
-      "cost_per_call": "0.00",
-      "protocol": "generic",
-      "compatible": true,
-      "compatibility_reason": "request builder: /query declares no request fields",
-      "mapping": "llm",
-      "compatible_endpoints": [
-        "/query"
+        "/v1/sla-compliance"
       ]
     },
     {
@@ -565,78 +790,6 @@
       ]
     },
     {
-      "id": "7410311",
-      "name": "Statuspage SLA Auditor",
-      "slug": "sla-miner",
-      "description": "Historical SLA compliance for named cloud providers (GitHub, Cloudflare, Vercel, Twilio, DigitalOcean, Discord). Computes uptime over a past window (1-90 days) from the provider's own public Statuspage incident history, counting only time components were in partial or major outage, and compares it to the provider's published SLA target. Not a current-status check or homepage probe. Optional component scope (e.g. \"GitHub Actions\"). Returns the outage windows and sources as evidence.",
-      "base_url": "https://clawback-eta.vercel.app",
-      "capabilities": [
-        "SLA_COMPLIANCE_GENERAL"
-      ],
-      "cost_per_call": "0.00",
-      "protocol": "generic",
-      "compatible": true,
-      "compatibility_reason": "request builder: service needs the request builder",
-      "mapping": "llm",
-      "compatible_endpoints": [
-        "/sla"
-      ]
-    },
-    {
-      "id": "103004",
-      "name": "Cloudflare Summary SLA",
-      "slug": "sla-cf-sum",
-      "description": "Cloudflare status summary SLA. Intent SLA_COMPLIANCE.\n",
-      "base_url": "https://www.cloudflarestatus.com",
-      "capabilities": [
-        "SLA_COMPLIANCE_GENERAL"
-      ],
-      "cost_per_call": "0.00",
-      "protocol": "generic",
-      "compatible": true,
-      "compatibility_reason": "request builder: /query declares no request fields",
-      "mapping": "llm",
-      "compatible_endpoints": [
-        "/query"
-      ]
-    },
-    {
-      "id": "7606",
-      "name": "ShipWire SLA Compliance",
-      "slug": "shipwire-sla-compliance",
-      "description": "Service-level-agreement compliance check, answered by a language model at request time. Send the agreed SLA terms and the measured results such as uptime, response time, resolution time or an on-time rate and the miner returns a clear verdict (compliant, breached, at risk or insufficient information) naming the metric that decides it, the agreed target, the measured value and the margin or shortfall. This is judgement over the numbers in the request. The answer is produced with MiniMax under a commercial plan held by the operator, so this miner is not keyless. Serves the SLA_COMPLIANCE intent.\n",
-      "base_url": "https://telegraph-ship.margyn.workers.dev",
-      "capabilities": [
-        "SLA_COMPLIANCE_GENERAL"
-      ],
-      "cost_per_call": "0.00",
-      "protocol": "generic",
-      "compatible": true,
-      "compatibility_reason": "request builder: /sla-compliance declares no request fields",
-      "mapping": "llm",
-      "compatible_endpoints": [
-        "/sla-compliance"
-      ]
-    },
-    {
-      "id": "781347",
-      "name": "Exact Public HTTP Monitoring Availability",
-      "slug": "zk-sla-http",
-      "description": "Source-verified availability estimates for eight explicitly named HTTP monitor scopes: GitHub, Instagram, TikTok, YouTube, Telegram and AWS homepages, Google's DNS levonk.com A-query URL, and Discord's unauthenticated gateway endpoint. Uses levonk/status ODbL-licensed source-rounded daily incident minutes, with revision, source time, window, accepted HTTP statuses, uncertainty bounds and attribution. A homepage accepting redirects is not proof of all product operations. No customer SLA target or contractual compliance is inferred.",
-      "base_url": "https://telegraph-ship.margyn.workers.dev",
-      "capabilities": [
-        "SLA_COMPLIANCE_GENERAL"
-      ],
-      "cost_per_call": "0.00",
-      "protocol": "generic",
-      "compatible": true,
-      "compatibility_reason": "request builder: service needs the request builder",
-      "mapping": "llm",
-      "compatible_endpoints": [
-        "/sla-compliance"
-      ]
-    },
-    {
       "id": "103001",
       "name": "GitHub Status SLA",
       "slug": "sla-github",
@@ -655,11 +808,11 @@
       ]
     },
     {
-      "id": "103006",
-      "name": "Discord Status Only",
-      "slug": "sla-discord-st",
-      "description": "Discord status endpoint SLA. Intent SLA_COMPLIANCE.\n",
-      "base_url": "https://discordstatus.com",
+      "id": "103003",
+      "name": "Cloudflare Status SLA",
+      "slug": "sla-cf",
+      "description": "Cloudflare status SLA signal. Intent SLA_COMPLIANCE.\n",
+      "base_url": "https://www.cloudflarestatus.com",
       "capabilities": [
         "SLA_COMPLIANCE_GENERAL"
       ],
@@ -673,39 +826,21 @@
       ]
     },
     {
-      "id": "103010",
-      "name": "GitHub Components SLA",
-      "slug": "sla-gh-comp",
-      "description": "GitHub components status SLA. Intent SLA_COMPLIANCE.\n",
-      "base_url": "https://www.githubstatus.com",
+      "id": "781347",
+      "name": "Exact Public HTTP Monitoring Availability",
+      "slug": "zk-sla-http",
+      "description": "Source-verified availability estimates for eight explicitly named HTTP monitor scopes: GitHub, Instagram, TikTok, YouTube, Telegram and AWS homepages, Google's DNS levonk.com A-query URL, and Discord's unauthenticated gateway endpoint. Uses levonk/status ODbL-licensed source-rounded daily incident minutes, with revision, source time, window, accepted HTTP statuses, uncertainty bounds and attribution. A homepage accepting redirects is not proof of all product operations. No customer SLA target or contractual compliance is inferred.",
+      "base_url": "https://telegraph-ship.margyn.workers.dev",
       "capabilities": [
         "SLA_COMPLIANCE_GENERAL"
       ],
       "cost_per_call": "0.00",
       "protocol": "generic",
       "compatible": true,
-      "compatibility_reason": "request builder: /query declares no request fields",
+      "compatibility_reason": "request builder: service needs the request builder",
       "mapping": "llm",
       "compatible_endpoints": [
-        "/query"
-      ]
-    },
-    {
-      "id": "103008",
-      "name": "HTTPBin Probe SLA",
-      "slug": "sla-httpbin",
-      "description": "HTTPBin 200 probe SLA check. Intent SLA_COMPLIANCE.\n",
-      "base_url": "https://httpbin.org",
-      "capabilities": [
-        "SLA_COMPLIANCE_GENERAL"
-      ],
-      "cost_per_call": "0.00",
-      "protocol": "generic",
-      "compatible": true,
-      "compatibility_reason": "request builder: /query declares no request fields",
-      "mapping": "llm",
-      "compatible_endpoints": [
-        "/query"
+        "/sla-compliance"
       ]
     },
     {
@@ -862,11 +997,11 @@
       ]
     },
     {
-      "id": "103005",
-      "name": "Discord Status SLA",
-      "slug": "sla-discord",
-      "description": "Discord status summary SLA. Intent SLA_COMPLIANCE.\n",
-      "base_url": "https://discordstatus.com",
+      "id": "103010",
+      "name": "GitHub Components SLA",
+      "slug": "sla-gh-comp",
+      "description": "GitHub components status SLA. Intent SLA_COMPLIANCE.\n",
+      "base_url": "https://www.githubstatus.com",
       "capabilities": [
         "SLA_COMPLIANCE_GENERAL"
       ],

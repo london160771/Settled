@@ -1,0 +1,44 @@
+{
+  "at": "2026-11-23T13:23:23.048Z",
+  "payer": "0xF308F872796f5c1CA01c28541A366f7F9393Dfb8",
+  "flight": "BA75 2026-11-20",
+  "results": {
+    "travel-routed": {
+      "http_status": 200,
+      "miner_id": "9002",
+      "miner_name": "TxLens",
+      "intent": "TRAVEL_DISRUPTION_GENERAL",
+      "cost_usd": 0.01,
+      "duration_ms": 626,
+      "receipt_hash": "0x1225169aa60e9461918e68d3984390367b43838c8ae2c3d40722a1ef66a91f9c",
+      "epoch_id": 43,
+      "result": {
+        "route_or_flight": "BA75 2026-11-20",
+        "disrupted": null,
+        "status": "ok",
+        "delay_minutes": null,
+        "reason": null
+      }
+    },
+    "weather-routed": {
+      "http_status": 200,
+      "miner_id": "20260828",
+      "miner_name": "PREFLIGHT Infrastructure Signals",
+      "intent": "WEATHER_CHECK_TEMPERATURE",
+      "cost_usd": 0.01,
+      "duration_ms": 1273,
+      "receipt_hash": "0xa4ce76b86411905a9920b7bcb0a56600fb8f03b6d200f93ead36587fd38f81ac",
+      "epoch_id": 43,
+      "result": {
+        "temperature_c": 7
+      }
+    },
+    "travel-direct": {
+      "http_status": 500,
+      "miner_id": "82001",
+      "intent": "TRAVEL_DISRUPTION_GENERAL",
+      "receipt_hash": null,
+      "epoch_id": null
+    }
+  }
+}

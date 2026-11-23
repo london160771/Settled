@@ -1,0 +1,60 @@
+{
+  "at": "2026-11-23T13:28:08.337Z",
+  "payer": "0xF308F872796f5c1CA01c28541A366f7F9393Dfb8",
+  "capUusdc": 40000,
+  "asks": [
+    {
+      "kind": "price",
+      "input": "ETH",
+      "intent": "CRYPTO_PRICE_USD",
+      "answer": "$1,723.303325",
+      "minerId": "9107",
+      "minerName": "CryptoPulse Multi-Source Price",
+      "costUusdc": 10000,
+      "durationMs": 442,
+      "receiptHash": "0x598b5a887af6c1a00b8a17f2ba66c585d6eb8df319c25b336f6460026bd0f205",
+      "epochId": 43
+    },
+    {
+      "kind": "weather",
+      "input": "Lagos",
+      "intent": "WEATHER_CHECK_TEMPERATURE",
+      "answer": "30.1 °C",
+      "minerId": "20260828",
+      "minerName": "PREFLIGHT Infrastructure Signals",
+      "costUusdc": 10000,
+      "durationMs": 1104,
+      "receiptHash": "0xc3213b4b4d8a68a86c8d7ace90c0374247db1ec775b0c71d3bb6abd6625d8b7d",
+      "epochId": 43
+    },
+    {
+      "kind": "search",
+      "input": "What is the Telegraph protocol?",
+      "intent": "WEB_SEARCH_GENERAL",
+      "answer": "A communication protocol is a system of rules that allows two or more entities of a communications system to transmit information. The protocol defines the rules, syntax, semantics, and synchronization of communication and possible error recovery methods. Protocols may be implemented by hardware, software, or a combination of both.",
+      "minerId": "303",
+      "minerName": "ChainSight Search Node — Live Web & News Intelligence",
+      "costUusdc": 10000,
+      "durationMs": 4302,
+      "receiptHash": "0x77fc922d3264c6a9481ad3048e334c8bb28614a4fdba7cbff5ae6d4d9b9b9699",
+      "epochId": 43
+    },
+    {
+      "kind": "ask",
+      "input": "What does EU261 compensate for?",
+      "intent": "CHAT_COMPLETION_GENERAL",
+      "answer": "EU261 compensates passengers for flight disruptions that are the airline’s responsibility, such as denied boarding, cancellations, or long delays.",
+      "minerId": "9002",
+      "minerName": "TxLens",
+      "costUusdc": 10000,
+      "durationMs": 1357,
+      "receiptHash": "0x95cef7c87716fd38a21010af6130fbb492c956b13679bf7f11c04b40d4a168e7",
+      "epochId": 43
+    },
+    {
+      "kind": "price",
+      "input": "BTC",
+      "error": "CAP_EXCEEDED"
+    }
+  ]
+}

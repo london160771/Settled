@@ -4,11 +4,11 @@ What is real, what is testnet, and what is replayed or mocked. Kept honest by th
 
 | Part | Status | Notes |
 | --- | --- | --- |
-| Telegraph asks (TRAVEL_DISRUPTION_GENERAL, WEATHER_FORECAST_GENERAL, WEATHER_CHECK_TEMPERATURE, WEB_SEARCH_GENERAL, QUESTION_ANSWERING_GENERAL / CHAT_COMPLETION_GENERAL, CRYPTO_PRICE_USD) | Real code, testnet. **No live paid ask has run yet** | Paid from per-user escrow on Ethereum Sepolia once guide 01 is done. Receipts stored with receipt_hash. |
+| Telegraph asks (TRAVEL_DISRUPTION_GENERAL, WEATHER_FORECAST_GENERAL, WEATHER_CHECK_TEMPERATURE, WEB_SEARCH_GENERAL, CHAT_COMPLETION_GENERAL, CRYPTO_PRICE_USD) | Real, testnet. Live paid asks ran on 2026-11-23 (evidence/gate0, evidence/live, evidence/mission9) | Paid from per-user escrow on Ethereum Sepolia once guide 01 is done. Receipts stored with receipt_hash. |
 | Payment rail | Escrow scheme on Ethereum Sepolia | The node did not offer x402 `exact` on Ethereum Sepolia (evidence/gate0/payment-rails.json). Our escrow signature was accepted by the live node (refused only for missing deposit; evidence/gate0/escrow-signature-check.json). |
 | Payments | Testnet | Test USDC, not real money. Not production usage. |
 | Wallets | Real testnet addresses, custodial | Derived from a server seed; Settled holds the keys on testnet. Mainnet plan in ROADMAP. |
-| Flight data | From Telegraph miners (when live) | Not mocked in the app. Whether miners can answer past individual flights is the open Gate 0 question (Option A/B). |
+| Flight data | From Telegraph miners | Gate 0 (live): no miner returned a delay for a past non-US flight (BA75 LHR–LOS). Flight decisions will mostly end in Needs more proof until miners cover it; Option B pending. |
 | Compensation rules | Simplified EU261 / UK261 | Not legal advice. Long-haul halving not computed. |
 | Claim emails | Real SMTP when configured, else `mailto:` | Only after the user confirms the exact address. Demo accounts can only send to the demo inbox. SMTP not configured yet (guide 02). |
 | Telegram bot | Real grammY bot | Not live until `TELEGRAM_BOT_TOKEN` is set (guide 03). Tested with a fake Telegram context and a stubbed Bot API. |

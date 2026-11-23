@@ -1,0 +1,54 @@
+{
+  "at": "2026-11-23T13:24:08.346Z",
+  "request": {
+    "intent": "TRAVEL_DISRUPTION_GENERAL",
+    "params": {
+      "route_or_flight": "BA75 LHR-LOS 2026-11-20"
+    }
+  },
+  "status": 200,
+  "body": {
+    "miner_id": "302",
+    "miner_name": "ChainSight — Universal Intelligence & Data Oracle",
+    "endpoint": "/traveldisruption",
+    "result": {
+      "route_or_flight": null,
+      "disrupted": null,
+      "status": "On time",
+      "delay_minutes": null,
+      "reason": "No known weather, air traffic, or operational issues reported for the London Heathrow (LHR) to Lagos (LOS) route on 20 Nov 2026."
+    },
+    "result_shape": "intent",
+    "format_version": 4,
+    "field_status": {
+      "route_or_flight": "rejected",
+      "disrupted": "missing",
+      "status": "ok",
+      "delay_minutes": "missing",
+      "reason": "ok"
+    },
+    "input": {
+      "route_or_flight": "BA75 LHR-LOS 2026-11-20"
+    },
+    "input_schema_version": 4,
+    "cost_usd": 0.01,
+    "duration_ms": 753,
+    "timestamp": "2026-11-23T13:24:05.879531434Z",
+    "reasoning": "Intent: miner chainsight-oracle given by the caller\nMiner: The user is asking about a specific flight route and date, which falls under the TRAVEL_DISRUPTION_GENERAL intent. The /traveldisruption endpoint is designed for this purpose and requires a 'query' parameter containing the route or flight information.",
+    "intent": "TRAVEL_DISRUPTION_GENERAL",
+    "intent_version": 2,
+    "signal_hash": "0xe44cfdf2acb0b1304b062094f98ed44b16faf447513ed182a746b601eb18fd19"
+  },
+  "receipt": {
+    "receipt_hash": "0x538db8d85fab0117e0d9e37470fa3b73c441d43a638d8deb8b0e766532baaa80",
+    "rail": "escrow",
+    "payer": "0xf308f872796f5c1ca01c28541a366f7f9393dfb8",
+    "miner": "6119",
+    "intent": "TRAVEL_DISRUPTION_GENERAL",
+    "amount_uusdc": "10000",
+    "epoch_id": 43,
+    "settlement": "epoch",
+    "chain": "telegraph",
+    "timestamp": 1795440248
+  }
+}
