@@ -150,18 +150,19 @@ Live judge demo in a real browser: Owed in 8.9 s, all six attacks blocked ([evid
 
 ## Commercial summary
 
-1. **Who it's for:** travellers who never claim delay money; later, small teams with uptime promises from hosts/APIs (SLA credits, P1).
-2. **What it improves:** proving a disruption is the tedious part. Settled buys independent, receipted proof and writes the claim, so the user only taps Send.
-3. **What it does today (testnet):** web + Telegram, per-user capped wallet, two-miner flight evidence with agreement check, simplified EU261 decision, receipt-backed drafts, confirmed sending, public proof pages, mission 9 paid asks, judge mode with six blocked attacks.
-4. **Why adopt:** claims backed by verifiable receipts are harder to brush off; the user stays in control (hard cap, nothing sent without a tap); the cost per decision is cents.
-5. **How to try it:** open `/judge` on the deployed app (link added at deploy), or run it locally with the steps above. Pricing idea (ROADMAP): user pays only the evidence cost, plus an optional success fee on paid claims.
+1. **Who it's for:** small teams and solo developers who pay for cloud services with uptime promises (Vercel, GitHub, DigitalOcean, Twilio) and never claim the service credits they are owed; travellers with late flights are a second audience.
+2. **What it improves:** proving the outage is the tedious part. Settled buys the month's uptime from one Telegraph miner, asks a different miner for a second opinion, works out the credit from your contract tiers, and writes the request with every receipt attached, so you only tap Send.
+3. **What it does today (testnet):** web + Telegram, per-user capped wallet, two-miner SLA evidence with agreement check, credit calculation, receipt-backed drafts, confirmed sending, public proof pages, mission 9 paid asks, judge mode with six blocked attacks. Live: Vercel Oct 2026 → Owed, 40 USD credit on a 400 USD bill, 0.02 test USDC of evidence, under 10 s.
+4. **Why adopt:** credits go unclaimed because checking is a chore; a claim backed by verifiable receipts from two independent sources is hard to brush off; the user stays in control (hard cap, nothing sent without a tap); evidence costs cents.
+5. **How to try it:** open `/judge` on the deployed app (link added at deploy), or run it locally with the steps above. Pricing idea (ROADMAP): user pays only the evidence cost, plus an optional success fee on credits received.
 
 ## Docs
 
 - [PRD.md](PRD.md) — requirements and phases (source of truth)
 - [PROJECT_STATE.md](PROJECT_STATE.md) — progress log, Gate 0 results, evidence index
 - [REAL_VS_MOCKED.md](REAL_VS_MOCKED.md) — what is real, testnet, replayed or mocked
-- [docs/tutorial.md](docs/tutorial.md) — how an agent pays Telegraph for proof (draft)
+- [docs/tutorial.md](docs/tutorial.md) — how an agent pays Telegraph for proof
+- [docs/submission.md](docs/submission.md) — video script and submission text (drafts for Adesope)
 - [docs/manual/](docs/manual/) — step-by-step guides for the manual tasks
 - [ROADMAP.md](ROADMAP.md) — ideas not in this build
 - [CLAUDE.md](CLAUDE.md) — rules for the coding agent
