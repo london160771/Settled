@@ -28,7 +28,7 @@ export default function Wallet() {
       <h1>Wallet</h1>
       <div className="card stack">
         <div>
-          <div className="muted">Your Settled wallet on {data.network}</div>
+          <div className="label muted">Your Settled wallet on {data.network}</div>
           <a className="mono" href={data.explorerUrl} target="_blank" rel="noreferrer">
             {data.address}
           </a>
@@ -40,9 +40,11 @@ export default function Wallet() {
           </div>
           {data.escrowError ? <div className="muted">Ledger: {data.escrowError}</div> : null}
         </div>
-        <button disabled={busy} onClick={topUp}>
-          {busy ? 'Minting test USDC…' : 'Top up (testnet: mint test USDC)'}
-        </button>
+        <div>
+          <button disabled={busy} onClick={topUp}>
+            {busy ? 'Minting test USDC…' : 'Top up with test USDC'}
+          </button>
+        </div>
         {msg ? <p>{msg}</p> : null}
         <ErrorBox error={err} />
         <p className="muted">
@@ -53,15 +55,15 @@ export default function Wallet() {
       <h2>Your cap</h2>
       <div className="grid3">
         <div className="card stat">
-          <div className="muted">Per decision</div>
+          <div className="label">Per decision</div>
           <div className="big">{usdc(b.decisionCapUusdc)}</div>
         </div>
         <div className="card stat">
-          <div className="muted">Per month</div>
+          <div className="label">Per month</div>
           <div className="big">{usdc(b.monthlyCapUusdc)}</div>
         </div>
         <div className="card stat">
-          <div className="muted">Spent / reserved now ({b.month})</div>
+          <div className="label">Spent / reserved in {b.month}</div>
           <div className="big">
             {usdc4(b.spentUusdc)} / {usdc4(b.reservedUusdc)}
           </div>

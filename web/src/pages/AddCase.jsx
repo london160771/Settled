@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { api, shortHash } from '../api/client.js';
-import { ErrorBox, useLoad } from '../components/ui.jsx';
+import { api } from '../api/client.js';
+import { ErrorBox, useLoad, Hash } from '../components/ui.jsx';
 
 function lastMonth() {
   const d = new Date();
@@ -98,8 +98,8 @@ function AddSla() {
         {terms ? (
           <p className="muted">
             Read by {terms.read.receipt.minerName || terms.read.receipt.minerId} · receipt{' '}
-            <span className="mono">{shortHash(terms.read.receipt.receiptHash)}</span> ·{' '}
-            {terms.read.quotesVerified} clause(s) matched your text word for word
+            <Hash value={terms.read.receipt.receiptHash} /> · {terms.read.quotesVerified} clause(s)
+            matched your text word for word
             {terms.read.suggestion.claimWindowDays
               ? ` · claim within ${terms.read.suggestion.claimWindowDays} days`
               : ''}
@@ -154,11 +154,24 @@ export default function AddCase() {
   return (
     <div className="narrow">
       <h1>Add a case</h1>
-      <div className="row-left">
-        <button className={kind === 'sla' ? '' : 'secondary'} onClick={() => setKind('sla')}>
+      <p className="muted">
+        Settled checks it when you press Check now. Nothing is paid before that
+      </p>
+      <div className="seg" role="tablist">
+        <button
+          role="tab"
+          aria-selected={kind === 'sla'}
+          className={kind === 'sla' ? 'on' : ''}
+          onClick={() => setKind('sla')}
+        >
           Cloud uptime (SLA)
         </button>
-        <button className={kind === 'flight' ? '' : 'secondary'} onClick={() => setKind('flight')}>
+        <button
+          role="tab"
+          aria-selected={kind === 'flight'}
+          className={kind === 'flight' ? 'on' : ''}
+          onClick={() => setKind('flight')}
+        >
           Late flight
         </button>
       </div>

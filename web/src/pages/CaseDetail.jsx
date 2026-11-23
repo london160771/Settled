@@ -1,7 +1,97 @@
 import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { api, shortHash, usdc4, caseTitle, caseSub, amountText } from '../api/client.js';
-import { useLoad, ErrorBox, Badge, ReceiptsTable } from '../components/ui.jsx';
+import { AlertTriangle, ArrowLeft, ExternalLink } from 'lucide-react';
+import { api, usdc4, caseTitle, caseSub } from '../api/client.js';
+import { useLoad, ErrorBox, Badge, ReceiptsTable, Hash } from '../components/ui.jsx';
+
+const FACT_LABEL = {
+  uptimePct: 'Measured uptime',
+  targetPct: 'Promised uptime',
+  contractTerms: 'Terms from your contract',
+  breachCorroborated: 'Second miner saw a breach',
+  delayMinutes: 'Arrival delay',
+};
+const factValue = (v) => {
+  if (v && typeof v === 'object') {
+    if (v.uptimePct != null) return `${v.uptimePct}%${v.period ? ` · ${v.period}` : ''}`;
+    return JSON.stringify(v);
+  }
+  if (typeof v === 'number' && v <= 100 && v >= 90) return `${v}%`;
+  return String(v);
+};
+
+// The decision, printed like a receipt: one figure, the reasons, each fact with its hash.
+export function DecisionReceipt({ decision, kicker, type, hashFor }) {
+  const amount = decision.amountUsd
+    ? { n: decision.amountUsd, unit: 'USD credit' }
+    : decision.amountEur
+      ? { n: decision.amountEur, unit: 'EUR' }
+      : null;
+  return (
+    <section className="receipt">
+      <div className="receipt-head">
+        <div>
+          <div className="receipt-kicker">{kicker}</div>
+          <div className="receipt-figure">
+            {amount ? (
+              <>
+                {amount.n}
+                <span className="unit">{amount.unit}</span>
+              </>
+            ) : (
+              <span style={{ fontSize: 28 }}>
+                <Badge value={decision.outcome} />
+              </span>
+            )}
+          </div>
+        </div>
+        {amount ? <Badge value={decision.outcome} /> : null}
+      </div>
+      <hr className="rule" />
+      <ul className="reasons">
+        {decision.reasons.map((r, i) => (
+          <li key={i}>{r}</li>
+        ))}
+      </ul>
+      {decision.warnings?.map((w, i) => (
+        <p key={i} className="note" style={{ marginTop: 16, marginBottom: 0 }}>
+          <AlertTriangle strokeWidth={1.5} /> {w}
+        </p>
+      ))}
+      {decision.factRefs?.length ? (
+        <>
+          <hr className="rule" />
+          <div className="facts">
+            {decision.factRefs.map((f, i) => (
+              <FactRow key={i} f={f} hashes={hashFor(f)} />
+            ))}
+          </div>
+        </>
+      ) : null}
+      <p className="fine">
+        Rules {decision.rulesVersion} ·{' '}
+        {type === 'sla' ? 'credit tiers from your contract' : 'simplified EU261/UK261'}, not legal
+        advice
+        {decision.spentUusdc != null
+          ? ` · evidence cost ${usdc4(decision.spentUusdc)} test USDC`
+          : ''}
+      </p>
+    </section>
+  );
+}
+function FactRow({ f, hashes }) {
+  return (
+    <>
+      <div className="k">{FACT_LABEL[f.fact] || f.fact}</div>
+      <div className="v">{factValue(f.value)}</div>
+      <div className="h">
+        {hashes.map((h) => (
+          <Hash key={h} value={h} />
+        ))}
+      </div>
+    </>
+  );
+}
 
 function SendBox({ claim, onDone, isSla }) {
   const [email, setEmail] = useState(claim.recipientEmail || '');
@@ -72,7 +162,7 @@ function SendBox({ claim, onDone, isSla }) {
         </button>
         {pending ? <button onClick={send}>Send to {pending}</button> : null}
       </div>
-      <p className="muted">Nothing is sent until you press “Send to …”.</p>
+      <p className="muted">Nothing is sent until you press Send.</p>
       <ErrorBox error={error} />
     </div>
   );
@@ -103,13 +193,21 @@ export default function CaseDetail() {
   const canCheck = ['Watching', 'NeedsMoreProof', 'EvidenceConflict'].includes(c.status);
   return (
     <>
-      <div className="row">
-        <h1>{caseTitle(c)}</h1>
-        <Badge value={c.status} />
+      <Link to="/claims" className="muted back">
+        <ArrowLeft strokeWidth={1.5} size={16} /> Claims
+      </Link>
+      <div className="page-head">
+        <div>
+          <h1>{caseTitle(c)}</h1>
+          <p className="muted">{caseSub(c)}</p>
+        </div>
+        <div className="row-left">
+          <Badge value={c.status} />
+          <a className="button secondary" href={proofUrl} target="_blank" rel="noreferrer">
+            Public proof page <ExternalLink strokeWidth={1.5} />
+          </a>
+        </div>
       </div>
-      <p className="muted">
-        {caseSub(c)} · <a href={proofUrl}>public proof page</a>
-      </p>
       {canCheck ? (
         <button
           disabled={busy}
@@ -121,42 +219,14 @@ export default function CaseDetail() {
       <ErrorBox error={actionError} />
 
       {decision ? (
-        <section className="card">
-          <h2>
-            Decision: <Badge value={decision.outcome} /> {amountText(decision)}
-          </h2>
-          <ul>
-            {decision.reasons.map((r, i) => (
-              <li key={i}>{r}</li>
-            ))}
-          </ul>
-          {decision.warnings?.map((w, i) => (
-            <p key={i} className="warn-text">
-              ⚠ {w}
-            </p>
-          ))}
-          <h3>Facts and their receipts</h3>
-          <ul>
-            {decision.factRefs.map((f, i) => (
-              <li key={i}>
-                <strong>{f.fact}</strong>:{' '}
-                {typeof f.value === 'object' ? JSON.stringify(f.value) : String(f.value)} —{' '}
-                {f.receiptIds.map((rid) => (
-                  <span key={rid} className="mono">
-                    {shortHash(byId[rid]?.receiptHash)}{' '}
-                  </span>
-                ))}
-              </li>
-            ))}
-          </ul>
-          <p className="muted">
-            Rules: {decision.rulesVersion} (
-            {c.type === 'sla' ? 'credit tiers from your contract' : 'simplified'}, not legal
-            advice). Evidence cost {usdc4(decision.spentUusdc)} test USDC.
-          </p>
-        </section>
+        <DecisionReceipt
+          decision={decision}
+          type={c.type}
+          kicker={`DECISION · ${new Date(decision.createdAt || Date.now()).toISOString().slice(0, 10)}`}
+          hashFor={(f) => f.receiptIds.map((rid) => byId[rid]?.receiptHash).filter(Boolean)}
+        />
       ) : (
-        <p className="muted">No decision yet. Press “Check now” to buy proof.</p>
+        <p className="empty">No decision yet. Press Check now to buy proof.</p>
       )}
 
       {decision?.outcome === 'Owed' && !claim ? (
@@ -174,8 +244,8 @@ export default function CaseDetail() {
             <h2>Claim email</h2>
             <Badge value={claim.status} />
           </div>
-          <p>
-            <strong>Subject:</strong> {claim.subject}
+          <p className="mail-subject">
+            Subject <strong>{claim.subject}</strong>
           </p>
           {editing != null ? (
             <div className="stack">
@@ -247,9 +317,6 @@ export default function CaseDetail() {
 
       <h2>Receipts for this case</h2>
       <ReceiptsTable receipts={receipts} />
-      <p>
-        <Link to="/claims">← All claims</Link>
-      </p>
     </>
   );
 }

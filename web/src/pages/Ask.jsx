@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { api, shortHash, usdc4, when } from '../api/client.js';
-import { useLoad, ErrorBox } from '../components/ui.jsx';
+import { api, usdc4, when } from '../api/client.js';
+import { useLoad, ErrorBox, Hash } from '../components/ui.jsx';
 
 const KINDS = [
   { kind: 'price', label: 'Token price', placeholder: 'ETH' },
@@ -34,17 +34,19 @@ export default function Ask() {
   return (
     <>
       <h1>Ask</h1>
-      <p className="muted">
+      <p className="lede">
         Your assistant buys a fresh answer from a Telegraph miner, paid from your capped wallet
         (0.01 test USDC per ask). Every answer shows its receipt.
       </p>
       <form onSubmit={submit} className="card stack">
-        <div className="row-left">
+        <div className="seg" role="tablist">
           {KINDS.map((x) => (
             <button
               type="button"
+              role="tab"
+              aria-selected={x.kind === kind}
               key={x.kind}
-              className={x.kind === kind ? '' : 'secondary'}
+              className={x.kind === kind ? 'on' : ''}
               onClick={() => setKind(x.kind)}
             >
               {x.label}
@@ -58,7 +60,9 @@ export default function Ask() {
           onChange={(e) => setInput(e.target.value)}
         />
         <ErrorBox error={error} />
-        <button disabled={busy}>{busy ? 'Buying the answer…' : 'Ask (paid)'}</button>
+        <div>
+          <button disabled={busy}>{busy ? 'Buying the answer…' : 'Ask · 0.01 test USDC'}</button>
+        </div>
       </form>
       <h2>Your answers</h2>
       <ErrorBox error={history.error} />
@@ -72,9 +76,10 @@ export default function Ask() {
           ) : (
             <>
               <p>{a.answer}</p>
-              <div className="muted">
-                {a.intent} · {a.receiptId?.minerName || a.receiptId?.minerId} · {usdc4(a.costUusdc)}{' '}
-                test USDC · <span className="mono">{shortHash(a.receiptId?.receiptHash)}</span>
+              <div className="row-left muted">
+                <span className="mono">{a.intent}</span> ·{' '}
+                {a.receiptId?.minerName || a.receiptId?.minerId} · {usdc4(a.costUusdc)} test USDC
+                {a.receiptId?.receiptHash ? <Hash value={a.receiptId.receiptHash} /> : null}
               </div>
             </>
           )}

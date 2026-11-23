@@ -22,7 +22,15 @@ export async function api(path, { method = 'GET', body } = {}) {
 export const usdc = (uusdc) => (uusdc == null ? '—' : (Number(uusdc) / 1e6).toFixed(2));
 export const usdc4 = (uusdc) => (uusdc == null ? '—' : (Number(uusdc) / 1e6).toFixed(4));
 export const shortHash = (h) => (h ? `${h.slice(0, 10)}…${h.slice(-6)}` : '—');
-export const when = (d) => (d ? new Date(d).toLocaleString() : '—');
+export const when = (d) =>
+  d
+    ? new Date(d).toLocaleString(undefined, {
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      })
+    : '—';
 
 const VENDOR_NAMES = {
   vercel: 'Vercel',

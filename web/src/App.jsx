@@ -1,4 +1,28 @@
-import { BrowserRouter, Routes, Route, NavLink, Navigate, Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  NavLink,
+  Navigate,
+  Link,
+  useLocation,
+} from 'react-router-dom';
+import {
+  LayoutGrid,
+  FileCheck2,
+  ReceiptText,
+  MessageSquare,
+  Wallet2,
+  Trophy,
+  Gavel,
+  Settings2,
+  LogOut,
+  Menu,
+  X,
+} from 'lucide-react';
+import { Logo } from './components/ui.jsx';
+import Landing from './pages/Landing.jsx';
 import { AuthProvider, useAuth } from './auth.jsx';
 import AuthPage from './pages/Auth.jsx';
 import Home from './pages/Home.jsx';
@@ -13,38 +37,87 @@ import Ask from './pages/Ask.jsx';
 import Leaderboard from './pages/Leaderboard.jsx';
 import Judge from './pages/Judge.jsx';
 
+const NAV = [
+  { to: '/', label: 'Overview', icon: LayoutGrid, end: true },
+  { to: '/claims', label: 'Claims', icon: FileCheck2 },
+  { to: '/receipts', label: 'Receipts', icon: ReceiptText },
+  { to: '/ask', label: 'Ask', icon: MessageSquare },
+  { to: '/wallet', label: 'Wallet', icon: Wallet2 },
+  { to: '/leaderboard', label: 'Leaderboard', icon: Trophy },
+];
+
 function Shell({ children }) {
   const { user, signOut } = useAuth();
-  return (
-    <>
-      <div className="banner">
-        TESTNET · Ethereum Sepolia · test USDC
-        {user?.isDemo ? <strong> · DEMO ACCOUNT</strong> : null}
-      </div>
-      <header className="top">
-        <Link to="/" className="brand">
-          Settled
-        </Link>
-        {user ? (
+  const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
+  useEffect(() => setOpen(false), [pathname]);
+  if (!user) {
+    // Signed out: the landing page draws its own header.
+    if (pathname === '/') return children;
+    return (
+      <>
+        <header className="pubbar">
+          <Link to="/" className="brand">
+            <Logo /> Settled
+          </Link>
           <nav>
-            <NavLink to="/" end>
-              Home
-            </NavLink>
-            <NavLink to="/claims">Claims</NavLink>
-            <NavLink to="/ask">Ask</NavLink>
-            <NavLink to="/receipts">Receipts</NavLink>
-            <NavLink to="/wallet">Wallet</NavLink>
-            <NavLink to="/leaderboard">Leaderboard</NavLink>
-            {user.isDemo ? <NavLink to="/judge">Judge</NavLink> : null}
-            <NavLink to="/settings">Settings</NavLink>
-            <button className="link" onClick={signOut}>
-              Sign out
-            </button>
+            <span className="net hide-sm">
+              <span className="dot" /> Testnet
+            </span>
+            <Link to="/signin">Sign in</Link>
+            <Link to="/judge" className="button">
+              Try the demo
+            </Link>
           </nav>
-        ) : null}
-      </header>
-      <main className="container">{children}</main>
-    </>
+        </header>
+        <main className="container">{children}</main>
+      </>
+    );
+  }
+  return (
+    <div className="app">
+      <aside className={`side${open ? ' open' : ''}`}>
+        <Link to="/" className="brand">
+          <Logo /> Settled
+        </Link>
+        <button
+          className="secondary menu-btn"
+          aria-label="Menu"
+          aria-expanded={open}
+          onClick={() => setOpen(!open)}
+        >
+          {open ? <X /> : <Menu />}
+        </button>
+        <nav className="nav">
+          {NAV.map((n) => (
+            <NavLink key={n.to} to={n.to} end={n.end}>
+              <n.icon strokeWidth={1.5} /> {n.label}
+            </NavLink>
+          ))}
+          <div className="nav-label">Account</div>
+          {user.isDemo ? (
+            <NavLink to="/judge">
+              <Gavel strokeWidth={1.5} /> Judge mode
+            </NavLink>
+          ) : null}
+          <NavLink to="/settings">
+            <Settings2 strokeWidth={1.5} /> Settings
+          </NavLink>
+          <button onClick={signOut}>
+            <LogOut strokeWidth={1.5} /> Sign out
+          </button>
+        </nav>
+        <div className="side-foot">
+          {user.isDemo ? <div className="demo-flag">Demo account</div> : null}
+          <div className="net">
+            <span className="dot" /> Testnet · Sepolia · test USDC
+          </div>
+        </div>
+      </aside>
+      <main className="main">
+        <div className="container">{children}</div>
+      </main>
+    </div>
   );
 }
 
@@ -52,6 +125,12 @@ function Private({ children }) {
   const { user } = useAuth();
   if (user === undefined) return <p className="muted">Loading…</p>;
   return user ? children : <Navigate to="/signin" replace />;
+}
+
+function HomeOrLanding() {
+  const { user } = useAuth();
+  if (user === undefined) return null;
+  return user ? <Home /> : <Landing />;
 }
 
 export default function App() {
@@ -65,14 +144,7 @@ export default function App() {
             <Route path="/proof/:publicId" element={<Proof />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/judge" element={<Judge />} />
-            <Route
-              path="/"
-              element={
-                <Private>
-                  <Home />
-                </Private>
-              }
-            />
+            <Route path="/" element={<HomeOrLanding />} />
             <Route
               path="/add"
               element={
@@ -94,6 +166,14 @@ export default function App() {
               element={
                 <Private>
                   <CaseDetail />
+                </Private>
+              }
+            />
+            <Route
+              path="/ask"
+              element={
+                <Private>
+                  <Ask />
                 </Private>
               }
             />
@@ -124,9 +204,9 @@ export default function App() {
             <Route
               path="*"
               element={
-                <p>
-                  Page not found. <Link to="/">Home</Link>
-                </p>
+                <div className="empty">
+                  This page does not exist. <Link to="/">Go to the start</Link>
+                </div>
               }
             />
           </Routes>
