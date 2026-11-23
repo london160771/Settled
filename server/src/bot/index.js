@@ -28,6 +28,7 @@ export function createBot(config, deps = {}) {
   bot.command('sla', (ctx) => h.slaHelp(ioFrom(ctx)));
   bot.command('claims', (ctx) => h.listClaims(ioFrom(ctx)));
   bot.command('wallet', (ctx) => h.wallet(ioFrom(ctx)));
+  bot.command('topup', (ctx) => h.topup(ioFrom(ctx)));
   bot.command('cap', (ctx) => h.cap(ioFrom(ctx), ctx.match?.trim()));
   bot.command('web', (ctx) => h.web(ioFrom(ctx)));
   for (const kind of ['ask', 'price', 'weather', 'search'])
@@ -54,6 +55,7 @@ export async function startBot(config, app, deps = {}) {
     { command: 'sla', description: 'Check a vendor uptime promise, e.g. sla vercel 2026-10' },
     { command: 'claims', description: 'Your claims' },
     { command: 'wallet', description: 'Wallet, balance and cap' },
+    { command: 'topup', description: 'Fill an empty testnet wallet with test USDC' },
     { command: 'cap', description: 'Set monthly cap, e.g. /cap 1.50' },
     { command: 'web', description: 'One-time login link for the web app' },
     { command: 'price', description: 'Paid ask: token price, e.g. /price ETH' },

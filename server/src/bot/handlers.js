@@ -76,7 +76,7 @@ export function createHandlers(config, deps = {}) {
       );
     }
     return io.reply(
-      'You are set up. Send `sla vercel 2026-10 400` or a flight like `BA75 2026-11-20 LHR LOS`. /sla /claims /wallet /cap /web',
+      'You are set up. Send `sla vercel 2026-10 400` or a flight like `BA75 2026-11-20 LHR LOS`. /sla /claims /wallet /topup /cap /web',
     );
   }
 
@@ -283,6 +283,18 @@ export function createHandlers(config, deps = {}) {
     }
   }
 
+  async function topup(io) {
+    const u = await needUser(io);
+    if (!u) return;
+    try {
+      await io.reply('⏳ Topping up your testnet wallet (mint + escrow deposit, about 30 s)…');
+      await account.requestTopUp(config, u._id, deps.wallet || {});
+      return io.reply('✅ Topped up with test USDC. Now press Check now on your case.');
+    } catch (e) {
+      return fail(io, e);
+    }
+  }
+
   async function web(io) {
     const u = await needUser(io);
     if (!u) return;
@@ -308,5 +320,17 @@ export function createHandlers(config, deps = {}) {
   }
 
   const slaHelp = (io) => io.reply(SLA_HELP);
-  return { start, text, callback, listClaims, wallet, cap, web, ask, slaHelp, awaitingRecipient };
+  return {
+    start,
+    text,
+    callback,
+    listClaims,
+    wallet,
+    cap,
+    web,
+    ask,
+    slaHelp,
+    topup,
+    awaitingRecipient,
+  };
 }

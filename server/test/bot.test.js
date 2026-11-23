@@ -71,6 +71,17 @@ describe('bot handlers (fake Telegram context)', () => {
     expect(c).toMatchObject({ vendor: 'vercel', period: '2026-10', monthlyFeeUsd: 400 });
     await h.text(io, 'SLA Vercel 2026-10');
     expect(io.last().text).toMatch(/DUPLICATE_CLAIM/);
+    const funded = [];
+    const h2 = createHandlers(config, {
+      wallet: {
+        fetchImpl: async () => new Response(JSON.stringify({ available: '0' }), { status: 200 }),
+        diamond: '0xdiamond',
+        fund: async (a) => (funded.push(a), { deposit: '0xtx' }),
+      },
+    });
+    await h2.topup(io);
+    expect(io.last().text).toMatch(/Topped up/);
+    expect(funded).toHaveLength(1);
     await h.slaHelp(io);
     expect(io.last().text).toMatch(/sla vercel 2026-10/);
   });
