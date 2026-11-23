@@ -13,7 +13,7 @@
 
 1. render.com → New → **Web Service** → connect the `Settled` GitHub repo (branch `main` after you merge the PR).
 2. Runtime: Node. Root directory: leave empty.
-3. Build command: `npm ci && npm run build -w web`
+3. Build command: `npm ci --include=dev && npm run build -w web` (with `NODE_ENV=production`, plain `npm ci` skips Vite). Also set env `NODE_VERSION` = `22`.
 4. Start command: `npm start -w server`
 5. Instance: Starter is best (the free plan sleeps, which stops the bot webhook and the worker).
 6. Environment variables (names from `.env.example`):
@@ -31,7 +31,7 @@
 
 1. vercel.com → Add New → Project → import the repo.
 2. Root directory: `web`. Framework: Vite. Build: `npm run build`. Output: `dist`.
-3. Add a file `web/vercel.json` (commit it) so `/api` goes to Render and cookies stay first-party:
+3. `web/vercel.json` (committed; points at `https://settled-5mmc.onrender.com`) sends `/api` to Render so cookies stay first-party. If your Render URL changes, edit it:
 
    ```
    { "rewrites": [ { "source": "/api/(.*)", "destination": "https://<render-url>/api/$1" }, { "source": "/(.*)", "destination": "/index.html" } ] }
