@@ -300,7 +300,7 @@ export function createHandlers(config, deps = {}) {
     if (!u) return;
     const code = await auth.createLinkCode(u._id, 'weblogin');
     return io.reply(
-      `Open this within 10 minutes to sign in on the web (one use): ${config.appUrl}/api/auth/link/${code}`,
+      `Open this within 10 minutes to sign in on the web (one use): ${config.webUrl}/api/auth/link/${code}`,
     );
   }
 

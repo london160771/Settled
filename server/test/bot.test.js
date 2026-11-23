@@ -153,7 +153,7 @@ describe('bot handlers (fake Telegram context)', () => {
     await h.cap(io, '1.5');
     expect(io.last().text).toMatch(/1.50 test USDC/);
     await h.web(io);
-    expect(io.last().text).toMatch(/https:\/\/api\.settled\.test\/api\/auth\/link\/[A-Z0-9]{8}/);
+    expect(io.last().text).toMatch(/https:\/\/settled\.test\/api\/auth\/link\/[A-Z0-9]{8}/);
   });
 });
 
