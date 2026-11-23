@@ -45,6 +45,41 @@ Judge mode runs six attacks against the real code paths, and each must be blocke
 
 The Telegram bot uses the same account and wallet: `/start`, then `sla vercel 2026-10 400`.
 
+## How to use it
+
+### On the web (https://settled-orpin.vercel.app)
+
+1. **Create an account.** Use Create an account on the landing page and enter your name (it signs your claims), email and password.
+2. **Fund the wallet.** Open **Wallet** and press **Top up with test USDC**. Each check costs about 0.01 test USDC. Your monthly cap (default 1.00) is under **Settings**.
+3. **Add a case.** Go to **Overview**, press **Add a case** and choose **Cloud uptime (SLA)**:
+   - Pick the vendor (Vercel, GitHub, DigitalOcean or Twilio) and a month that has ended, up to 90 days back.
+   - Enter your monthly bill in USD.
+   - Optional: open **Paste your SLA** and press **Read my SLA**. A Telegraph miner fills in the promised uptime, credit tiers and claim window from your contract. Check the values before you save.
+4. **Check it.** On the case page press **Check now**. Settled buys the month's uptime and, if there was a breach, a second opinion from a different miner. The decision prints as a receipt: Owed, Not owed, Needs more proof or Evidence conflict, with each fact next to its receipt hash.
+5. **Send the claim.** If it says Owed, press **Draft the claim**. Read or edit the email, enter the vendor's billing address, press **Use this address**, then **Send to …**. Nothing is sent before that last press. Without email set up on the server, the button opens your own mail app instead.
+6. **Share the proof.** **Public proof page** gives a link anyone can open to see the decision and verify every receipt. The same link is already in the email.
+7. **Track it.** After sending, mark the claim **Paid** or **Rejected**. **Receipts** lists every paid Telegraph call, and **Ask** buys quick answers (price, weather, search, a question) from the same capped wallet.
+
+### On Telegram ([@GetSettledBot](https://t.me/GetSettledBot))
+
+1. Open the bot and send `/start`. That creates your account and wallet. If you already have a web account, go to **Settings → Telegram → Get a link code** on the web, then send `/start <code>` to the bot so both share one account.
+2. Send `/topup` to fill the testnet wallet.
+3. Send `sla vercel 2026-10 400`, meaning vendor, finished month and your monthly bill in USD. The bot adds the case and shows a **Check now** button.
+4. Tap **Check now**. The bot replies with the receipts and the decision. If you are owed, it sends the draft with **Send**, **Edit** and **Not now** buttons.
+5. Tap **Send**, type the vendor's billing email, then tap **Send to …** to confirm the address. The claim then shows as Sent on the web too.
+
+| Command | What it does |
+| --- | --- |
+| `sla <vendor> <YYYY-MM> [bill]` | Add an SLA case, e.g. `sla github 2026-10 250` |
+| `/sla` | How to write an SLA case |
+| `/claims` | Your cases and their status |
+| `/wallet` | Wallet address, balance and cap |
+| `/topup` | Fill an empty testnet wallet with test USDC |
+| `/cap 1.50` | Set your monthly cap in test USDC |
+| `/web` | One-time login link to the web app |
+| `/price ETH`, `/weather Lagos`, `/search …`, `/ask …` | Paid answers from Telegraph miners (0.01 test USDC each), each with its receipt |
+| `BA75 2026-11-20 LHR LOS` | Add a late flight (second path) |
+
 > **Testnet only.** Ethereum Sepolia (chain 11155111), test USDC `0xcc194e1a843B658526D0D5C431f670028582Ae17`, Telegraph devnode. Test USDC has no value. Credit rules come from your contract tiers, not legal advice.
 
 ## Status (honest)
