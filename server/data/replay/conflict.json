@@ -1,0 +1,19 @@
+{
+  "source": "SYNTHETIC placeholder. Replace with two real conflicting TRAVEL_DISRUPTION receipts captured during live runs (Gate 0 / Phase 4). Shown in the UI as 'replayed (synthetic fixture)'.",
+  "synthetic": true,
+  "case": { "flightNumber": "BA75", "date": "2026-11-20", "from": "LHR", "to": "LOS" },
+  "travel": [
+    {
+      "minerId": "replay-a",
+      "minerName": "Replayed miner A",
+      "receiptHash": "0xreplayed000000000000000000000000000000000000000000000000000000a1",
+      "result": { "delay_minutes": 220, "status": "delayed" }
+    },
+    {
+      "minerId": "replay-b",
+      "minerName": "Replayed miner B",
+      "receiptHash": "0xreplayed000000000000000000000000000000000000000000000000000000b2",
+      "result": { "delay_minutes": 95, "status": "delayed" }
+    }
+  ]
+}

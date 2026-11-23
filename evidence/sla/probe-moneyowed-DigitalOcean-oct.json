@@ -1,0 +1,54 @@
+{
+  "at": "2026-11-23T13:37:20.470Z",
+  "miner": "2611217",
+  "request": {
+    "intent": "SLA_COMPLIANCE_GENERAL",
+    "query": "DigitalOcean SLA compliance for calendar month October 2026"
+  },
+  "status": 200,
+  "body": {
+    "miner_id": "2611217",
+    "miner_name": "MONEY OWED Contract SLA Check",
+    "endpoint": "/sla-compliance",
+    "result": {
+      "service": "DigitalOcean CPU Droplets",
+      "uptime_pct": 100,
+      "sla_target_pct": 99.99,
+      "compliant": true,
+      "period": "2026-10"
+    },
+    "result_shape": "intent",
+    "format_version": 4,
+    "field_status": {
+      "service": "ok",
+      "uptime_pct": "ok",
+      "sla_target_pct": "ok",
+      "compliant": "ok",
+      "period": "ok"
+    },
+    "input": {
+      "service": "DigitalOcean",
+      "period": "October 2026"
+    },
+    "input_schema_version": 4,
+    "cost_usd": 0.01,
+    "duration_ms": 221,
+    "timestamp": "2026-11-23T13:37:18.037856236Z",
+    "reasoning": "Intent: miner moneyowed-sla given by the caller\nMiner: input schema v4 mapped in code to GET /sla-compliance",
+    "intent": "SLA_COMPLIANCE_GENERAL",
+    "intent_version": 1,
+    "signal_hash": "0x96a1b31d4baf23badb73731d675ab38fe2789dff2a48f6ad2078ce4937466beb"
+  },
+  "receipt": {
+    "receipt_hash": "0x8d9fe746f48ab087cf2e570e06be80785ed8bdb6ad1614793fc6b95c75e0af46",
+    "rail": "escrow",
+    "payer": "0xf308f872796f5c1ca01c28541a366f7f9393dfb8",
+    "miner": "6156",
+    "intent": "SLA_COMPLIANCE_GENERAL",
+    "amount_uusdc": "10000",
+    "epoch_id": 43,
+    "settlement": "epoch",
+    "chain": "telegraph",
+    "timestamp": 1795441040
+  }
+}

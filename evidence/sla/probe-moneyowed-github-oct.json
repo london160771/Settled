@@ -1,0 +1,54 @@
+{
+  "at": "2026-11-23T13:37:02.770Z",
+  "miner": "2611217",
+  "request": {
+    "intent": "SLA_COMPLIANCE_GENERAL",
+    "query": "GitHub Enterprise Cloud SLA compliance for calendar month October 2026 (2026-10). Service credit owed?"
+  },
+  "status": 200,
+  "body": {
+    "miner_id": "2611217",
+    "miner_name": "MONEY OWED Contract SLA Check",
+    "endpoint": "/sla-compliance",
+    "result": {
+      "service": "GitHub Enterprise Cloud",
+      "uptime_pct": 99.9715,
+      "sla_target_pct": 99.9,
+      "compliant": true,
+      "period": "2026-10"
+    },
+    "result_shape": "intent",
+    "format_version": 4,
+    "field_status": {
+      "service": "ok",
+      "uptime_pct": "ok",
+      "sla_target_pct": "ok",
+      "compliant": "ok",
+      "period": "ok"
+    },
+    "input": {
+      "service": "GitHub Enterprise Cloud",
+      "period": "October 2026"
+    },
+    "input_schema_version": 4,
+    "cost_usd": 0.01,
+    "duration_ms": 969,
+    "timestamp": "2026-11-23T13:37:01.216898048Z",
+    "reasoning": "Intent: miner moneyowed-sla given by the caller\nMiner: input schema v4 mapped in code to GET /sla-compliance",
+    "intent": "SLA_COMPLIANCE_GENERAL",
+    "intent_version": 1,
+    "signal_hash": "0x3b05bc1067ff8ef10126ffe8c671e04d8c0a3a942f9d95b9c7f33104443865c3"
+  },
+  "receipt": {
+    "receipt_hash": "0x83fb12b45d0b01af230e2cc605f4215d7339b4f93930002395a085e2ef44c990",
+    "rail": "escrow",
+    "payer": "0xf308f872796f5c1ca01c28541a366f7f9393dfb8",
+    "miner": "6156",
+    "intent": "SLA_COMPLIANCE_GENERAL",
+    "amount_uusdc": "10000",
+    "epoch_id": 43,
+    "settlement": "epoch",
+    "chain": "telegraph",
+    "timestamp": 1795441022
+  }
+}

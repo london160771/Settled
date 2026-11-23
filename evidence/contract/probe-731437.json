@@ -1,0 +1,447 @@
+{
+  "at": "2026-11-23T14:09:46.682Z",
+  "miner": "731437",
+  "request": {
+    "intent": "CONTRACT_OBLIGATION_AUDIT_GENERAL",
+    "params": {
+      "contract": "SAMPLE SERVICE LEVEL AGREEMENT (synthetic example written for Settled tests; not any vendor's real terms)\n\n1. Service Commitment. Acme Cloud will use commercially reasonable efforts to make the Platform available with a Monthly Uptime Percentage of at least 99.99% during each calendar month (the \"Service Commitment\").\n\n2. Service Credits. If Acme Cloud does not meet the Service Commitment, Customer will be eligible to receive a Service Credit as a percentage of the monthly fees paid for the affected month, as follows:\n   (a) Monthly Uptime Percentage less than 99.99% but equal to or greater than 99.0%: 10% Service Credit;\n   (b) Monthly Uptime Percentage less than 99.0% but equal to or greater than 95.0%: 25% Service Credit;\n   (c) Monthly Uptime Percentage less than 95.0%: 50% Service Credit.\n\n3. Claims. To receive a Service Credit, Customer must submit a claim to support within thirty (30) days after the end of the month in which the downtime occurred. Service Credits are Customer's sole remedy.\n\n4. Exclusions. The Service Commitment does not apply to scheduled maintenance announced at least 48 hours in advance or to degraded performance that does not make the Platform unavailable.\n"
+    }
+  },
+  "status": 200,
+  "body": {
+    "miner_id": "731437",
+    "miner_name": "ZK Contract Literal Evidence Index",
+    "endpoint": "/contract-audit",
+    "result": {
+      "as_of": "2026-11-23T14:09:21.354Z",
+      "clauses": [
+        {
+          "end": 105,
+          "evidence_origin": "supplied_text",
+          "offset_unit": "UTF-16 code units",
+          "paragraph_index": 0,
+          "quote": "SAMPLE SERVICE LEVEL AGREEMENT (synthetic example written for Settled tests; not any vendor's real terms)",
+          "reference": "Supplied paragraph 1",
+          "start": 0
+        },
+        {
+          "end": 319,
+          "evidence_origin": "supplied_text",
+          "offset_unit": "UTF-16 code units",
+          "paragraph_index": 1,
+          "quote": "1. Service Commitment. Acme Cloud will use commercially reasonable efforts to make the Platform available with a Monthly Uptime Percentage of at least 99.99% during each calendar month (the \"Service Commitment\").",
+          "reference": "Supplied paragraph 2",
+          "start": 107
+        },
+        {
+          "end": 523,
+          "evidence_origin": "supplied_text",
+          "offset_unit": "UTF-16 code units",
+          "paragraph_index": 2,
+          "quote": "2. Service Credits. If Acme Cloud does not meet the Service Commitment, Customer will be eligible to receive a Service Credit as a percentage of the monthly fees paid for the affected month, as follows:",
+          "reference": "Supplied paragraph 3",
+          "start": 321
+        },
+        {
+          "end": 629,
+          "evidence_origin": "supplied_text",
+          "offset_unit": "UTF-16 code units",
+          "paragraph_index": 3,
+          "quote": "(a) Monthly Uptime Percentage less than 99.99% but equal to or greater than 99.0%: 10% Service Credit;",
+          "reference": "Supplied paragraph 4",
+          "start": 527
+        },
+        {
+          "end": 734,
+          "evidence_origin": "supplied_text",
+          "offset_unit": "UTF-16 code units",
+          "paragraph_index": 4,
+          "quote": "(b) Monthly Uptime Percentage less than 99.0% but equal to or greater than 95.0%: 25% Service Credit;",
+          "reference": "Supplied paragraph 5",
+          "start": 633
+        },
+        {
+          "end": 804,
+          "evidence_origin": "supplied_text",
+          "offset_unit": "UTF-16 code units",
+          "paragraph_index": 5,
+          "quote": "(c) Monthly Uptime Percentage less than 95.0%: 50% Service Credit.",
+          "reference": "Supplied paragraph 6",
+          "start": 738
+        },
+        {
+          "end": 1012,
+          "evidence_origin": "supplied_text",
+          "offset_unit": "UTF-16 code units",
+          "paragraph_index": 6,
+          "quote": "3. Claims. To receive a Service Credit, Customer must submit a claim to support within thirty (30) days after the end of the month in which the downtime occurred. Service Credits are Customer's sole remedy.",
+          "reference": "Supplied paragraph 7",
+          "start": 806
+        },
+        {
+          "end": 1202,
+          "evidence_origin": "supplied_text",
+          "offset_unit": "UTF-16 code units",
+          "paragraph_index": 7,
+          "quote": "4. Exclusions. The Service Commitment does not apply to scheduled maintenance announced at least 48 hours in advance or to degraded performance that does not make the Platform unavailable.",
+          "reference": "Supplied paragraph 8",
+          "start": 1014
+        }
+      ],
+      "confidence": 0.2,
+      "extraction": "Verbatim nonempty lines and literal grammatical subject/statement/time spans. Conditions and negations remain in the full quote. Subjects are not verified obligors, and time mentions are not computed deadlines; no model inference or compliance certification.",
+      "input_sha256": "0cbe894085cfbddb128bcbf0141cbb841bae39c6d86e1f37c7b1de29d8cde61b",
+      "intent": "CONTRACT_OBLIGATION_AUDIT",
+      "obligations": [
+        {
+          "end": 319,
+          "evidence_origin": "supplied_text",
+          "frequency_interpretation": "Literal frequency wording only, including descriptive uses and frequency limits. Not a resolved schedule, assigned deadline, legal duty or performance finding; read the whole paragraph and adjacent clauses.",
+          "interpretation": "Keyword-selected candidate paragraph; read its full wording and adjacent clauses. Literal subjects are not verified obligors. No incorporation, applicability or performance assessment.",
+          "lexical_frequency_mentions": [
+            {
+              "end": 120,
+              "offset_unit": "UTF-16 code units within quote",
+              "start": 113,
+              "text": "Monthly"
+            }
+          ],
+          "lexical_negative_mentions": [],
+          "lexical_qualifier_mentions": [],
+          "offset_unit": "UTF-16 code units",
+          "paragraph_index": 1,
+          "quote": "1. Service Commitment. Acme Cloud will use commercially reasonable efforts to make the Platform available with a Monthly Uptime Percentage of at least 99.99% during each calendar month (the \"Service Commitment\").",
+          "reference": "Supplied paragraph 2",
+          "start": 107,
+          "statements": [],
+          "status": "Unclear",
+          "text": "1. Service Commitment. Acme Cloud will use commercially reasonable efforts to make the Platform available with a Monthly Uptime Percentage of at least 99.99% during each calendar month (the \"Service Commitment\").",
+          "time_mentions": []
+        },
+        {
+          "end": 523,
+          "evidence_origin": "supplied_text",
+          "frequency_interpretation": "Literal frequency wording only, including descriptive uses and frequency limits. Not a resolved schedule, assigned deadline, legal duty or performance finding; read the whole paragraph and adjacent clauses.",
+          "interpretation": "Keyword-selected candidate paragraph; read its full wording and adjacent clauses. Literal subjects are not verified obligors. No incorporation, applicability or performance assessment.",
+          "lexical_frequency_mentions": [
+            {
+              "end": 156,
+              "offset_unit": "UTF-16 code units within quote",
+              "start": 149,
+              "text": "monthly"
+            }
+          ],
+          "lexical_negative_mentions": [],
+          "lexical_qualifier_mentions": [
+            {
+              "cue": {
+                "end": 22,
+                "offset_unit": "UTF-16 code units within quote",
+                "start": 20,
+                "text": "If"
+              },
+              "interpretation": "Literal qualifier cue and paragraph suffix, not a resolved condition or exception. Read the whole paragraph and adjacent clauses; legal scope and applicability are not assessed.",
+              "remainder": {
+                "end": 202,
+                "offset_unit": "UTF-16 code units within quote",
+                "start": 20,
+                "text": "If Acme Cloud does not meet the Service Commitment, Customer will be eligible to receive a Service Credit as a percentage of the monthly fees paid for the affected month, as follows:"
+              }
+            }
+          ],
+          "offset_unit": "UTF-16 code units",
+          "paragraph_index": 2,
+          "quote": "2. Service Credits. If Acme Cloud does not meet the Service Commitment, Customer will be eligible to receive a Service Credit as a percentage of the monthly fees paid for the affected month, as follows:",
+          "reference": "Supplied paragraph 3",
+          "start": 321,
+          "statements": [
+            {
+              "operator": {
+                "end": 85,
+                "offset_unit": "UTF-16 code units within quote",
+                "start": 81,
+                "text": "will"
+              },
+              "paragraph_context": {
+                "end": 202,
+                "offset_unit": "UTF-16 code units within quote",
+                "start": 0,
+                "text": "2. Service Credits. If Acme Cloud does not meet the Service Commitment, Customer will be eligible to receive a Service Credit as a percentage of the monthly fees paid for the affected month, as follows:"
+              },
+              "role_resolution": "Not assessed: a grammatical subject may be a recipient in passive wording, and quoted or negated wording may not impose a duty.",
+              "statement": {
+                "end": 202,
+                "offset_unit": "UTF-16 code units within quote",
+                "start": 72,
+                "text": "Customer will be eligible to receive a Service Credit as a percentage of the monthly fees paid for the affected month, as follows:"
+              },
+              "subject": {
+                "end": 80,
+                "offset_unit": "UTF-16 code units within quote",
+                "start": 72,
+                "text": "Customer"
+              },
+              "timing_linkage": "Not assessed: time mentions are indexed for the whole paragraph, not assigned to a party or converted into due dates."
+            }
+          ],
+          "status": "Unclear",
+          "text": "2. Service Credits. If Acme Cloud does not meet the Service Commitment, Customer will be eligible to receive a Service Credit as a percentage of the monthly fees paid for the affected month, as follows:",
+          "time_mentions": []
+        },
+        {
+          "end": 629,
+          "evidence_origin": "supplied_text",
+          "frequency_interpretation": "Literal frequency wording only, including descriptive uses and frequency limits. Not a resolved schedule, assigned deadline, legal duty or performance finding; read the whole paragraph and adjacent clauses.",
+          "interpretation": "Keyword-selected candidate paragraph; read its full wording and adjacent clauses. Literal subjects are not verified obligors. No incorporation, applicability or performance assessment.",
+          "lexical_frequency_mentions": [
+            {
+              "end": 11,
+              "offset_unit": "UTF-16 code units within quote",
+              "start": 4,
+              "text": "Monthly"
+            }
+          ],
+          "lexical_negative_mentions": [],
+          "lexical_qualifier_mentions": [],
+          "offset_unit": "UTF-16 code units",
+          "paragraph_index": 3,
+          "quote": "(a) Monthly Uptime Percentage less than 99.99% but equal to or greater than 99.0%: 10% Service Credit;",
+          "reference": "Supplied paragraph 4",
+          "start": 527,
+          "statements": [],
+          "status": "Unclear",
+          "text": "(a) Monthly Uptime Percentage less than 99.99% but equal to or greater than 99.0%: 10% Service Credit;",
+          "time_mentions": []
+        },
+        {
+          "end": 734,
+          "evidence_origin": "supplied_text",
+          "frequency_interpretation": "Literal frequency wording only, including descriptive uses and frequency limits. Not a resolved schedule, assigned deadline, legal duty or performance finding; read the whole paragraph and adjacent clauses.",
+          "interpretation": "Keyword-selected candidate paragraph; read its full wording and adjacent clauses. Literal subjects are not verified obligors. No incorporation, applicability or performance assessment.",
+          "lexical_frequency_mentions": [
+            {
+              "end": 11,
+              "offset_unit": "UTF-16 code units within quote",
+              "start": 4,
+              "text": "Monthly"
+            }
+          ],
+          "lexical_negative_mentions": [],
+          "lexical_qualifier_mentions": [],
+          "offset_unit": "UTF-16 code units",
+          "paragraph_index": 4,
+          "quote": "(b) Monthly Uptime Percentage less than 99.0% but equal to or greater than 95.0%: 25% Service Credit;",
+          "reference": "Supplied paragraph 5",
+          "start": 633,
+          "statements": [],
+          "status": "Unclear",
+          "text": "(b) Monthly Uptime Percentage less than 99.0% but equal to or greater than 95.0%: 25% Service Credit;",
+          "time_mentions": []
+        },
+        {
+          "end": 804,
+          "evidence_origin": "supplied_text",
+          "frequency_interpretation": "Literal frequency wording only, including descriptive uses and frequency limits. Not a resolved schedule, assigned deadline, legal duty or performance finding; read the whole paragraph and adjacent clauses.",
+          "interpretation": "Keyword-selected candidate paragraph; read its full wording and adjacent clauses. Literal subjects are not verified obligors. No incorporation, applicability or performance assessment.",
+          "lexical_frequency_mentions": [
+            {
+              "end": 11,
+              "offset_unit": "UTF-16 code units within quote",
+              "start": 4,
+              "text": "Monthly"
+            }
+          ],
+          "lexical_negative_mentions": [],
+          "lexical_qualifier_mentions": [],
+          "offset_unit": "UTF-16 code units",
+          "paragraph_index": 5,
+          "quote": "(c) Monthly Uptime Percentage less than 95.0%: 50% Service Credit.",
+          "reference": "Supplied paragraph 6",
+          "start": 738,
+          "statements": [],
+          "status": "Unclear",
+          "text": "(c) Monthly Uptime Percentage less than 95.0%: 50% Service Credit.",
+          "time_mentions": []
+        },
+        {
+          "end": 1012,
+          "evidence_origin": "supplied_text",
+          "interpretation": "Keyword-selected candidate paragraph; read its full wording and adjacent clauses. Literal subjects are not verified obligors. No incorporation, applicability or performance assessment.",
+          "lexical_negative_mentions": [],
+          "lexical_qualifier_mentions": [],
+          "offset_unit": "UTF-16 code units",
+          "paragraph_index": 6,
+          "quote": "3. Claims. To receive a Service Credit, Customer must submit a claim to support within thirty (30) days after the end of the month in which the downtime occurred. Service Credits are Customer's sole remedy.",
+          "reference": "Supplied paragraph 7",
+          "start": 806,
+          "statements": [
+            {
+              "operator": {
+                "end": 53,
+                "offset_unit": "UTF-16 code units within quote",
+                "start": 49,
+                "text": "must"
+              },
+              "paragraph_context": {
+                "end": 206,
+                "offset_unit": "UTF-16 code units within quote",
+                "start": 0,
+                "text": "3. Claims. To receive a Service Credit, Customer must submit a claim to support within thirty (30) days after the end of the month in which the downtime occurred. Service Credits are Customer's sole remedy."
+              },
+              "role_resolution": "Not assessed: a grammatical subject may be a recipient in passive wording, and quoted or negated wording may not impose a duty.",
+              "statement": {
+                "end": 206,
+                "offset_unit": "UTF-16 code units within quote",
+                "start": 40,
+                "text": "Customer must submit a claim to support within thirty (30) days after the end of the month in which the downtime occurred. Service Credits are Customer's sole remedy."
+              },
+              "subject": {
+                "end": 48,
+                "offset_unit": "UTF-16 code units within quote",
+                "start": 40,
+                "text": "Customer"
+              },
+              "timing_linkage": "Not assessed: time mentions are indexed for the whole paragraph, not assigned to a party or converted into due dates."
+            }
+          ],
+          "status": "Unclear",
+          "text": "3. Claims. To receive a Service Credit, Customer must submit a claim to support within thirty (30) days after the end of the month in which the downtime occurred. Service Credits are Customer's sole remedy.",
+          "time_mentions": [
+            {
+              "end": 103,
+              "start": 87,
+              "text": "thirty (30) days"
+            }
+          ]
+        },
+        {
+          "end": 1202,
+          "evidence_origin": "supplied_text",
+          "interpretation": "Keyword-selected candidate paragraph; read its full wording and adjacent clauses. Literal subjects are not verified obligors. No incorporation, applicability or performance assessment.",
+          "lexical_negative_mentions": [],
+          "lexical_qualifier_mentions": [
+            {
+              "cue": {
+                "end": 52,
+                "offset_unit": "UTF-16 code units within quote",
+                "start": 38,
+                "text": "does not apply"
+              },
+              "interpretation": "Literal qualifier cue and paragraph suffix, not a resolved condition or exception. Read the whole paragraph and adjacent clauses; legal scope and applicability are not assessed.",
+              "remainder": {
+                "end": 188,
+                "offset_unit": "UTF-16 code units within quote",
+                "start": 38,
+                "text": "does not apply to scheduled maintenance announced at least 48 hours in advance or to degraded performance that does not make the Platform unavailable."
+              }
+            }
+          ],
+          "offset_unit": "UTF-16 code units",
+          "paragraph_index": 7,
+          "quote": "4. Exclusions. The Service Commitment does not apply to scheduled maintenance announced at least 48 hours in advance or to degraded performance that does not make the Platform unavailable.",
+          "reference": "Supplied paragraph 8",
+          "start": 1014,
+          "statements": [],
+          "status": "Unclear",
+          "text": "4. Exclusions. The Service Commitment does not apply to scheduled maintenance announced at least 48 hours in advance or to degraded performance that does not make the Platform unavailable.",
+          "time_mentions": [
+            {
+              "end": 105,
+              "start": 97,
+              "text": "48 hours"
+            }
+          ]
+        }
+      ],
+      "source": "Supplied contract text (not independently authenticated)",
+      "summary": "Unclear. Supplied wording does not establish incorporation, applicability or performance in a particular contract; complete first paragraph excerpt: “2. Service Credits. If Acme Cloud does not meet the Service Commitment, Customer will be eligible to receive a Service Credit as a percentage of the monthly fees paid for the affected month, as follows:\n(a) Monthly Uptime Percentage less than 99.99% but equal to or greater than 99.0%: 10% Service Credit;\n(b) Monthly Uptime Percentage less than 99.0% but equal to or greater than 95.0%: 25% Service Credit;\n(c) Monthly Uptime Percentage less than 95.0%: 50% Service Credit.”; time-bearing candidate paragraph 7: “3. Claims. To receive a Service Credit, Customer must submit a claim to support within thirty (30) days after the end of the month in which the downtime occurred. Service Credits are Customer's sole remedy.”; time-bearing candidate paragraph 8: “4. Exclusions. The Service Commitment does not apply to scheduled maintenance announced at least 48 hours in advance or to degraded performance that does not make the Platform unavailable.”; time-bearing candidate paragraph 2: “1. Service Commitment. Acme Cloud will use commercially reasonable efforts to make the Platform available with a Monthly Uptime Percentage of at least 99.99% during each calendar month (the \"Service Commitment\").”; remaining context is retained in clauses.",
+      "summary_additional_excerpts": [
+        {
+          "complete_paragraph": true,
+          "end": 206,
+          "offset_unit": "UTF-16 code units within quote",
+          "paragraph_index": 6,
+          "start": 0,
+          "text": "3. Claims. To receive a Service Credit, Customer must submit a claim to support within thirty (30) days after the end of the month in which the downtime occurred. Service Credits are Customer's sole remedy."
+        },
+        {
+          "complete_paragraph": true,
+          "end": 188,
+          "offset_unit": "UTF-16 code units within quote",
+          "paragraph_index": 7,
+          "start": 0,
+          "text": "4. Exclusions. The Service Commitment does not apply to scheduled maintenance announced at least 48 hours in advance or to degraded performance that does not make the Platform unavailable."
+        },
+        {
+          "complete_paragraph": true,
+          "end": 212,
+          "offset_unit": "UTF-16 code units within quote",
+          "paragraph_index": 1,
+          "start": 0,
+          "text": "1. Service Commitment. Acme Cloud will use commercially reasonable efforts to make the Platform available with a Monthly Uptime Percentage of at least 99.99% during each calendar month (the \"Service Commitment\")."
+        }
+      ],
+      "summary_continuations": [
+        {
+          "complete_paragraph": true,
+          "end": 102,
+          "offset_unit": "UTF-16 code units within quote",
+          "paragraph_index": 3,
+          "start": 0,
+          "text": "(a) Monthly Uptime Percentage less than 99.99% but equal to or greater than 99.0%: 10% Service Credit;"
+        },
+        {
+          "complete_paragraph": true,
+          "end": 101,
+          "offset_unit": "UTF-16 code units within quote",
+          "paragraph_index": 4,
+          "start": 0,
+          "text": "(b) Monthly Uptime Percentage less than 99.0% but equal to or greater than 95.0%: 25% Service Credit;"
+        },
+        {
+          "complete_paragraph": true,
+          "end": 66,
+          "offset_unit": "UTF-16 code units within quote",
+          "paragraph_index": 5,
+          "start": 0,
+          "text": "(c) Monthly Uptime Percentage less than 95.0%: 50% Service Credit."
+        }
+      ],
+      "summary_excerpt": {
+        "complete_paragraph": true,
+        "end": 202,
+        "offset_unit": "UTF-16 code units within quote",
+        "paragraph_index": 2,
+        "start": 0,
+        "text": "2. Service Credits. If Acme Cloud does not meet the Service Commitment, Customer will be eligible to receive a Service Credit as a percentage of the monthly fees paid for the affected month, as follows:"
+      },
+      "verdict": "Unclear"
+    },
+    "result_shape": "raw",
+    "shape_error": "parser_unavailable",
+    "format_version": 3,
+    "input": {
+      "contract": "SAMPLE SERVICE LEVEL AGREEMENT (synthetic example written for Settled tests; not any vendor's real terms)\n\n1. Service Commitment. Acme Cloud will use commercially reasonable efforts to make the Platform available with a Monthly Uptime Percentage of at least 99.99% during each calendar month (the \"Service Commitment\").\n\n2. Service Credits. If Acme Cloud does not meet the Service Commitment, Customer will be eligible to receive a Service Credit as a percentage of the monthly fees paid for the affected month, as follows:\n   (a) Monthly Uptime Percentage less than 99.99% but equal to or greater than 99.0%: 10% Service Credit;\n   (b) Monthly Uptime Percentage less than 99.0% but equal to or greater than 95.0%: 25% Service Credit;\n   (c) Monthly Uptime Percentage less than 95.0%: 50% Service Credit.\n\n3. Claims. To receive a Service Credit, Customer must submit a claim to support within thirty (30) days after the end of the month in which the downtime occurred. Service Credits are Customer's sole remedy.\n\n4. Exclusions. The Service Commitment does not apply to scheduled maintenance announced at least 48 hours in advance or to degraded performance that does not make the Platform unavailable.\n"
+    },
+    "input_schema_version": 3,
+    "cost_usd": 0.01,
+    "duration_ms": 73,
+    "timestamp": "2026-11-23T14:09:21.361686242Z",
+    "reasoning": "Intent: miner zk-contract-spans given by the caller\nMiner: The user is asking to audit a contract for its obligations. The ZK Contract Literal Evidence Index miner has an endpoint '/contract-audit' that is specifically designed for the CONTRACT_OBLIGATION_AUDIT_GENERAL intent and accepts the contract text as a parameter. The provided contract text is directly mapped to the 'contract' field in the request body.",
+    "intent": "CONTRACT_OBLIGATION_AUDIT_GENERAL",
+    "intent_version": 1,
+    "signal_hash": "0x42f71feafd50a5939d9d7b38549382b2c5288277197864c7096ce2e3fa86fc87"
+  },
+  "receipt": {
+    "receipt_hash": "0xb3db459f27f3316892c7f03ee1a2ea2e991ad1752622bb04e124ca8d74667d6b",
+    "rail": "escrow",
+    "payer": "0xf308f872796f5c1ca01c28541a366f7f9393dfb8",
+    "miner": "4899",
+    "intent": "CONTRACT_OBLIGATION_AUDIT_GENERAL",
+    "amount_uusdc": "10000",
+    "epoch_id": 43,
+    "settlement": "epoch",
+    "chain": "telegraph",
+    "timestamp": 1795442986
+  }
+}

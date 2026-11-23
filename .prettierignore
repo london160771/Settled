@@ -1,0 +1,7 @@
+node_modules
+dist
+coverage
+evidence
+package-lock.json
+*.md
+server/data/airports.json

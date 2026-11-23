@@ -1,0 +1,154 @@
+{
+  "at": "2026-11-23T13:23:15.288Z",
+  "request": {
+    "intent": "TRAVEL_DISRUPTION_GENERAL",
+    "params": {
+      "route_or_flight": "BA75 2026-11-20"
+    },
+    "max_budget_usdc": 10000
+  },
+  "status": 200,
+  "body": {
+    "miner_id": "9002",
+    "miner_name": "TxLens",
+    "endpoint": "/travel-disruption",
+    "result": {
+      "route_or_flight": "BA75 2026-11-20",
+      "disrupted": null,
+      "status": "ok",
+      "delay_minutes": null,
+      "reason": null
+    },
+    "result_shape": "intent",
+    "format_version": 4,
+    "field_status": {
+      "route_or_flight": "ok",
+      "disrupted": "missing",
+      "status": "ok",
+      "delay_minutes": "missing",
+      "reason": "missing"
+    },
+    "input": {
+      "route_or_flight": "BA75 2026-11-20"
+    },
+    "input_schema_version": 4,
+    "cost_usd": 0.01,
+    "duration_ms": 626,
+    "timestamp": "2026-11-23T13:23:12.237117866Z",
+    "reasoning": "Intent: intent given by the caller\nMiner: The user is asking about a flight route and date, which falls under the TRAVEL_DISRUPTION_GENERAL intent. The TxLens miner has an endpoint `/travel-disruption` that explicitly serves this intent. The `query` parameter is required for this endpoint, and the provided `route_or_flight` value is used to populate it.",
+    "intent": "TRAVEL_DISRUPTION_GENERAL",
+    "intent_version": 2,
+    "signal_hash": "0x7f58ba8e1b056b52780662a17f0759e9cc8220db089225d900ac8b822e0ec63c",
+    "warnings": [
+      "The response does not include: Delay in minutes",
+      "The response does not include: Whether there is a delay, cancellation or disruption",
+      "The response does not include: Stated cause of the disruption"
+    ],
+    "payments": [
+      {
+        "miner": "txlens",
+        "intent": "TRAVEL_DISRUPTION_GENERAL",
+        "amount_uusdc": 10000,
+        "receipt_hash": "0x1225169aa60e9461918e68d3984390367b43838c8ae2c3d40722a1ef66a91f9c"
+      }
+    ],
+    "cost_usd_total": 0.01,
+    "delivery": "specialist",
+    "served_rank": 1,
+    "sources": [
+      {
+        "miner": "txlens",
+        "intent": "TRAVEL_DISRUPTION_GENERAL"
+      }
+    ],
+    "findings": {
+      "items": [
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "Unknown. No specific weather, strike, or operational information is provided for BA75 on 2026‑11‑20, so the disruption risk cannot be determined from the supplied data. Live status should be confirmed with British Airways or the relevan...",
+          "name": "answer",
+          "path": "$.answer",
+          "type": "string",
+          "value": "Unknown. No specific weather, strike, or operational information is provided for BA75 on 2026‑11‑20, so the disruption risk cannot be determined from the supplied data. Live status should be confirmed with British Airways or the relevant airport authorities."
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "travel-disruption:query: BA75 2026-11-20",
+          "name": "canonical",
+          "path": "$.canonical",
+          "type": "string",
+          "value": "travel-disruption:query: BA75 2026-11-20"
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "2026-11-23T13:23:12.155Z",
+          "name": "checked_at",
+          "path": "$.checked_at",
+          "type": "date",
+          "value": "2026-11-23T13:23:12.155Z"
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "0.8",
+          "name": "confidence",
+          "path": "$.confidence",
+          "type": "number",
+          "value": 0.8
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "0",
+          "name": "cost_usd",
+          "path": "$.cost_usd",
+          "type": "integer",
+          "value": 0
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "ok",
+          "name": "status",
+          "path": "$.status",
+          "type": "string",
+          "value": "ok"
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "Unknown. No specific weather, strike, or operational information is provided for BA75 on 2026‑11‑20, so the disruption risk cannot be determined from the supplied data. Live status should be confirmed with British Airways or the relevan...",
+          "name": "summary",
+          "path": "$.summary",
+          "type": "string",
+          "value": "Unknown. No specific weather, strike, or operational information is provided for BA75 on 2026‑11‑20, so the disruption risk cannot be determined from the supplied data. Live status should be confirmed with British Airways or the relevant airport authorities."
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "Unknown",
+          "name": "verdict",
+          "path": "$.verdict",
+          "type": "string",
+          "value": "Unknown"
+        }
+      ],
+      "raw_sha256": "ff14f4c5deff4dbbb98357e9200b639243c2ef1bfe6d7add186790704f42d4b9"
+    }
+  },
+  "receipt": {
+    "receipt_hash": "0x1225169aa60e9461918e68d3984390367b43838c8ae2c3d40722a1ef66a91f9c",
+    "rail": "escrow",
+    "payer": "0xf308f872796f5c1ca01c28541a366f7f9393dfb8",
+    "miner": "6121",
+    "intent": "TRAVEL_DISRUPTION_GENERAL",
+    "amount_uusdc": "10000",
+    "epoch_id": 43,
+    "settlement": "epoch",
+    "chain": "telegraph",
+    "timestamp": 1795440195
+  }
+}

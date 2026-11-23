@@ -1,0 +1,57 @@
+{
+  "at": "2026-11-23T13:37:48.012Z",
+  "miner": "7410311",
+  "request": {
+    "intent": "SLA_COMPLIANCE_GENERAL",
+    "params": {
+      "service": "Vercel",
+      "period": "30d"
+    }
+  },
+  "status": 200,
+  "body": {
+    "miner_id": "7410311",
+    "miner_name": "Statuspage SLA Auditor",
+    "endpoint": "/sla",
+    "result": {
+      "service": "Vercel",
+      "uptime_pct": 99.5617,
+      "sla_target_pct": 99.99,
+      "compliant": false,
+      "period": "last 30 days"
+    },
+    "result_shape": "intent",
+    "format_version": 4,
+    "field_status": {
+      "service": "ok",
+      "uptime_pct": "ok",
+      "sla_target_pct": "ok",
+      "compliant": "ok",
+      "period": "ok"
+    },
+    "input": {
+      "service": "Vercel",
+      "period": "30d"
+    },
+    "input_schema_version": 4,
+    "cost_usd": 0.01,
+    "duration_ms": 248,
+    "timestamp": "2026-11-23T13:37:46.489656542Z",
+    "reasoning": "Intent: miner sla-miner given by the caller\nMiner: The user is asking about the SLA compliance for Vercel over the last 30 days. The Statuspage SLA Auditor miner has an endpoint '/sla' that serves the SLA_COMPLIANCE_GENERAL intent. This endpoint accepts 'service' and 'period' as parameters, which directly correspond to the provided parameters in the user's request.",
+    "intent": "SLA_COMPLIANCE_GENERAL",
+    "intent_version": 1,
+    "signal_hash": "0x34561da1bbd8128baaeb37b668f92429a7e59f18386ccbf8d733c05e9492ed05"
+  },
+  "receipt": {
+    "receipt_hash": "0xadb9b2691a2785098332c75ed6a1595dcb2fadc6cd01829e5848467351385b08",
+    "rail": "escrow",
+    "payer": "0xf308f872796f5c1ca01c28541a366f7f9393dfb8",
+    "miner": "5310",
+    "intent": "SLA_COMPLIANCE_GENERAL",
+    "amount_uusdc": "10000",
+    "epoch_id": 43,
+    "settlement": "epoch",
+    "chain": "telegraph",
+    "timestamp": 1795441067
+  }
+}

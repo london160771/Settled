@@ -1,0 +1,191 @@
+{
+  "at": "2026-11-23T13:24:03.213Z",
+  "request": {
+    "intent": "TRAVEL_DISRUPTION_GENERAL",
+    "params": {
+      "route_or_flight": "BA75 LHR-LOS 2026-11-20"
+    },
+    "max_budget_usdc": 40000
+  },
+  "status": 200,
+  "body": {
+    "miner_id": "9002",
+    "miner_name": "TxLens",
+    "endpoint": "/travel-disruption",
+    "result": {
+      "route_or_flight": "BA75 LHR-LOS 2026-11-20",
+      "disrupted": false,
+      "status": "ok",
+      "delay_minutes": null,
+      "reason": "No known strikes, weather events, or air‑traffic‑control issues affecting London Heathrow (LHR) to Lagos (LOS) on 20 Nov 2026; the route is operating normally."
+    },
+    "result_shape": "intent",
+    "format_version": 4,
+    "field_status": {
+      "route_or_flight": "ok",
+      "disrupted": "ok",
+      "status": "ok",
+      "delay_minutes": "missing",
+      "reason": "ok"
+    },
+    "input": {
+      "route_or_flight": "BA75 LHR-LOS 2026-11-20"
+    },
+    "input_schema_version": 4,
+    "cost_usd": 0.01,
+    "duration_ms": 605,
+    "timestamp": "2026-11-23T13:23:41.064458658Z",
+    "reasoning": "Intent: intent given by the caller\nMiner: The user is asking about a flight disruption, which falls under the TRAVEL_DISRUPTION_GENERAL intent. The TxLens miner has an endpoint `/travel-disruption` that explicitly serves this intent. The `query` parameter is required for this endpoint and should contain the verbatim user question, which in this case is the flight information provided.",
+    "intent": "TRAVEL_DISRUPTION_GENERAL",
+    "intent_version": 2,
+    "signal_hash": "0x013a260ec80303e0a85fae523973c99a5be97dffae915cf2e1264abfd7e7dc65",
+    "warnings": [
+      "The response does not include: Delay in minutes",
+      "Sources returned conflicting information for: answer"
+    ],
+    "payments": [
+      {
+        "miner": "txlens",
+        "intent": "TRAVEL_DISRUPTION_GENERAL",
+        "amount_uusdc": 10000,
+        "receipt_hash": "0x8ff67605beeb113665f1ebbb3c53560a00dd6240adcbcaee8e04a3ac03681c97"
+      },
+      {
+        "miner": "chainsight-oracle",
+        "intent": "TRAVEL_DISRUPTION_GENERAL",
+        "amount_uusdc": 10000,
+        "receipt_hash": "0xd61fe556a02d60b5e4e82be34c113a5c914db79bbcea290733c6f7a8617d95fb"
+      }
+    ],
+    "cost_usd_total": 0.02,
+    "delivery": "specialist",
+    "served_rank": 1,
+    "sources": [
+      {
+        "miner": "chainsight-oracle",
+        "intent": "TRAVEL_DISRUPTION_GENERAL"
+      },
+      {
+        "miner": "txlens",
+        "intent": "TRAVEL_DISRUPTION_GENERAL"
+      }
+    ],
+    "findings": {
+      "items": [
+        {
+          "basis": "provider_reported",
+          "delivery": "ranked_fallback",
+          "evidence": "Disruption status: On time Reason: No known strikes, weather events, or air‑traffic‑control issues affecting London Heathrow (LHR) to Lagos (LOS) on 20 Nov 2026; the route is operating normally.",
+          "name": "answer",
+          "path": "$.answer",
+          "source": "chainsight-oracle/TRAVEL_DISRUPTION_GENERAL",
+          "type": "string",
+          "value": "Disruption status: On time Reason: No known strikes, weather events, or air‑traffic‑control issues affecting London Heathrow (LHR) to Lagos (LOS) on 20 Nov 2026; the route is operating normally."
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "ranked_fallback",
+          "evidence": "Disruption status: On time Reason: No known strikes, weather events, or air‑traffic‑control issues affecting London Heathrow (LHR) to Lagos (LOS) on 20 Nov 2026; the route is operating normally.",
+          "name": "signal",
+          "path": "$.signal",
+          "source": "chainsight-oracle/TRAVEL_DISRUPTION_GENERAL",
+          "type": "string",
+          "value": "Disruption status: On time Reason: No known strikes, weather events, or air‑traffic‑control issues affecting London Heathrow (LHR) to Lagos (LOS) on 20 Nov 2026; the route is operating normally."
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "Unknown. No recent weather, strike, or air‑traffic information is provided for the BA75 flight from London Heathrow to Los Angeles on 20 November 2026, so the disruption risk cannot be determined from the supplied data. Live status sh...",
+          "name": "answer",
+          "path": "$.answer",
+          "source": "txlens/TRAVEL_DISRUPTION_GENERAL",
+          "type": "string",
+          "value": "Unknown. No recent weather, strike, or air‑traffic information is provided for the BA75 flight from London Heathrow to Los Angeles on 20 November 2026, so the disruption risk cannot be determined from the supplied data. Live status should be confirmed with British Airways."
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "travel-disruption:query: BA75 LHR-LOS 2026-11-20",
+          "name": "canonical",
+          "path": "$.canonical",
+          "source": "txlens/TRAVEL_DISRUPTION_GENERAL",
+          "type": "string",
+          "value": "travel-disruption:query: BA75 LHR-LOS 2026-11-20"
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "2026-11-23T13:23:40.984Z",
+          "name": "checked_at",
+          "path": "$.checked_at",
+          "source": "txlens/TRAVEL_DISRUPTION_GENERAL",
+          "type": "date",
+          "value": "2026-11-23T13:23:40.984Z"
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "0.8",
+          "name": "confidence",
+          "path": "$.confidence",
+          "source": "txlens/TRAVEL_DISRUPTION_GENERAL",
+          "type": "number",
+          "value": 0.8
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "0",
+          "name": "cost_usd",
+          "path": "$.cost_usd",
+          "source": "txlens/TRAVEL_DISRUPTION_GENERAL",
+          "type": "integer",
+          "value": 0
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "ok",
+          "name": "status",
+          "path": "$.status",
+          "source": "txlens/TRAVEL_DISRUPTION_GENERAL",
+          "type": "string",
+          "value": "ok"
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "Unknown. No recent weather, strike, or air‑traffic information is provided for the BA75 flight from London Heathrow to Los Angeles on 20 November 2026, so the disruption risk cannot be determined from the supplied data. Live status sh...",
+          "name": "summary",
+          "path": "$.summary",
+          "source": "txlens/TRAVEL_DISRUPTION_GENERAL",
+          "type": "string",
+          "value": "Unknown. No recent weather, strike, or air‑traffic information is provided for the BA75 flight from London Heathrow to Los Angeles on 20 November 2026, so the disruption risk cannot be determined from the supplied data. Live status should be confirmed with British Airways."
+        },
+        {
+          "basis": "provider_reported",
+          "delivery": "specialist",
+          "evidence": "Unknown",
+          "name": "verdict",
+          "path": "$.verdict",
+          "source": "txlens/TRAVEL_DISRUPTION_GENERAL",
+          "type": "string",
+          "value": "Unknown"
+        }
+      ],
+      "raw_sha256": "c1f475b92b44ac9cceb11d83c2530f6bf4cec70d48bef6f5bd7b3ef29403b0b2"
+    }
+  },
+  "receipt": {
+    "receipt_hash": "0x8ff67605beeb113665f1ebbb3c53560a00dd6240adcbcaee8e04a3ac03681c97",
+    "rail": "escrow",
+    "payer": "0xf308f872796f5c1ca01c28541a366f7f9393dfb8",
+    "miner": "6121",
+    "intent": "TRAVEL_DISRUPTION_GENERAL",
+    "amount_uusdc": "10000",
+    "epoch_id": 43,
+    "settlement": "epoch",
+    "chain": "telegraph",
+    "timestamp": 1795440243
+  }
+}

@@ -1,0 +1,444 @@
+{
+  "TRAVEL_DISRUPTION": {
+    "miner_count": 0,
+    "unknown": false,
+    "params": [
+      "route_or_flight*"
+    ],
+    "fields": [
+      "route_or_flight",
+      "disrupted",
+      "status",
+      "delay_minutes",
+      "reason"
+    ],
+    "miners": []
+  },
+  "TRAVEL_DISRUPTION_GENERAL": {
+    "miner_count": 19,
+    "unknown": false,
+    "params": [
+      "route_or_flight*"
+    ],
+    "fields": [
+      "route_or_flight",
+      "disrupted",
+      "status",
+      "delay_minutes",
+      "reason"
+    ],
+    "miners": [
+      "82001 FAA NAS Airport Status",
+      "9002 TxLens",
+      "1900999000 ReferenceForge",
+      "774921 VeriReceipt Deterministic Oracle",
+      "20260828 PREFLIGHT Infrastructure Signals",
+      "82003 AviationWeather METAR",
+      "170020 FAA NAS Airport Disruption Status",
+      "7602 TravelWire Travel Disruption",
+      "302 ChainSight — Universal Intelligence & Data Oracle",
+      "82007 ADSB.lol Aircraft Reg",
+      "82010 NWS NY Alerts Travel",
+      "82004 AviationWeather TAF",
+      "82005 AviationWeather AIRSIGMET",
+      "710639 FAA Travel Status with Typed Mapping",
+      "82008 ADSB.lol Nearby Traffic",
+      "82009 AviationWeather METAR JFK",
+      "7141437 FAA Operational Airport Events",
+      "82006 NWS Area Alerts Travel",
+      "82002 FAA Fly Airport Status"
+    ]
+  },
+  "WEATHER_CHECK_TEMPERATURE": {
+    "miner_count": 34,
+    "unknown": false,
+    "params": [
+      "location*"
+    ],
+    "fields": [
+      "temperature_c"
+    ],
+    "miners": [
+      "7310043 Atlas — public-data intelligence for routing, retail, weather, FX and CVEs",
+      "170013 Open-Meteo Current Temperature (modelled)",
+      "33009 Open-Meteo Marine Weather",
+      "7310099 VulnRank - Security, Compliance and Verified Lookups",
+      "190099 Wx Metno",
+      "0 Lacre-Meteo (Transit-Integrity-Sealed Weather Forecast)",
+      "33002 Open-Meteo Flood Weather",
+      "9006 Verity Current Weather Check",
+      "302 ChainSight — Universal Intelligence & Data Oracle",
+      "190101 Wx Wttr",
+      "170016 NOAA AWC Nearest METAR Temperature (observed)",
+      "4283 Gauge",
+      "33007 Open-Meteo Air Quality",
+      "33010 Environment Canada Weather",
+      "170106 7Timer Civil",
+      "7304 SkyWire Current Weather",
+      "20260826 Isobar Weather",
+      "33006 Sunrise-Sunset Weather Check",
+      "83159274 TelegraphIntent",
+      "170015 Bright Sky DWD Station Temperature (observed)",
+      "730401 SkyWire Source-Mapped Temperature",
+      "190098 Wx 7timer",
+      "78214 SkyWire Observed Air Temperature",
+      "20260828 PREFLIGHT Infrastructure Signals",
+      "7001 Solar DePIN Node",
+      "20260821 Amanat Weather Risk",
+      "33008 NWS Alerts Weather Check",
+      "9002 TxLens",
+      "33005 Bright Sky Weather Check",
+      "4433 LiveCert — Sourced Answers for Agents",
+      "190100 Wx Openmeteo",
+      "170014 MET Norway Locationforecast Temperature (modelled)",
+      "1900999000 ReferenceForge",
+      "774921 VeriReceipt Deterministic Oracle"
+    ]
+  },
+  "WEATHER_FORECAST_GENERAL": {
+    "miner_count": 28,
+    "unknown": false,
+    "params": [
+      "location*",
+      "window_hours"
+    ],
+    "fields": [
+      "location",
+      "when",
+      "temp_max_c",
+      "temp_min_c",
+      "precipitation_probability_pct",
+      "condition"
+    ],
+    "miners": [
+      "83159274 TelegraphIntent",
+      "35007 wttr.in Forecast",
+      "35002 Open-Meteo Daily Forecast",
+      "82920263 WeatherTop V3 Forecast",
+      "35008 Open-Meteo Archive",
+      "35006 7Timer Civil Forecast",
+      "9002 TxLens",
+      "4433 LiveCert — Sourced Answers for Agents",
+      "35010 Environment Canada Forecast",
+      "35009 Bright Sky Forecast Weather",
+      "1900999000 ReferenceForge",
+      "774921 VeriReceipt Deterministic Oracle",
+      "20260828 PREFLIGHT Infrastructure Signals",
+      "20260821 Amanat Weather Risk",
+      "910 OnLookout Weather Forecast",
+      "35004 Open-Meteo AQ Forecast",
+      "64173 OathCast Weather Forecast Miner",
+      "0 Lacre-Meteo (Transit-Integrity-Sealed Weather Forecast)",
+      "302 ChainSight — Universal Intelligence & Data Oracle",
+      "35003 Open-Meteo Ensemble Forecast",
+      "9603 Weather Forecast Verify (Open-Meteo)",
+      "7305 SkyWire Weather Forecast",
+      "9003 Verity Weather Forecast",
+      "20260826 Isobar Weather",
+      "35005 Open-Meteo Marine Forecast",
+      "1900999043 PREFLIGHT Infrastructure Signals",
+      "73156 SkyWire Source Window Forecast",
+      "35001 Open-Meteo Forecast"
+    ]
+  },
+  "WEB_SEARCH_GENERAL": {
+    "miner_count": 30,
+    "unknown": false,
+    "params": [
+      "query*"
+    ],
+    "fields": [
+      "answer",
+      "sources",
+      "brief"
+    ],
+    "miners": [
+      "170081 Marginalia Search",
+      "49007 Crossref Works Web Search",
+      "190102 Search Duckduckgo Ia",
+      "5530 Telegraph Verity Intelligence",
+      "49006 Lobsters Hottest Search",
+      "49010 OpenAlex Web Topic Search",
+      "152 Kriterion-Pramagraph",
+      "5893375 weerakorn's Web Research Miner",
+      "49008 Zenodo Records Web Search",
+      "3 Telegraph Demo Miner",
+      "49005 Dev.to Article Search",
+      "83159274 TelegraphIntent",
+      "2 Kitesurf Scraper Demo",
+      "303 ChainSight Search Node — Live Web & News Intelligence",
+      "49001 HN Front Page Search",
+      "4433 LiveCert — Sourced Answers for Agents",
+      "49004 DuckDuckGo Instant Answer",
+      "78432 Wikipedia and NASA Public Source Discovery",
+      "49002 HN Search By Date",
+      "1900999000 ReferenceForge",
+      "20260828 PREFLIGHT Infrastructure Signals",
+      "9002 TxLens",
+      "501 Telegraph Sentinel Risk Intelligence",
+      "49003 Spaceflight News Search",
+      "78221 Revision-linked Wikipedia Source Search",
+      "302 ChainSight — Universal Intelligence & Data Oracle",
+      "49009 HN Algolia Web Search",
+      "190103 Search Wikipedia",
+      "6164 Praman Desk Compliance & Procurement Auditor",
+      "121262 KK local LLama v.2"
+    ]
+  },
+  "QUESTION_ANSWERING_GENERAL": {
+    "miner_count": 17,
+    "unknown": false,
+    "params": [],
+    "fields": [],
+    "miners": [
+      "148005 HN Item QA",
+      "148007 World Bank QA Data",
+      "148008 IMF QA Indicators",
+      "780031 ZK Verbatim QA Proof Candidate",
+      "9002 TxLens",
+      "7310082 ZK Structured Source QA",
+      "4433 LiveCert — Sourced Answers for Agents",
+      "20260828 PREFLIGHT Infrastructure Signals",
+      "148001 OpenAlex QA",
+      "780019 ZK Source-Excerpt QA Candidate",
+      "148002 Crossref QA",
+      "302 ChainSight — Universal Intelligence & Data Oracle",
+      "148004 HN Ask QA",
+      "7314 Package Release Intelligence",
+      "1900999019 TextWire Question Answering",
+      "148006 BBC QA Feed",
+      "148010 HN Best QA"
+    ]
+  },
+  "CHAT_COMPLETION_GENERAL": {
+    "miner_count": 18,
+    "unknown": false,
+    "params": [
+      "message*"
+    ],
+    "fields": [
+      "reply",
+      "verdict",
+      "brief"
+    ],
+    "miners": [
+      "202611202 Bounded Chat Answers",
+      "501 Telegraph Sentinel Risk Intelligence",
+      "164002 HN Ask Chat",
+      "901 Telegraph Groq LPU Miner",
+      "164010 CourtListener Chat",
+      "164004 BBC Chat Feed",
+      "83159274 TelegraphIntent",
+      "164006 OpenAlex Chat Lit",
+      "164005 BBC Tech Chat",
+      "9002 TxLens",
+      "4433 LiveCert — Sourced Answers for Agents",
+      "164007 Crossref Chat Lit",
+      "164001 HN Chat Item",
+      "164008 Zenodo Chat Lit",
+      "164009 HTTPBin Chat Probe",
+      "1900999000 ReferenceForge",
+      "20260828 PREFLIGHT Infrastructure Signals",
+      "164003 HN Best Chat"
+    ]
+  },
+  "CRYPTO_PRICE_USD": {
+    "miner_count": 58,
+    "unknown": false,
+    "params": [
+      "symbol*"
+    ],
+    "fields": [
+      "price_usd"
+    ],
+    "miners": [
+      "190173 Cp Coinlore",
+      "7710320 ZK USD Spot Price",
+      "190203 Cp Xt",
+      "7310099 VulnRank - Security, Compliance and Verified Lookups",
+      "501 Telegraph Sentinel Risk Intelligence",
+      "190064 Cp Binance",
+      "170102 Gate.io Spot",
+      "190066 Cp Bitget",
+      "32003 Kraken Spot Price",
+      "170104 Bybit Spot",
+      "190071 Cp Cryptocom",
+      "190205 Cp Hitbtc",
+      "900 OnChain Intel Miner",
+      "190208 Cp Bitso",
+      "4283 Gauge",
+      "190174 Cp Coinpaprika",
+      "32010 KuCoin Crypto Price",
+      "94217604 ProvenancePrice",
+      "190202 Cp Phemex",
+      "7311 Optivis Crypto Price",
+      "6110114 Breadwinner",
+      "170100 HTX Spot",
+      "32005 Bitstamp Spot Price",
+      "190076 Cp Kraken",
+      "190075 Cp Htx",
+      "9107 CryptoPulse Multi-Source Price",
+      "190206 Cp Digifinex",
+      "190073 Cp Gate",
+      "32006 Gemini Spot Price",
+      "83159274 TelegraphIntent",
+      "190204 Cp Bitrue",
+      "32004 Binance Spot Price",
+      "190070 Cp Coingecko",
+      "190074 Cp Gemini",
+      "152 Kriterion-Pramagraph",
+      "190212 Cp P2pb2b",
+      "32002 Coinbase Spot Price",
+      "7320 FinWire Crypto Price",
+      "170101 MEXC Spot",
+      "351 Alchemy Prices API (Historic and Live Crypto Prices)",
+      "190065 Cp Bitfinex",
+      "190069 Cp Coinbase",
+      "1900999000 ReferenceForge",
+      "774921 VeriReceipt Deterministic Oracle",
+      "190067 Cp Bitstamp",
+      "20260828 PREFLIGHT Infrastructure Signals",
+      "190211 Cp Btse",
+      "20260829 AgentFeed Base & Crypto Prices",
+      "190072 Cp Defillama",
+      "190078 Cp Mexc",
+      "190068 Cp Bybit",
+      "9002 TxLens",
+      "190209 Cp Woo",
+      "42 KoinMix Crypto Price Oracle",
+      "4433 LiveCert — Sourced Answers for Agents",
+      "190077 Cp Kucoin",
+      "170103 Bitfinex Spot",
+      "32001 CoinGecko Crypto Price"
+    ]
+  },
+  "SERVER_UPTIME_MONITOR_GENERAL": {
+    "miner_count": 20,
+    "unknown": false,
+    "params": [],
+    "fields": [],
+    "miners": [
+      "200003 DigitalOcean Status",
+      "150008 HTTPBin Status Uptime",
+      "150010 Cloudflare Trace Uptime",
+      "200004 Vercel Status",
+      "7352 GuardWire Server Uptime Monitor",
+      "170060 HackerTarget HTTP headers",
+      "150006 Discord Uptime Summary",
+      "150001 GitHub Uptime",
+      "23112026 downproof-uptime",
+      "150007 HTTPBin Uptime",
+      "150002 GitHub Uptime Summary",
+      "150005 Discord Uptime",
+      "20260828 PREFLIGHT Infrastructure Signals",
+      "170058 check-host.net HTTP",
+      "9002 TxLens",
+      "302 ChainSight — Universal Intelligence & Data Oracle",
+      "791352 GuardWire Uptime Evidence",
+      "150004 Cloudflare Uptime Summary",
+      "150003 Cloudflare Uptime",
+      "150009 IPify Uptime"
+    ]
+  },
+  "SLA_COMPLIANCE_GENERAL": {
+    "miner_count": 25,
+    "unknown": false,
+    "params": [
+      "service*",
+      "period*"
+    ],
+    "fields": [
+      "service",
+      "uptime_pct",
+      "sla_target_pct",
+      "compliant",
+      "period"
+    ],
+    "miners": [
+      "2611217 MONEY OWED Contract SLA Check",
+      "302 ChainSight — Universal Intelligence & Data Oracle",
+      "103007 Stripe Status SLA",
+      "103002 GitHub Summary SLA",
+      "103008 HTTPBin Probe SLA",
+      "7410311 Statuspage SLA Auditor",
+      "103006 Discord Status Only",
+      "103004 Cloudflare Summary SLA",
+      "5530 Telegraph Verity Intelligence",
+      "103005 Discord Status SLA",
+      "781308 Public Homepage Availability — Bounded Day Windows",
+      "23112026 downproof-uptime",
+      "781346 Source-Verified Whole-Day Availability Durations",
+      "781307 Upptime Public HTTP Availability",
+      "781306 GitHub Component Uptime Research Candidate",
+      "83159274 TelegraphIntent",
+      "7606 ShipWire SLA Compliance",
+      "1900999000 ReferenceForge",
+      "774921 VeriReceipt Deterministic Oracle",
+      "20260828 PREFLIGHT Infrastructure Signals",
+      "103001 GitHub Status SLA",
+      "103003 Cloudflare Status SLA",
+      "781347 Exact Public HTTP Monitoring Availability",
+      "9002 TxLens",
+      "103010 GitHub Components SLA"
+    ]
+  },
+  "CONTRACT_OBLIGATION_AUDIT_GENERAL": {
+    "miner_count": 13,
+    "unknown": false,
+    "params": [
+      "contract*"
+    ],
+    "fields": [
+      "verdict",
+      "obligations",
+      "clauses",
+      "summary"
+    ],
+    "miners": [
+      "6164 Praman Desk Compliance & Procurement Auditor",
+      "64007 Federal Register Agencies",
+      "7310099 VulnRank - Security, Compliance and Verified Lookups",
+      "64009 Chicago Purchase Orders",
+      "64010 Crossref Funders",
+      "64006 Federal Register Docs",
+      "64004 USASpending Agencies",
+      "7436 FactWire Contract Obligation Audit",
+      "83159274 TelegraphIntent",
+      "1900999000 ReferenceForge",
+      "20260828 PREFLIGHT Infrastructure Signals",
+      "9002 TxLens",
+      "731437 ZK Contract Literal Evidence Index"
+    ]
+  },
+  "FLIGHT_AVAILABILITY_GENERAL": {
+    "miner_count": 14,
+    "unknown": false,
+    "params": [
+      "flight*",
+      "date*"
+    ],
+    "fields": [
+      "flight",
+      "date",
+      "available",
+      "price",
+      "currency"
+    ],
+    "miners": [
+      "9002 TxLens",
+      "7614 FlightWire Flight Availability",
+      "1900999000 ReferenceForge",
+      "20260828 PREFLIGHT Infrastructure Signals",
+      "58008 AviationWeather METAR KJFK",
+      "58005 ADSB.lol type B738",
+      "58007 AviationWeather METAR KMIA",
+      "58003 ADSB.lol PIA",
+      "58009 AviationWeather TAF KLAX",
+      "58002 ADSB.lol LADD",
+      "58004 ADSB.lol type A320",
+      "58010 AviationWeather METAR EGLL",
+      "58001 ADSB.lol military",
+      "58006 ADSB.lol Miami radius"
+    ]
+  }
+}

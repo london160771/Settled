@@ -1,0 +1,54 @@
+{
+  "at": "2026-11-23T13:24:23.053Z",
+  "request": {
+    "intent": "TRAVEL_DISRUPTION_GENERAL",
+    "params": {
+      "route_or_flight": "BA75 LHR-LOS 2026-11-20"
+    }
+  },
+  "status": 200,
+  "body": {
+    "miner_id": "20260828",
+    "miner_name": "PREFLIGHT Infrastructure Signals",
+    "endpoint": "/travel-disruption",
+    "result": {
+      "route_or_flight": "BA75 LHR-LOS 2026-11-20",
+      "disrupted": null,
+      "status": null,
+      "delay_minutes": null,
+      "reason": "BA75 flies LHR to LOS, and it is not airborne right now on adsb.lol. LHR and LOS is not a US airport this miner covers; it reads the FAA's US airport status only, so disruption there is unknown rather than none."
+    },
+    "result_shape": "intent",
+    "format_version": 4,
+    "field_status": {
+      "route_or_flight": "ok",
+      "disrupted": "missing",
+      "status": "missing",
+      "delay_minutes": "missing",
+      "reason": "ok"
+    },
+    "input": {
+      "route_or_flight": "BA75 LHR-LOS 2026-11-20"
+    },
+    "input_schema_version": 4,
+    "cost_usd": 0.01,
+    "duration_ms": 9698,
+    "timestamp": "2026-11-23T13:24:19.947590651Z",
+    "reasoning": "Intent: miner a1-preflight given by the caller\nMiner: The user is asking about travel disruptions for a specific flight route and date. The PREFLIGHT Infrastructure Signals miner has an endpoint `/travel-disruption` that serves the `TRAVEL_DISRUPTION_GENERAL` intent and accepts a `query` and `route_or_flight` parameter, which directly map to the provided information.",
+    "intent": "TRAVEL_DISRUPTION_GENERAL",
+    "intent_version": 2,
+    "signal_hash": "0xc60da2c2271268403ebab63dcd100f13f9168d4674dd79a7b4deb17577956213"
+  },
+  "receipt": {
+    "receipt_hash": "0x949bcf63dc9f7fc662a3f7afe55bf901a7fa11d6381d16a32ea8c6412dc655ff",
+    "rail": "escrow",
+    "payer": "0xf308f872796f5c1ca01c28541a366f7f9393dfb8",
+    "miner": "5311",
+    "intent": "TRAVEL_DISRUPTION_GENERAL",
+    "amount_uusdc": "10000",
+    "epoch_id": 43,
+    "settlement": "epoch",
+    "chain": "telegraph",
+    "timestamp": 1795440262
+  }
+}

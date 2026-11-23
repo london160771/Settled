@@ -1,0 +1,11 @@
+{
+  "at": "2026-11-22",
+  "what": "Escrow payment signed by server/src/services/telegraph/escrow.js with a throwaway unfunded key (never stored), sent to POST /engine/v1/ask (CRYPTO_PRICE_USD, max_budget_usdc 10000).",
+  "http_status": 402,
+  "node_reply": {
+    "error": "payment required",
+    "reason": "insufficient escrow for delivery: unbilled=0 μUSDC + price=10000 μUSDC > balance=0 μUSDC",
+    "scheme": "escrow"
+  },
+  "meaning": "The node accepted the signature and refused only for missing deposit (per Telegraph escrow docs). Nothing was charged."
+}

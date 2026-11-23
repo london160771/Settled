@@ -1,0 +1,10 @@
+{
+  "at": "2026-11-23T13:23:02.903Z",
+  "beneficiary": "0xF308F872796f5c1CA01c28541A366f7F9393Dfb8",
+  "amount_uusdc": 500000,
+  "txs": {
+    "mint": "0xbd2b3b44cf492f31ebd3ede1d479b0219a9602f2ad27b0fa69eb30f10adfb741",
+    "approve": "0xa0638e584a6240b2b31751ed8689d63e5bd78b45543273f614be233958013dd0",
+    "deposit": "0x0e07a93e5fb4a4bb2de47a775fb2b4371f884b232790ce95d58cda7a0d5bf9fb"
+  }
+}

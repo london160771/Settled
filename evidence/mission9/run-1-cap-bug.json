@@ -1,0 +1,66 @@
+{
+  "at": "2026-11-23T13:25:12.648Z",
+  "payer": "0xF308F872796f5c1CA01c28541A366f7F9393Dfb8",
+  "capUusdc": 40000,
+  "asks": [
+    {
+      "kind": "price",
+      "input": "ETH",
+      "intent": "CRYPTO_PRICE_USD",
+      "answer": "$1,721.625557",
+      "minerId": "9107",
+      "minerName": "CryptoPulse Multi-Source Price",
+      "costUusdc": 10000,
+      "durationMs": 249,
+      "receiptHash": "0x5836442a0b26dfc448464131f3d44331cf4354f7e4f14601bc827f1ecde36734",
+      "epochId": 43
+    },
+    {
+      "kind": "weather",
+      "input": "Lagos",
+      "intent": "WEATHER_CHECK_TEMPERATURE",
+      "answer": "30.1 °C",
+      "minerId": "20260828",
+      "minerName": "PREFLIGHT Infrastructure Signals",
+      "costUusdc": 10000,
+      "durationMs": 1105,
+      "receiptHash": "0xe591fb419fe9abe23d65ecc2c8f2a41d2b6152095810e9b2eed867fd22807627",
+      "epochId": 43
+    },
+    {
+      "kind": "search",
+      "input": "What is the Telegraph protocol?",
+      "intent": "WEB_SEARCH_GENERAL",
+      "answer": "Electrical telegraph",
+      "minerId": "303",
+      "minerName": "ChainSight Search Node — Live Web & News Intelligence",
+      "costUusdc": 10000,
+      "durationMs": 4564,
+      "receiptHash": "0xa030b477bbc17b1dbb59a914be1ae74e53bbf862023a71a49996f043edec44d3",
+      "epochId": 43
+    },
+    {
+      "kind": "ask",
+      "input": "What does EU261 compensate for?",
+      "intent": "QUESTION_ANSWERING_GENERAL",
+      "answer": "EU261 compensates passengers for flight disruptions, including:\n\n*   **Cancellations:** Passengers are entitled to reimbursement, re-routing, or a refund.\n*   **Delays:** Compensation is provided for significant delays (3 hours or more) upon arrival, depending on the flight distance.\n*   **Denied Boarding:** Passengers who are denied boarding due to overbooking are entitled to compensation and assistance.\n*   **Downgrading:** If a passenger is downgraded to a lower class of service, they are entitled to a refund for part of their ticket price.\n\nIn addition to financial compensation, passengers are also entitled to **care and assistance** during disruptions, which can include meals, refreshments, accommodation, and transport between the airport and accommodation.",
+      "minerId": "openai",
+      "minerName": "openai",
+      "costUusdc": 0,
+      "durationMs": 1230,
+      "epochId": null
+    },
+    {
+      "kind": "price",
+      "input": "BTC",
+      "intent": "CRYPTO_PRICE_USD",
+      "answer": "$61,202.22113",
+      "minerId": "9107",
+      "minerName": "CryptoPulse Multi-Source Price",
+      "costUusdc": 10000,
+      "durationMs": 1381,
+      "receiptHash": "0x9dd8a3f1e7cd9c47d0eb87d00d81d584e4c22ef2224117683833fcf1ae392031",
+      "epochId": 43
+    }
+  ]
+}

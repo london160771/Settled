@@ -1,0 +1,14 @@
+{
+  "at": "2026-11-23T13:24:45.457Z",
+  "intent": "CRYPTO_PRICE_USD",
+  "minerId": "9107",
+  "minerName": "CryptoPulse Multi-Source Price",
+  "costUusdc": 10000,
+  "durationMs": 444,
+  "receiptHash": "0x6c88232077285e65c644f64f6126169eab9da86352e367e80ce2a1e4a331ee6f",
+  "epochId": 43,
+  "chain": "telegraph",
+  "result": {
+    "price_usd": 1721.625557426295
+  }
+}

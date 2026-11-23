@@ -1,0 +1,54 @@
+{
+  "at": "2026-11-23T13:37:26.950Z",
+  "miner": "2611217",
+  "request": {
+    "intent": "SLA_COMPLIANCE_GENERAL",
+    "query": "Twilio SLA compliance for calendar month October 2026"
+  },
+  "status": 200,
+  "body": {
+    "miner_id": "2611217",
+    "miner_name": "MONEY OWED Contract SLA Check",
+    "endpoint": "/sla-compliance",
+    "result": {
+      "service": "Twilio Services APIs",
+      "uptime_pct": 100,
+      "sla_target_pct": 99.95,
+      "compliant": true,
+      "period": "2026-10"
+    },
+    "result_shape": "intent",
+    "format_version": 4,
+    "field_status": {
+      "service": "ok",
+      "uptime_pct": "ok",
+      "sla_target_pct": "ok",
+      "compliant": "ok",
+      "period": "ok"
+    },
+    "input": {
+      "service": "Twilio",
+      "period": "October 2026"
+    },
+    "input_schema_version": 4,
+    "cost_usd": 0.01,
+    "duration_ms": 372,
+    "timestamp": "2026-11-23T13:37:24.411236529Z",
+    "reasoning": "Intent: miner moneyowed-sla given by the caller\nMiner: input schema v4 mapped in code to GET /sla-compliance",
+    "intent": "SLA_COMPLIANCE_GENERAL",
+    "intent_version": 1,
+    "signal_hash": "0x742a888f75aabe94333141edf02e2c37c068c80a4e333338bc36a315718bafad"
+  },
+  "receipt": {
+    "receipt_hash": "0xfe64434f7ac13413f48ef4c8f844ebcfddf974b28b7c982e0bdfdc7e18939f90",
+    "rail": "escrow",
+    "payer": "0xf308f872796f5c1ca01c28541a366f7f9393dfb8",
+    "miner": "6156",
+    "intent": "SLA_COMPLIANCE_GENERAL",
+    "amount_uusdc": "10000",
+    "epoch_id": 43,
+    "settlement": "epoch",
+    "chain": "telegraph",
+    "timestamp": 1795441046
+  }
+}

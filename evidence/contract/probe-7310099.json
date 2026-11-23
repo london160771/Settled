@@ -1,0 +1,61 @@
+{
+  "at": "2026-11-23T14:09:18.116Z",
+  "miner": "7310099",
+  "request": {
+    "intent": "CONTRACT_OBLIGATION_AUDIT_GENERAL",
+    "params": {
+      "contract": "SAMPLE SERVICE LEVEL AGREEMENT (synthetic example written for Settled tests; not any vendor's real terms)\n\n1. Service Commitment. Acme Cloud will use commercially reasonable efforts to make the Platform available with a Monthly Uptime Percentage of at least 99.99% during each calendar month (the \"Service Commitment\").\n\n2. Service Credits. If Acme Cloud does not meet the Service Commitment, Customer will be eligible to receive a Service Credit as a percentage of the monthly fees paid for the affected month, as follows:\n   (a) Monthly Uptime Percentage less than 99.99% but equal to or greater than 99.0%: 10% Service Credit;\n   (b) Monthly Uptime Percentage less than 99.0% but equal to or greater than 95.0%: 25% Service Credit;\n   (c) Monthly Uptime Percentage less than 95.0%: 50% Service Credit.\n\n3. Claims. To receive a Service Credit, Customer must submit a claim to support within thirty (30) days after the end of the month in which the downtime occurred. Service Credits are Customer's sole remedy.\n\n4. Exclusions. The Service Commitment does not apply to scheduled maintenance announced at least 48 hours in advance or to degraded performance that does not make the Platform unavailable.\n"
+    }
+  },
+  "status": 200,
+  "body": {
+    "miner_id": "7310099",
+    "miner_name": "VulnRank - Security, Compliance and Verified Lookups",
+    "endpoint": "/contract-audit",
+    "result": {
+      "verdict": null,
+      "obligations": [
+        "Acme Cloud will use commercially reasonable efforts to make the Platform available with a Monthly Uptime Percentage of at least 99.99% during each calendar month (the \"Service Commitment\").",
+        "If Acme Cloud does not meet the Service Commitment, Customer will be eligible to receive a Service Credit as a percentage of the monthly fees paid for the affected month, as follows:",
+        "To receive a Service Credit, Customer must submit a claim to support within thirty (30) days after the end of the month in which the downtime occurred."
+      ],
+      "clauses": [
+        "1",
+        "2",
+        "3"
+      ],
+      "summary": "Found 3 obligation(s) (1 performance, 1 payment, 1 deliverable); as of 2026-11-23: 0 with a date already passed, 0 upcoming, 3 undated, 0 stated as completed. Extracted by rules from the text supplied; not legal advice."
+    },
+    "result_shape": "intent",
+    "format_version": 3,
+    "field_status": {
+      "verdict": "rejected",
+      "obligations": "ok",
+      "clauses": "ok",
+      "summary": "ok"
+    },
+    "input": {
+      "contract": "SAMPLE SERVICE LEVEL AGREEMENT (synthetic example written for Settled tests; not any vendor's real terms)\n\n1. Service Commitment. Acme Cloud will use commercially reasonable efforts to make the Platform available with a Monthly Uptime Percentage of at least 99.99% during each calendar month (the \"Service Commitment\").\n\n2. Service Credits. If Acme Cloud does not meet the Service Commitment, Customer will be eligible to receive a Service Credit as a percentage of the monthly fees paid for the affected month, as follows:\n   (a) Monthly Uptime Percentage less than 99.99% but equal to or greater than 99.0%: 10% Service Credit;\n   (b) Monthly Uptime Percentage less than 99.0% but equal to or greater than 95.0%: 25% Service Credit;\n   (c) Monthly Uptime Percentage less than 95.0%: 50% Service Credit.\n\n3. Claims. To receive a Service Credit, Customer must submit a claim to support within thirty (30) days after the end of the month in which the downtime occurred. Service Credits are Customer's sole remedy.\n\n4. Exclusions. The Service Commitment does not apply to scheduled maintenance announced at least 48 hours in advance or to degraded performance that does not make the Platform unavailable.\n"
+    },
+    "input_schema_version": 3,
+    "cost_usd": 0.01,
+    "duration_ms": 555,
+    "timestamp": "2026-11-23T14:09:09.593557055Z",
+    "reasoning": "Intent: miner vulnrank-triage given by the caller\nMiner: The user is asking to audit a contract for obligations. The VulnRank miner's '/contract-audit' endpoint is designed for this purpose, as indicated by its description and the intent 'CONTRACT_OBLIGATION_AUDIT_GENERAL'. The 'contract' parameter is required and has been populated with the provided contract text.",
+    "intent": "CONTRACT_OBLIGATION_AUDIT_GENERAL",
+    "intent_version": 1,
+    "signal_hash": "0x2aafac5bbd94a1f5d3661ab6bd6ec6ceaffa3429fbe1bd988a34c57d269ac34f"
+  },
+  "receipt": {
+    "receipt_hash": "0xc4ddcb2135c38fb886dd2ef7a4fc71dfc9f6564ca666bfa23db6dba9a7ef7630",
+    "rail": "escrow",
+    "payer": "0xf308f872796f5c1ca01c28541a366f7f9393dfb8",
+    "miner": "6161",
+    "intent": "CONTRACT_OBLIGATION_AUDIT_GENERAL",
+    "amount_uusdc": "10000",
+    "epoch_id": 43,
+    "settlement": "epoch",
+    "chain": "telegraph",
+    "timestamp": 1795442957
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "fetched_at": "2026-11-23T13:22:11.570Z",
+  "rails": {
+    "routed": {
+      "status": 402,
+      "accepts": [
+        {
+          "scheme": "exact",
+          "network": "eip155:84532",
+          "amount": "20000",
+          "asset": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+          "payTo": "0xC0A3FB6d3F1f4B54617d29ffbdA4663Af5F96e2e"
+        },
+        {
+          "scheme": "exact",
+          "network": "solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1",
+          "amount": "20000",
+          "asset": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU",
+          "payTo": "G53EbeTZSNsAn7bj6iMFUQnq3zpDdEbHhKkPRywo8bix"
+        },
+        {
+          "scheme": "escrow",
+          "network": "eip155:11155111",
+          "amount": "20000",
+          "payTo": "0x72a70e949362670bf8bcead24efc5b8f950aa08b"
+        }
+      ]
+    },
+    "direct": {
+      "status": 402,
+      "accepts": [
+        {
+          "scheme": "exact",
+          "network": "eip155:84532",
+          "amount": "10000",
+          "asset": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+          "payTo": "0xC0A3FB6d3F1f4B54617d29ffbdA4663Af5F96e2e"
+        },
+        {
+          "scheme": "exact",
+          "network": "solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1",
+          "amount": "10000",
+          "asset": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU",
+          "payTo": "G53EbeTZSNsAn7bj6iMFUQnq3zpDdEbHhKkPRywo8bix"
+        },
+        {
+          "scheme": "escrow",
+          "network": "eip155:11155111",
+          "amount": "10000",
+          "payTo": "0x72a70e949362670bf8bcead24efc5b8f950aa08b"
+        }
+      ]
+    }
+  }
+}
