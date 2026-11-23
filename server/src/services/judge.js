@@ -3,12 +3,21 @@ import { Case, Claim, Counter, Decision, User } from '../models/index.js';
 import { AppError } from '../errors.js';
 import { createUser } from './users.js';
 import { afterCreate } from './auth.js';
-import { addFlightCase } from './cases.js';
+import { addFlightCase, addSlaCase } from './cases.js';
 import { requestTopUp } from './account.js';
 import { checkCase } from './flights/evidence.js';
 import { createDraft } from './claims/index.js';
 
-// The seeded real flight case. Confirmed after Gate 0 shows the miners can answer it.
+// Main demo case (Gate 0 Option B): live miners reported Vercel below its 99.99% SLA in Oct 2026
+// (evidence/sla/). The window miner covers 90 days back, so this seed works until ~2027-01-29.
+export const JUDGE_SLA_SEED = {
+  type: 'sla',
+  vendor: 'vercel',
+  period: '2026-10',
+  monthlyFeeUsd: 400,
+};
+// Second seeded case: a real flight. Live miners can't report its delay (Gate 0), so it shows an
+// honest "Needs more proof". Also used by the Attack Lab (duplicate + booking-email injection).
 export const JUDGE_SEED = { flightNumber: 'BA75', date: '2026-11-20', from: 'LHR', to: 'LOS' };
 export const JUDGE_REUSE_MS = 60 * 60 * 1000;
 export const DEMO_CAPS = { decisionCapUusdc: 200000, monthlyCapUusdc: 500000 };
@@ -47,7 +56,8 @@ export async function judgeSession(config, currentUser, deps = {}) {
       caps: DEMO_CAPS,
     }),
   );
-  const seeded = await addFlightCase(user._id, JUDGE_SEED);
+  await addFlightCase(user._id, JUDGE_SEED);
+  const seeded = await addSlaCase(user._id, JUDGE_SLA_SEED);
   let funding = null;
   try {
     funding = await requestTopUp(config, user._id, deps.wallet || {});
@@ -60,8 +70,9 @@ export async function judgeSession(config, currentUser, deps = {}) {
 export async function seededCase(userId) {
   const c = await Case.findOne({
     userId,
-    flightNumber: JUDGE_SEED.flightNumber,
-    date: JUDGE_SEED.date,
+    type: 'sla',
+    vendor: JUDGE_SLA_SEED.vendor,
+    period: JUDGE_SLA_SEED.period,
   });
   if (!c) throw new AppError('NOT_FOUND', 'Seeded case missing; start a new judge session.');
   return c;

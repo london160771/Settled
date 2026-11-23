@@ -5,6 +5,7 @@ import nodemailer from 'nodemailer';
 import { Case, Claim, Decision, Receipt, User } from '../../models/index.js';
 import { AppError } from '../../errors.js';
 import { getAirport } from '../flights/airports.js';
+import { getVendor } from '../sla/vendors.js';
 
 const EMAIL = /^[^\s@<>"]+@[^\s@<>"]+\.[^\s@<>"]+$/;
 const short = (h) => (h ? `${h.slice(0, 10)}…${h.slice(-6)}` : '');
@@ -36,7 +37,43 @@ export async function backedFacts(decision) {
   return out;
 }
 
+function receiptLines(facts) {
+  const all = Object.entries(facts).flatMap(([fact, f]) => f.receipts.map((r) => ({ fact, r })));
+  return all.map(
+    ({ fact, r }) =>
+      `- ${fact}: ${r.intent}, miner ${r.minerName || r.minerId}, receipt ${r.receiptHash}, ${new Date(r.createdAt).toISOString()}`,
+  );
+}
+
+export function slaDraftText({ c, decision, facts, user, url }) {
+  const v = getVendor(c.vendor);
+  const f = decision.facts || {};
+  const ask =
+    f.creditUsd != null
+      ? `a service credit of ${f.creditPct}% of my monthly fee (${f.creditUsd} USD of ${f.monthlyFeeUsd} USD)`
+      : `a service credit of ${f.creditPct}% of my monthly fee for ${c.period}`;
+  return [
+    `Dear ${v?.name || c.vendor} support / billing team,`,
+    '',
+    `Your service level agreement promises ${f.targetPct}% monthly uptime. In ${c.period} the measured uptime was ${facts.uptimePct.value}%, based on your own public status page incident history.`,
+    '',
+    `Under the service credit terms of my agreement, I am requesting ${ask}.`,
+    '',
+    `The uptime figures were checked by independent data providers on the Telegraph network, and a second provider confirmed the breach. Each check has a receipt you can verify here: ${url}`,
+    '',
+    'Please confirm the credit or reply with your decision within 14 days.',
+    '',
+    'Kind regards,',
+    user.claimFromName || user.displayName || '',
+    '',
+    '---',
+    'Receipts (Telegraph, testnet):',
+    ...receiptLines(facts),
+  ].join('\n');
+}
+
 export function draftText({ c, decision, facts, user, url }) {
+  if (c.type === 'sla') return slaDraftText({ c, decision, facts, user, url });
   const dep = getAirport(c.from);
   const arr = getAirport(c.to);
   const route = `${dep?.name || c.from} (${c.from}) to ${arr?.name || c.to} (${c.to})`;
@@ -63,12 +100,7 @@ export function draftText({ c, decision, facts, user, url }) {
     '---',
     'Receipts (Telegraph, testnet):',
   );
-  const all = Object.entries(facts).flatMap(([fact, f]) => f.receipts.map((r) => ({ fact, r })));
-  for (const { fact, r } of all) {
-    lines.push(
-      `- ${fact}: ${r.intent}, miner ${r.minerName || r.minerId}, receipt ${r.receiptHash}, ${new Date(r.createdAt).toISOString()}`,
-    );
-  }
+  lines.push(...receiptLines(facts));
   return lines.join('\n');
 }
 
@@ -85,8 +117,12 @@ export async function createDraft(config, userId, caseId) {
     );
   }
   const facts = await backedFacts(decision);
-  if (!facts.delayMinutes && !facts.cancelled)
-    throw new AppError('NEEDS_MORE_PROOF', 'The delay has no paid receipt behind it.');
+  if (
+    c.type === 'sla'
+      ? !facts.uptimePct || !facts.breachCorroborated
+      : !facts.delayMinutes && !facts.cancelled
+  )
+    throw new AppError('NEEDS_MORE_PROOF', 'The key fact has no paid receipt behind it.');
   const user = await User.findById(userId).lean();
   const url = proofUrl(config, c.publicId);
   try {
@@ -94,7 +130,10 @@ export async function createDraft(config, userId, caseId) {
       caseId: c._id,
       userId,
       decisionId: decision._id,
-      subject: `Compensation claim: ${c.flightNumber} on ${c.date} (EU261)`,
+      subject:
+        c.type === 'sla'
+          ? `SLA service credit request: ${getVendor(c.vendor)?.name || c.vendor}, ${c.period}`
+          : `Compensation claim: ${c.flightNumber} on ${c.date} (EU261)`,
       draftText: draftText({ c, decision, facts, user, url }),
       proofUrl: url,
       recipientEmail: user.isDemo ? config.demoInboxEmail : undefined,
@@ -226,6 +265,9 @@ export async function getProof(publicId) {
   const ids = (decision?.factRefs || []).flatMap((f) => f.receiptIds || []);
   const receipts = await Receipt.find({ _id: { $in: ids } }).lean();
   return {
+    type: c.type || 'flight',
+    vendor: c.type === 'sla' ? getVendor(c.vendor)?.name || c.vendor : undefined,
+    period: c.period,
     flightNumber: c.flightNumber,
     date: c.date,
     from: c.from,
@@ -236,6 +278,7 @@ export async function getProof(publicId) {
       ? {
           outcome: decision.outcome,
           amountEur: decision.amountEur,
+          amountUsd: decision.amountUsd,
           reasons: decision.reasons,
           warnings: decision.warnings,
           rulesVersion: decision.rulesVersion,

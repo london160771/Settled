@@ -1,0 +1,57 @@
+{
+  "at": "2026-11-23T13:37:40.251Z",
+  "miner": "7410311",
+  "request": {
+    "intent": "SLA_COMPLIANCE_GENERAL",
+    "params": {
+      "service": "Vercel",
+      "period": "2026-10-01 to 2026-10-31"
+    }
+  },
+  "status": 200,
+  "body": {
+    "miner_id": "7410311",
+    "miner_name": "Statuspage SLA Auditor",
+    "endpoint": "/sla",
+    "result": {
+      "service": "Vercel",
+      "uptime_pct": 99.2678,
+      "sla_target_pct": 99.99,
+      "compliant": false,
+      "period": "last 90 days"
+    },
+    "result_shape": "intent",
+    "format_version": 4,
+    "field_status": {
+      "service": "ok",
+      "uptime_pct": "ok",
+      "sla_target_pct": "ok",
+      "compliant": "ok",
+      "period": "ok"
+    },
+    "input": {
+      "service": "Vercel",
+      "period": "2026-10-01 to 2026-10-31"
+    },
+    "input_schema_version": 4,
+    "cost_usd": 0.01,
+    "duration_ms": 328,
+    "timestamp": "2026-11-23T13:37:37.83281556Z",
+    "reasoning": "Intent: miner sla-miner given by the caller\nMiner: The user is asking about the SLA compliance for Vercel over a specific period. The '/sla' endpoint is designed for checking uptime percentages and SLA compliance for cloud providers based on their public status pages. The provided parameters 'service' and 'period' directly map to the required 'service' and 'period' parameters of this endpoint.",
+    "intent": "SLA_COMPLIANCE_GENERAL",
+    "intent_version": 1,
+    "signal_hash": "0x5769de07b7553a196f06dc541839feb6a9b64571a0cc10eb41706bb6a76a8322"
+  },
+  "receipt": {
+    "receipt_hash": "0x2d571e70647c86a2871fa7518b3cbd187172c557d3894bd483b96a779e4299ef",
+    "rail": "escrow",
+    "payer": "0xf308f872796f5c1ca01c28541a366f7f9393dfb8",
+    "miner": "5310",
+    "intent": "SLA_COMPLIANCE_GENERAL",
+    "amount_uusdc": "10000",
+    "epoch_id": 43,
+    "settlement": "epoch",
+    "chain": "telegraph",
+    "timestamp": 1795441060
+  }
+}

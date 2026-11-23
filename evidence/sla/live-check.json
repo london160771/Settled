@@ -1,0 +1,70 @@
+{
+  "at": "2026-11-23T13:42:56.736Z",
+  "case": {
+    "vendor": "vercel",
+    "period": "2026-10",
+    "monthlyFeeUsd": 400
+  },
+  "ms": 9836,
+  "decision": {
+    "outcome": "Owed",
+    "amountUsd": 40,
+    "reasons": [
+      "Uptime in 2026-10 was 99.9645%, below the promised 99.99%.",
+      "A second miner also saw a breach (99.1224% over last 54 days).",
+      "Your tiers give a 10% service credit = 40 USD of 400 USD."
+    ],
+    "warnings": [
+      "Most vendors only pay credits you request in time (often within 30 days after the month). Check your contract."
+    ],
+    "facts": {
+      "uptimePct": 99.9645,
+      "targetPct": 99.99,
+      "period": "2026-10",
+      "windowUptimePct": 99.1224,
+      "windowPeriod": "last 54 days",
+      "creditPct": 10,
+      "creditUsd": 40,
+      "monthlyFeeUsd": 400
+    },
+    "spentUusdc": 20000
+  },
+  "draft": {
+    "subject": "SLA service credit request: Vercel, 2026-10",
+    "text": "Dear Vercel support / billing team,\n\nYour service level agreement promises 99.99% monthly uptime. In 2026-10 the measured uptime was 99.9645%, based on your own public status page incident history.\n\nUnder the service credit terms of my agreement, I am requesting a service credit of 10% of my monthly fee (40 USD of 400 USD).\n\nThe uptime figures were checked by independent data providers on the Telegraph network, and a second provider confirmed the breach. Each check has a receipt you can verify here: http://localhost:5173/proof/UsWZHUNc7_o_\n\nPlease confirm the credit or reply with your decision within 14 days.\n\nKind regards,\nSettled demo\n\n---\nReceipts (Telegraph, testnet):\n- uptimePct: SLA_COMPLIANCE_GENERAL, miner MONEY OWED Contract SLA Check, receipt 0xefdeee88f23bfa5abaaf81d434ea0a89694a9345cb18eb2e4f7d510308b93253, 2026-11-23T13:43:02.509Z\n- targetPct: SLA_COMPLIANCE_GENERAL, miner MONEY OWED Contract SLA Check, receipt 0xefdeee88f23bfa5abaaf81d434ea0a89694a9345cb18eb2e4f7d510308b93253, 2026-11-23T13:43:02.509Z\n- breachCorroborated: SLA_COMPLIANCE_GENERAL, miner Statuspage SLA Auditor, receipt 0xf9da432138fcae18be40ca6b360e244c9aaa9692d80a4d16840350d2b0ad5380, 2026-11-23T13:43:06.561Z"
+  },
+  "receipts": [
+    {
+      "intent": "SLA_COMPLIANCE_GENERAL",
+      "minerId": "2611217",
+      "minerName": "MONEY OWED Contract SLA Check",
+      "status": "settled",
+      "costUusdc": 10000,
+      "receiptHash": "0xefdeee88f23bfa5abaaf81d434ea0a89694a9345cb18eb2e4f7d510308b93253",
+      "epochId": 43,
+      "result": {
+        "service": "Vercel Services (content serving)",
+        "uptime_pct": 99.9645,
+        "sla_target_pct": 99.99,
+        "compliant": false,
+        "period": "2026-10"
+      }
+    },
+    {
+      "intent": "SLA_COMPLIANCE_GENERAL",
+      "minerId": "7410311",
+      "minerName": "Statuspage SLA Auditor",
+      "status": "settled",
+      "costUusdc": 10000,
+      "receiptHash": "0xf9da432138fcae18be40ca6b360e244c9aaa9692d80a4d16840350d2b0ad5380",
+      "epochId": 43,
+      "result": {
+        "service": "Vercel",
+        "uptime_pct": 99.1224,
+        "sla_target_pct": 99.99,
+        "compliant": false,
+        "period": "last 54 days"
+      }
+    }
+  ]
+}

@@ -13,6 +13,7 @@ import { getBudget } from '../services/budget/index.js';
 import * as ask from '../services/ask/index.js';
 import * as judge from '../services/judge.js';
 import { runAttacks } from '../services/attacks/index.js';
+import { VENDORS, DEFAULT_TIERS } from '../services/sla/vendors.js';
 
 const wrap = (fn) => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
 
@@ -75,6 +76,12 @@ export function apiRouter(config, deps = {}) {
   r.get('/me', requireUser, (req, res) => res.json({ user: auth.publicUser(req.user) }));
 
   // Cases + claims
+  r.get('/sla/vendors', (_req, res) =>
+    res.json({
+      vendors: Object.entries(VENDORS).map(([key, v]) => ({ key, name: v.name })),
+      defaultTiers: DEFAULT_TIERS,
+    }),
+  );
   r.get(
     '/cases',
     requireUser,
@@ -92,7 +99,7 @@ export function apiRouter(config, deps = {}) {
     '/cases',
     requireUser,
     wrap(async (req, res) => {
-      res.status(201).json({ case: await cases.addFlightCase(req.user._id, req.body || {}) });
+      res.status(201).json({ case: await cases.addCase(req.user._id, req.body || {}) });
     }),
   );
   r.get(

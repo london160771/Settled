@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { api } from '../api/client.js';
+import { api, caseTitle, amountText } from '../api/client.js';
 import { useLoad, ErrorBox, Badge, ReceiptsTable } from '../components/ui.jsx';
 
 export default function Proof() {
@@ -11,16 +11,17 @@ export default function Proof() {
   return (
     <>
       <h1>
-        Proof: {data.flightNumber} · {data.date}
+        Proof: {data.type === 'sla' ? `${data.vendor} SLA · ${data.period}` : caseTitle(data)}
       </h1>
       {data.replayed ? <p className="badge warn">Contains replayed demo data</p> : null}
       <p className="muted">
-        {data.from} → {data.to} · {data.network}
+        {data.type === 'sla' ? 'Uptime vs promised SLA' : `${data.from} → ${data.to}`} ·{' '}
+        {data.network}
       </p>
       {d ? (
         <section className="card">
           <h2>
-            <Badge value={d.outcome} /> {d.amountEur ? `${d.amountEur} EUR` : ''}
+            <Badge value={d.outcome} /> {amountText(d)}
           </h2>
           <ul>
             {d.reasons.map((r, i) => (
@@ -32,7 +33,13 @@ export default function Proof() {
               ⚠ {w}
             </p>
           ))}
-          <p className="muted">Rules {d.rulesVersion}: simplified EU261/UK261, not legal advice.</p>
+          <p className="muted">
+            Rules {d.rulesVersion}:{' '}
+            {data.type === 'sla'
+              ? "uptime from the vendor's public incident history vs the promised SLA, credit by the claimant's contract tiers"
+              : 'simplified EU261/UK261'}
+            , not legal advice.
+          </p>
         </section>
       ) : (
         <p>No decision yet.</p>

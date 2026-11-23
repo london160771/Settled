@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { api, usdc } from '../api/client.js';
+import { api, usdc, amountText } from '../api/client.js';
 import { useAuth } from '../auth.jsx';
 import { ErrorBox, Badge, ReceiptsTable } from '../components/ui.jsx';
 
@@ -72,9 +72,9 @@ export default function Judge() {
       <h1>Judge mode</h1>
       <p>
         A fresh demo account inside the real product: a testnet wallet funded with 0.50 test USDC
-        and a seeded real flight case. <strong>REAL:</strong> Telegraph asks, receipts, cap,
-        decision, draft. <strong>DEMO:</strong> the account, and claims can only go to the demo
-        inbox.
+        and two seeded real cases: Vercel's uptime in October 2026, and a late flight.{' '}
+        <strong>REAL:</strong> Telegraph asks, receipts, cap, decision, draft.{' '}
+        <strong>DEMO:</strong> the account, and claims can only go to the demo inbox.
       </p>
       {!isDemo ? (
         <button onClick={start}>Start the demo account</button>
@@ -91,8 +91,10 @@ export default function Judge() {
           <section className="card stack">
             <h2>1. Run the demo</h2>
             <p className="muted">
-              Buys two TRAVEL_DISRUPTION answers from two different miners plus weather, decides
-              under simplified EU261, and drafts the claim. Target: under 90 seconds.
+              Buys Vercel's October 2026 uptime from one SLA miner and a second opinion from a
+              different miner, compares it with the 99.99% promise, works out the service credit and
+              drafts the request. Target: under 90 seconds. (The flight case is there too: live
+              miners can't report past flight delays yet, so it honestly ends in Needs more proof.)
             </p>
             <button disabled={running} onClick={runDemo}>
               {running ? `Running… ${elapsed}s` : 'Run the demo'}
@@ -101,8 +103,7 @@ export default function Judge() {
             {demo ? (
               <div className="stack">
                 <div>
-                  Decision: <Badge value={demo.decision.outcome} />{' '}
-                  {demo.decision.amountEur ? `${demo.decision.amountEur} EUR` : ''} ·{' '}
+                  Decision: <Badge value={demo.decision.outcome} /> {amountText(demo.decision)} ·{' '}
                   {(demo.ms / 1000).toFixed(1)} s · evidence cost {usdc(demo.decision.spentUusdc)}{' '}
                   test USDC
                 </div>

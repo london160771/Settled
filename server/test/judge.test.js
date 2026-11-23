@@ -19,7 +19,28 @@ beforeEach(async () => {
 
 function setup() {
   const fake = fakeTelegraph({
+    known: [
+      'TRAVEL_DISRUPTION_GENERAL',
+      'WEATHER_FORECAST_GENERAL',
+      'WEATHER_CHECK_TEMPERATURE',
+      'CRYPTO_PRICE_USD',
+      'WEB_SEARCH_GENERAL',
+      'CHAT_COMPLETION_GENERAL',
+      'SLA_COMPLIANCE_GENERAL',
+    ],
     handler: ({ body, path }) => {
+      if (body.intent === 'SLA_COMPLIANCE_GENERAL') {
+        const minerId = path.split('/').pop();
+        const period = minerId === '7410311' ? 'last 54 days' : '2026-10';
+        const r = {
+          service: 'Vercel',
+          uptime_pct: 99.96,
+          sla_target_pct: 99.99,
+          compliant: false,
+          period,
+        };
+        return okAnswer({ intent: body.intent, minerId, result: r });
+      }
       if (body.intent === 'WEATHER_FORECAST_GENERAL')
         return okAnswer({ intent: body.intent, minerId: 'w9', result: { condition: 'Clear' } });
       const minerId = path.endsWith('/ask') ? 'm1' : path.split('/').pop();
@@ -30,6 +51,7 @@ function setup() {
       });
     },
   });
+  fake.miners = [{ id: 'm1' }, { id: 'm2' }, { id: '2611217' }, { id: '7410311' }];
   fake.ledger = { available: '0', deposited: '0', charged: '0', credited: '0', unbilled: '0' };
   const funded = [];
   const app = createApp(config, {
@@ -55,9 +77,10 @@ describe('judge mode', () => {
     expect(s2.body.reused).toBe(true);
     expect(s2.body.user.id).toBe(s1.body.user.id);
     const cases = await agent.get('/api/cases');
-    expect(cases.body.cases[0]).toMatchObject({
-      flightNumber: 'BA75',
-      date: '2026-11-20',
+    expect(cases.body.cases.map((c) => c.type).sort()).toEqual(['flight', 'sla']);
+    expect(cases.body.cases.find((c) => c.type === 'sla')).toMatchObject({
+      vendor: 'vercel',
+      period: '2026-10',
       status: 'Watching',
     });
   });

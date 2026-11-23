@@ -306,7 +306,7 @@ Rules for every phase: inspect the repo and these docs first; build only the pha
 
 ## 15. P1 — only when Adesope says go (after P0 is deployed and recorded)
 
-- Phase 11 — SLA / uptime claims: service cases (URL + promised uptime %), SERVER_UPTIME_MONITOR from several regions + SLA_COMPLIANCE, downtime calc, credit by the user's SLA tiers, draft credit request.
+- Phase 11 — SLA / uptime claims (moved into P0 on 2026-11-23, see Decisions Log): service cases (URL + promised uptime %), SERVER_UPTIME_MONITOR from several regions + SLA_COMPLIANCE, downtime calc, credit by the user's SLA tiers, draft credit request.
 - Phase 12 — CONTRACT_OBLIGATION_AUDIT on a pasted SLA/terms; OpenClaw skill wrapper for the claim flow.
 
 ## 16. Environment variables (names only; values never committed)
@@ -363,6 +363,8 @@ Scoring reminder (Apps & Agents, /100): technical quality + mainnet readiness 35
 - 2026-11-22: Agent works phases continuously, commits + pushes each passed phase, stops only for manual tasks, never deploys. (Adesope)
 
 - 2026-11-22 (Gate 0, agent): The live node's 402 offers no x402 `exact` on Ethereum Sepolia (only Base Sepolia/Solana), so Settled pays with the **escrow** scheme on Ethereum Sepolia (EIP-191 signed, `X-PAYMENT` header). The operator funds each user's escrow with `depositUSDCFor(user, amount)`; the user's Settled wallet balance is its escrow `available` from `/v1/ledger/account/{address}`. Receipts come in `X-PAYMENT-RESPONSE` (escrow has no tx_hash; show it when present). `@x402/fetch`/`@x402/evm` are not used. Exact Intent names come from Gate 0 (`*_GENERAL`, `WEATHER_CHECK_TEMPERATURE`, `CRYPTO_PRICE_USD`).
+
+- 2026-11-23 (Gate 0 Option B, Adesope chose it on the decision card): no live TRAVEL_DISRUPTION miner returns a past non-US flight's delay, so the **main path is SLA/uptime claims** and Phase 11 moves into P0. Scope kept small: SLA cases = vendor (Vercel, GitHub, DigitalOcean, Twilio) + finished billing month + optional promised % / monthly bill / credit tiers. Evidence = `SLA_COMPLIANCE_GENERAL` from a calendar-month, contract-scoped miner plus a second, different miner's rolling window covering the month (≤ 90 days back); "Owed" needs both to see a breach. Credit = the user's tiers (example defaults, labelled). The judge demo runs the Vercel 2026-10 case; the flight path stays as a secondary path. `SERVER_UPTIME_MONITOR` (point-in-time only) is not used.
 
 ## 20. Open questions
 

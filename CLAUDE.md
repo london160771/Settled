@@ -99,5 +99,7 @@ node server/scripts/gate0.js
 node server/scripts/reconcile.js
 node server/scripts/seed-judge.js
 node server/scripts/mission9.js     # live: 4 paid asks + 5th blocked
+node server/scripts/sla-live.js     # live: SLA case vercel 2026-10 → decision + draft (~0.02)
+node server/scripts/sla-probe.js    # live: one SLA miner probe (~0.01)
 LIVE_TELEGRAPH=1 npm test -w server # live smoke ask
 ```

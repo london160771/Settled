@@ -1,4 +1,4 @@
-// Buy the evidence for one flight case and record a Decision (several purchases, one decision).
+// Buy the evidence for one case (flight or SLA) and record a Decision (several purchases, one decision).
 import { randomUUID } from 'node:crypto';
 import { Case, Decision, Receipt } from '../../models/index.js';
 import { AppError } from '../../errors.js';
@@ -6,6 +6,8 @@ import { askIntent } from '../telegraph/askIntent.js';
 import { getIntentSchema } from '../telegraph/intents.js';
 import { getAirport } from './airports.js';
 import { decide } from './decide.js';
+import { slaEvidence } from '../sla/evidence.js';
+import { decideSla } from '../sla/decide.js';
 
 export const TRAVEL_INTENT = 'TRAVEL_DISRUPTION_GENERAL';
 export const WEATHER_INTENT = 'WEATHER_FORECAST_GENERAL';
@@ -62,6 +64,12 @@ export async function checkCase(config, caseId, deps = {}) {
   };
 
   try {
+    if (c.type === 'sla') {
+      const ev = await slaEvidence({ config, c, tryAsk, fetchImpl: deps.fetchImpl, now: deps.now });
+      const d = decideSla({ caseDoc: c, month: ev.month, window: ev.window });
+      notes.push(...ev.notes);
+      return await finish(d);
+    }
     const query = flightQuery(c);
     const first = await tryAsk({ intent: TRAVEL_INTENT, params: { route_or_flight: query } });
     if (first)
@@ -97,7 +105,13 @@ export async function checkCase(config, caseId, deps = {}) {
       });
       if (w) weather = { receiptId: w.receipt._id, result: w.result };
     }
-    const d = decide({ caseDoc: c, travel, weather });
+    return await finish(decide({ caseDoc: c, travel, weather }));
+  } catch (err) {
+    await restore('Watching');
+    throw err;
+  }
+
+  async function finish(d) {
     if (notes.length) d.reasons.push(`Evidence notes: ${notes.join('; ')}`);
     const spent = await Receipt.aggregate([
       { $match: { caseId: c._id, askId: { $exists: true } } },
@@ -106,8 +120,5 @@ export async function checkCase(config, caseId, deps = {}) {
     const decision = await Decision.create({ caseId: c._id, ...d, spentUusdc: spent[0]?.s || 0 });
     await Case.updateOne({ _id: c._id }, { $set: { status: d.outcome } });
     return decision;
-  } catch (err) {
-    await restore('Watching');
-    throw err;
   }
 }

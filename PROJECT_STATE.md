@@ -6,7 +6,7 @@ Progress log. Updated in every phase commit. Newest notes at the top of the log.
 
 - Current phase: P0 code complete (Phases 0, 2, 5–10 passed; 1 blocked; 3, 4, 7, 8, 9 passed offline with live checks pending). Stopped: next steps need Adesope.
 - Branch: `claude/project-thread-00viqq` (session's push branch; PR to `main`)
-- Blocked on: Adesope's choice of Option B (switch main path to SLA/uptime claims, Phase 11 into P0). Wallet is done. Also waiting (non-blocking): `TELEGRAM_BOT_TOKEN` (guide 03), SMTP (guide 02, optional).
+- Blocked on: `TELEGRAM_BOT_TOKEN` for the live bot check — see docs/manual/03-telegram-bot.md. Option B chosen and built (Phase 11). Also waiting (non-blocking): `TELEGRAM_BOT_TOKEN` (guide 03), SMTP (guide 02, optional).
 - Deadline: Dec 1, 2026, 23:59 UTC (internal cutoff 12:00 UTC)
 
 ## Phases
@@ -14,7 +14,7 @@ Progress log. Updated in every phase commit. Newest notes at the top of the log.
 | Phase | Name | Status | Commit | Notes |
 | --- | --- | --- | --- | --- |
 | 0 | Repo setup | Passed | (see log) | Workspaces, ESLint+Prettier, Vitest, config validation, CI, /api/health |
-| 1 | Gate 0: prove Telegraph works | Passed — Option A fails, Option B awaiting Adesope | (see log) | Real receipts saved; no miner answers a past flight's delay |
+| 1 | Gate 0: prove Telegraph works | Passed — Option B chosen (SLA main path) | (see log) | Real receipts saved; no miner answers a past flight's delay |
 | 2 | Data, wallets and the cap | Passed | (see log) | Models, HD wallets, escrow top-up, atomic budget, monthly reset |
 | 3 | Telegraph client | Passed (live smoke done) | (see log) | askIntent (escrow rail), #228 handling, reconcile. Live smoke needs guide 01 |
 | 4 | Flight evidence and decision | Passed offline; live run pending | (see log) | airports.json (3,245), EU261-simple, 2 distinct miners + weather, agreement check. Live run needs guide 01 + Gate 0 Option A |
@@ -24,7 +24,7 @@ Progress log. Updated in every phase commit. Newest notes at the top of the log.
 | 8 | Mission 9: Ask and leaderboard | Passed (live: 4 receipts, 5th CAP_EXCEEDED) | (see log) | Router, /ask /price /weather /search (web + bot), opt-in leaderboard. Live: `node server/scripts/mission9.js` after guide 01 |
 | 9 | Judge mode and Attack Lab | Passed offline; real timed run pending | (see log) | /judge, seed-judge.js, Run the demo, 6 attacks, daily limit. Real timing needs guide 01 |
 | 10 | Release readiness (no deploy) | Passed (refresh numbers after live runs) | (see log) | README, REAL_VS_MOCKED, tutorial draft, deploy guide 04, clean clone verified |
-| 11 | P1: SLA / uptime claims | Waiting for go | | Only when Adesope says |
+| 11 | SLA / uptime claims (moved into P0, Option B) | Passed (live: Vercel 2026-10 → Owed, 2 receipts) | | `evidence/sla/live-check.json` |
 | 12 | P1: Contract audit + OpenClaw skill | Waiting for go | | Only when Adesope says |
 
 Status values: Not started, In progress, Passed, Blocked, Waiting for go.
@@ -54,6 +54,8 @@ Paid part (2026-11-23, operator `0x6029…7AC5`, test user HD index 1 `0xF308…
 
 ## Evidence index
 
+- `evidence/sla/probe-*.json` — live SLA miner probes (2026-11-23); `evidence/sla/live-check.json` — live end-to-end SLA check → Owed + draft.
+
 - `evidence/gate0/ask-*.json`, `probe-*.json`, `summary-paid.json`, `funding.json` — paid Gate 0 asks and escrow funding (2026-11-23).
 - `evidence/live/phase3-smoke.json` — Phase 3 live smoke ask.
 - `evidence/mission9/run.json` — live Mission 9 run (4 receipts + CAP_EXCEEDED); `run-1-*.json`, `run-2-*.json` earlier runs.
@@ -66,10 +68,18 @@ Paid part (2026-11-23, operator `0x6029…7AC5`, test user HD index 1 `0xF308…
 
 ## Log
 
+- 2026-11-23: Phase 11 (SLA path) passed, now the main path. Live probes (`evidence/sla/probe-*.json`): MONEY OWED Contract SLA Check (2611217) answers calendar months (Vercel 2026-10: 99.9645% vs 99.99% target, not compliant; GitHub Enterprise Cloud, DigitalOcean, Twilio compliant); Statuspage SLA Auditor (7410311) answers rolling windows only (`30d`, `54d`; ignores calendar dates); one free-text query to 7410311 failed with HTTP 500 (`unknown_component`, may be charged per #228). Built: SLA cases (vendor + finished month + optional promised %, bill, tiers), evidence (month miner, then a different window miner only if the month shows a breach), `decideSla` (`sla-credit-1`), credit-request draft, proof page, web Add/Detail/Claims/Home, bot `sla vercel 2026-10 400` + `/sla`, judge demo now runs Vercel 2026-10 (flight case kept, honest Needs more proof). Checks: `npm run lint` pass; `npm test` 89 pass / 1 skipped (13 new SLA tests + 1 bot test); `npm run build` pass; **live** `node server/scripts/sla-live.js` → Owed, 40 USD credit (10% of 400), 2 receipts from 2 miners (`0xefdeee88…3253`, `0xf9da4321…5380`), 9.8 s, 0.02 test USDC. Web pages built but not clicked through in a browser yet.
 - 2026-11-23: Wallet set (guide 01 done). Paid Gate 0, Phase 3 live smoke and Mission 9 live run done; see Gate 0 results. Fixes found live: 200-without-receipt counted as quoted price; `/ask` → CHAT_COMPLETION_GENERAL. Checks: `npm test` 75 pass / 1 skipped; live smoke 1/1. Option A fails for BA75; asking Adesope about Option B.
 - 2026-11-22: Phase 10 passed. README (what, status, sponsor-to-file table, run, env, sample request, costs, limits, troubleshooting, mainnet switch, commercial summary), REAL_VS_MOCKED final for this point, `docs/tutorial.md` draft, `docs/manual/04-deploy.md` (Render + Vercel + Atlas), CONCEPT-BRIEF.md removed (PRD carries it). Root `npm run dev` now starts API and web together. Checks: fresh clone of the branch → `npm ci`, `npm run lint` pass, `npm test` 75 pass / 1 skipped, `npm run build` pass; `npm run dev` served `/api/health` on :4000 and the web on :5173 (proxy OK). README states no live numbers yet; every number it gives is a constant from code or the mocked example, labelled as such. **After the live runs, refresh README/REAL_VS_MOCKED with evidence numbers.**
 
-## Next steps (in order, after guide 01)
+## Next steps (now)
+
+1. Guide 03: `TELEGRAM_BOT_TOKEN` → live `/start` and `sla vercel 2026-10 400` in the bot.
+2. Timed `/judge` Run the demo on a running server → record seconds here.
+3. Optional guide 02 (SMTP): one email to the demo inbox.
+4. `node server/scripts/reconcile.js` after the next epoch root (check #228 charges for the two HTTP 500s).
+
+## Earlier next steps (after guide 01, mostly done)
 
 1. `node server/scripts/gate0.js` → record Option A/B, first receipt_hash, in "Gate 0 results"; pick the judge seed flight (update `JUDGE_SEED` in `server/src/services/judge.js` and `PREFERRED_TRAVEL_MINERS` in `server/src/services/flights/evidence.js`). If Option B: log it in the PRD and move Phase 11 into P0.
 2. `LIVE_TELEGRAPH=1 npm test -w server` (Phase 3 live smoke) → `evidence/live/phase3-smoke.json`.

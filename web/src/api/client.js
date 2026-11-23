@@ -23,3 +23,23 @@ export const usdc = (uusdc) => (uusdc == null ? '—' : (Number(uusdc) / 1e6).to
 export const usdc4 = (uusdc) => (uusdc == null ? '—' : (Number(uusdc) / 1e6).toFixed(4));
 export const shortHash = (h) => (h ? `${h.slice(0, 10)}…${h.slice(-6)}` : '—');
 export const when = (d) => (d ? new Date(d).toLocaleString() : '—');
+
+const VENDOR_NAMES = {
+  vercel: 'Vercel',
+  github: 'GitHub',
+  digitalocean: 'DigitalOcean',
+  twilio: 'Twilio',
+};
+// Case labels shared by lists and detail pages (flight or SLA).
+export const caseTitle = (c) =>
+  c.type === 'sla'
+    ? `${VENDOR_NAMES[c.vendor] || c.vendor} SLA · ${c.period}`
+    : `${c.flightNumber} · ${c.date}`;
+export const caseSub = (c) =>
+  c.type === 'sla'
+    ? `Promised ${c.promisedPct != null ? `${c.promisedPct}%` : "vendor's published"} uptime${c.monthlyFeeUsd != null ? ` · bill ${c.monthlyFeeUsd} USD/month` : ''}`
+    : c.from && c.to
+      ? `${c.from} → ${c.to}`
+      : 'Route not set';
+export const amountText = (d) =>
+  d?.amountEur ? `${d.amountEur} EUR` : d?.amountUsd ? `${d.amountUsd} USD credit` : '';

@@ -18,6 +18,9 @@ const short = (h) => (h ? `${h.slice(0, 8)}…${h.slice(-4)}` : '—');
 const emailTag = (e) => createHash('sha256').update(String(e)).digest('hex').slice(0, 8);
 const FLIGHT_MSG =
   /^\s*([A-Z0-9]{2}\s?\d{1,4})\s+(\d{4}-\d{2}-\d{2})(?:\s+([A-Z]{3})(?:\s*[- ]\s*|\s+)([A-Z]{3}))?\s*$/i;
+const SLA_MSG = /^\s*sla\s+([a-z]+)\s+(\d{4}-\d{2})(?:\s+\$?(\d+(?:\.\d+)?))?\s*$/i;
+export const SLA_HELP =
+  'Send `sla vercel 2026-10 400` (vendor, finished month, your monthly bill in USD; the bill is optional). Vendors: vercel, github, digitalocean, twilio. Set your own promised uptime and credit tiers on the web.';
 const EMAIL = /^[^\s@<>"]+@[^\s@<>"]+\.[^\s@<>"]+$/;
 
 export function receiptLine(r) {
@@ -69,15 +72,19 @@ export function createHandlers(config, deps = {}) {
         await createUser(config, { telegramId: tid, displayName: io.name || '' }),
       );
       return io.reply(
-        'Welcome to Settled. Proof first. Then the claim.\n\nSend a late flight like `BA75 2026-11-20 LHR LOS`, or forward the booking email. I buy proof from Telegraph miners (testnet, capped), decide if you are owed money, and draft the claim. Nothing is sent without your yes.\n\nAlready on the web? Use Settings → Telegram to get a link code.',
+        'Welcome to Settled. Proof first. Then the claim.\n\nSend `sla vercel 2026-10 400` to check if a cloud vendor broke its uptime promise last month, or a late flight like `BA75 2026-11-20 LHR LOS`. I buy proof from Telegraph miners (testnet, capped), decide if you are owed money, and draft the claim. Nothing is sent without your yes.\n\nAlready on the web? Use Settings → Telegram to get a link code.',
       );
     }
     return io.reply(
-      'You are set up. Send a flight like `BA75 2026-11-20 LHR LOS`. /claims /wallet /cap /web',
+      'You are set up. Send `sla vercel 2026-10 400` or a flight like `BA75 2026-11-20 LHR LOS`. /sla /claims /wallet /cap /web',
     );
   }
 
   async function caseAdded(io, c, warning) {
+    if (c.type === 'sla')
+      return io.reply(`📈 Case added: ${cases.caseTitle(c)}.`, {
+        buttons: [[{ text: 'Check now', data: `ck:${c._id}` }]],
+      });
     const lines = [
       `✈️ Case added: ${c.flightNumber} on ${c.date}${c.from && c.to ? ` (${c.from} → ${c.to})` : ''}.`,
     ];
@@ -111,7 +118,16 @@ export function createHandlers(config, deps = {}) {
       }
     }
     const m = FLIGHT_MSG.exec(msg);
+    const sla = SLA_MSG.exec(msg);
     try {
+      if (sla && !forwarded) {
+        const c = await cases.addSlaCase(u._id, {
+          vendor: sla[1],
+          period: sla[2],
+          monthlyFeeUsd: sla[3],
+        });
+        return caseAdded(io, c);
+      }
       if (m && !forwarded) {
         const c = await cases.addFlightCase(u._id, {
           flightNumber: m[1].replace(/\s/g, ''),
@@ -153,12 +169,14 @@ export function createHandlers(config, deps = {}) {
         const c = await cases.getCase(u._id, id);
         const delay = d.facts?.delayMinutes;
         const head =
-          delay != null
-            ? `Your flight ${c.flightNumber} landed ${Math.floor(delay / 60)}h${String(delay % 60).padStart(2, '0')}m late.`
-            : `Decision for ${c.flightNumber}:`;
+          c.type === 'sla'
+            ? `Decision for ${cases.caseTitle(c)}:`
+            : delay != null
+              ? `Your flight ${c.flightNumber} landed ${Math.floor(delay / 60)}h${String(delay % 60).padStart(2, '0')}m late.`
+              : `Decision for ${c.flightNumber}:`;
         const body = [
           head,
-          `Decision: ${d.outcome}${d.amountEur ? ` · ${d.amountEur} EUR` : ''}`,
+          `Decision: ${d.outcome}${d.amountEur ? ` · ${d.amountEur} EUR` : ''}${d.amountUsd ? ` · ${d.amountUsd} USD credit` : ''}`,
           ...d.reasons.map((r) => `• ${r}`),
           ...(d.warnings || []).map((w) => `⚠️ ${w}`),
         ].join('\n');
@@ -227,12 +245,11 @@ export function createHandlers(config, deps = {}) {
     const u = await needUser(io);
     if (!u) return;
     const list = await cases.listCases(u._id);
-    if (!list.length)
-      return io.reply('No claims yet. Send a flight like `BA75 2026-11-20 LHR LOS`.');
+    if (!list.length) return io.reply('No claims yet. ' + SLA_HELP);
     return io.reply(
       list
         .slice(0, 15)
-        .map((c) => `• ${c.flightNumber} ${c.date} — ${c.status}`)
+        .map((c) => `• ${cases.caseTitle(c)} — ${c.status}`)
         .join('\n'),
     );
   }
@@ -290,5 +307,6 @@ export function createHandlers(config, deps = {}) {
     }
   }
 
-  return { start, text, callback, listClaims, wallet, cap, web, ask, awaitingRecipient };
+  const slaHelp = (io) => io.reply(SLA_HELP);
+  return { start, text, callback, listClaims, wallet, cap, web, ask, slaHelp, awaitingRecipient };
 }

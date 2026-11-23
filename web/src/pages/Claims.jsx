@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { api } from '../api/client.js';
+import { api, caseTitle, caseSub, amountText } from '../api/client.js';
 import { useLoad, ErrorBox, Badge } from '../components/ui.jsx';
 
 export default function Claims() {
@@ -10,7 +10,7 @@ export default function Claims() {
       <div className="row">
         <h1>Claims</h1>
         <Link className="button" to="/add">
-          Add a flight
+          Add a case
         </Link>
       </div>
       <ErrorBox error={error} />
@@ -19,9 +19,8 @@ export default function Claims() {
           <table>
             <thead>
               <tr>
-                <th>Flight</th>
-                <th>Date</th>
-                <th>Route</th>
+                <th>Case</th>
+                <th>Details</th>
                 <th>Status</th>
                 <th>Amount</th>
               </tr>
@@ -30,14 +29,13 @@ export default function Claims() {
               {list.map((c) => (
                 <tr key={c._id}>
                   <td>
-                    <Link to={`/cases/${c._id}`}>{c.flightNumber}</Link>
+                    <Link to={`/cases/${c._id}`}>{caseTitle(c)}</Link>
                   </td>
-                  <td>{c.date}</td>
-                  <td>{c.from && c.to ? `${c.from} → ${c.to}` : '—'}</td>
+                  <td>{caseSub(c)}</td>
                   <td>
                     <Badge value={c.status} />
                   </td>
-                  <td>{c.decision?.amountEur ? `${c.decision.amountEur} EUR` : '—'}</td>
+                  <td>{amountText(c.decision) || '—'}</td>
                 </tr>
               ))}
             </tbody>

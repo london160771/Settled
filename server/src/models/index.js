@@ -56,7 +56,13 @@ const CounterSchema = new Schema({ _id: String, seq: { type: Number, default: 0 
 const CaseSchema = new Schema(
   {
     userId: { type: Schema.Types.ObjectId, ref: 'User', required: true, index: true },
-    type: { type: String, enum: ['flight'], default: 'flight' },
+    type: { type: String, enum: ['flight', 'sla'], default: 'flight' },
+    // SLA cases: vendor key, billing month YYYY-MM, the user's contract terms.
+    vendor: String,
+    period: String,
+    promisedPct: Number,
+    monthlyFeeUsd: Number,
+    tiers: [{ _id: false, belowPct: Number, creditPct: Number }],
     flightNumber: { type: String, uppercase: true, trim: true },
     date: String, // YYYY-MM-DD
     from: { type: String, uppercase: true },
@@ -69,8 +75,15 @@ const CaseSchema = new Schema(
   },
   { timestamps: true },
 );
-// Invariant 5: one claim per flight per user.
-CaseSchema.index({ userId: 1, type: 1, flightNumber: 1, date: 1 }, { unique: true });
+// Invariant 5: one claim per flight (or per vendor + month) per user.
+CaseSchema.index(
+  { userId: 1, type: 1, flightNumber: 1, date: 1 },
+  { unique: true, partialFilterExpression: { type: 'flight' } },
+);
+CaseSchema.index(
+  { userId: 1, type: 1, vendor: 1, period: 1 },
+  { unique: true, partialFilterExpression: { type: 'sla' } },
+);
 
 const ReceiptSchema = new Schema(
   {
@@ -123,6 +136,7 @@ const DecisionSchema = new Schema(
     caseId: { type: Schema.Types.ObjectId, ref: 'Case', required: true, index: true },
     outcome: { type: String, enum: ['Owed', 'NotOwed', 'NeedsMoreProof', 'EvidenceConflict'] },
     amountEur: Number,
+    amountUsd: Number, // SLA service credit
     reasons: [String],
     warnings: [String],
     facts: Schema.Types.Mixed,

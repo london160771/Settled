@@ -1,0 +1,54 @@
+{
+  "at": "2026-11-23T13:36:50.095Z",
+  "miner": "7410311",
+  "request": {
+    "intent": "SLA_COMPLIANCE_GENERAL",
+    "query": "Did GitHub meet its SLA in October 2026? Uptime for 2026-10-01 to 2026-10-31."
+  },
+  "status": 200,
+  "body": {
+    "miner_id": "7410311",
+    "miner_name": "Statuspage SLA Auditor",
+    "endpoint": "/sla",
+    "result": {
+      "service": "GitHub",
+      "uptime_pct": 99.0479,
+      "sla_target_pct": 99.9,
+      "compliant": false,
+      "period": "last 90 days"
+    },
+    "result_shape": "intent",
+    "format_version": 4,
+    "field_status": {
+      "service": "ok",
+      "uptime_pct": "ok",
+      "sla_target_pct": "ok",
+      "compliant": "ok",
+      "period": "ok"
+    },
+    "input": {
+      "service": "GitHub",
+      "period": "2026-10-01 to 2026-10-31"
+    },
+    "input_schema_version": 4,
+    "cost_usd": 0.01,
+    "duration_ms": 1458,
+    "timestamp": "2026-11-23T13:36:48.776036067Z",
+    "reasoning": "Intent: miner sla-miner given by the caller\nMiner: The user is asking about the SLA compliance for GitHub over a specific period. The '/sla' endpoint in the Statuspage SLA Auditor miner is designed for this purpose, as indicated by its description and the 'SLA_COMPLIANCE_GENERAL' intent. The 'service' and 'period' parameters are directly provided in the user's request and map to the required fields for this endpoint.",
+    "intent": "SLA_COMPLIANCE_GENERAL",
+    "intent_version": 1,
+    "signal_hash": "0x563da31977438e0b71b8fc64ed349bf27e3cf13530ec8ec3a6bd869f932b1532"
+  },
+  "receipt": {
+    "receipt_hash": "0x196302e6d08dd99482483e1029942bf05e5aaf44bf83fbeb1be19856d6de9b01",
+    "rail": "escrow",
+    "payer": "0xf308f872796f5c1ca01c28541a366f7f9393dfb8",
+    "miner": "5310",
+    "intent": "SLA_COMPLIANCE_GENERAL",
+    "amount_uusdc": "10000",
+    "epoch_id": 43,
+    "settlement": "epoch",
+    "chain": "telegraph",
+    "timestamp": 1795441009
+  }
+}

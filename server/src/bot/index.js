@@ -25,6 +25,7 @@ export function createBot(config, deps = {}) {
   const bot = new Bot(config.telegramBotToken, deps.botConfig);
   const h = createHandlers(config, deps);
   bot.command('start', (ctx) => h.start(ioFrom(ctx), ctx.match?.trim() || null));
+  bot.command('sla', (ctx) => h.slaHelp(ioFrom(ctx)));
   bot.command('claims', (ctx) => h.listClaims(ioFrom(ctx)));
   bot.command('wallet', (ctx) => h.wallet(ioFrom(ctx)));
   bot.command('cap', (ctx) => h.cap(ioFrom(ctx), ctx.match?.trim()));
@@ -50,6 +51,7 @@ export async function startBot(config, app, deps = {}) {
   }
   const { bot } = createBot(config, deps);
   await bot.api.setMyCommands([
+    { command: 'sla', description: 'Check a vendor uptime promise, e.g. sla vercel 2026-10' },
     { command: 'claims', description: 'Your claims' },
     { command: 'wallet', description: 'Wallet, balance and cap' },
     { command: 'cap', description: 'Set monthly cap, e.g. /cap 1.50' },

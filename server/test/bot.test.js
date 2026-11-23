@@ -61,6 +61,20 @@ describe('bot handlers (fake Telegram context)', () => {
     expect(io.last().text).toMatch(/DUPLICATE_CLAIM/);
   });
 
+  it('an "sla vercel 2026-10 400" message adds an SLA case; /sla explains the format', async () => {
+    const h = createHandlers(config);
+    const io = fakeIo(222);
+    await h.start(io);
+    await h.text(io, 'sla vercel 2026-10 400');
+    expect(io.last().text).toMatch(/Case added: Vercel SLA · 2026-10/);
+    const c = await Case.findOne({ type: 'sla' }).lean();
+    expect(c).toMatchObject({ vendor: 'vercel', period: '2026-10', monthlyFeeUsd: 400 });
+    await h.text(io, 'SLA Vercel 2026-10');
+    expect(io.last().text).toMatch(/DUPLICATE_CLAIM/);
+    await h.slaHelp(io);
+    expect(io.last().text).toMatch(/sla vercel 2026-10/);
+  });
+
   it('check → live receipt lines → Owed → draft → Send asks address → confirm names it → sent', async () => {
     const fake = node();
     const t = nodemailer.createTransport({ jsonTransport: true });

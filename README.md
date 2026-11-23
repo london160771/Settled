@@ -2,7 +2,7 @@
 
 **Proof first. Then the claim.**
 
-Settled is a personal claims assistant: a web app plus a Telegram bot that share one account, one capped wallet and one list of claims. When your flight is late, Settled pays Telegraph miners for proof, decides if you are owed money under (simplified) EU261/UK261, and drafts the refund claim with every paid receipt attached. Nothing is sent without your yes.
+Settled is a personal claims assistant: a web app plus a Telegram bot that share one account, one capped wallet and one list of claims. When a cloud vendor (Vercel, GitHub, DigitalOcean, Twilio) misses its uptime promise for a month, Settled pays Telegraph miners for proof from two independent sources, works out the service credit from your contract tiers, and drafts the credit request with every paid receipt attached. Late flights (simplified EU261/UK261) are a second path. Nothing is sent without your yes.
 
 Built for the Telegraph Protocol Hackathon Season II, Apps & Agents track: **mission 15** (Consumer Automation, main) and **mission 9** (Personal Agent, bonus).
 
@@ -14,9 +14,9 @@ Core guarantee: **no claim without a paid receipt behind every fact in it, and s
 
 | Part | State |
 | --- | --- |
-| Code for P0 (web, API, bot, cap, Telegraph client, decisions, claims, Ask, leaderboard, judge mode, Attack Lab) | Built, 75 automated tests pass (Telegraph mocked in tests) |
+| Code for P0 (web, API, bot, cap, Telegraph client, SLA + flight decisions, claims, Ask, leaderboard, judge mode, Attack Lab) | Built, 89 automated tests pass (Telegraph mocked in tests) |
 | Real paid Telegraph asks | **Run live on 2026-11-23** with real receipts: Gate 0 ([evidence/gate0](evidence/gate0)), smoke ask ([evidence/live](evidence/live)), Mission 9 4 asks + 5th blocked ([evidence/mission9](evidence/mission9)) |
-| Flights vs SLA path (Gate 0 Option A/B) | Live Gate 0: no miner returned a past flight's delay (BA75 LHR–LOS), so flight checks end in Needs more proof. Option B (SLA path) under review |
+| Main path | **SLA credits** (Gate 0 Option B). Live: Vercel Oct 2026 99.9645% vs 99.99% → Owed, 10% credit, 2 receipts from 2 miners, 9.8 s ([evidence/sla/live-check.json](evidence/sla/live-check.json)). Flights stay as a second path, but live miners can't report a past flight's delay yet, so they end in Needs more proof |
 | Telegram bot live | Waiting for `TELEGRAM_BOT_TOKEN` ([guide 03](docs/manual/03-telegram-bot.md)) |
 | Real email sending | Optional SMTP ([guide 02](docs/manual/02-email-sending.md)); `mailto:` fallback works today |
 | Deploy | Not done by the agent. [Guide 04](docs/manual/04-deploy.md) |
@@ -33,7 +33,14 @@ See [PROJECT_STATE.md](PROJECT_STATE.md) for the phase log and [REAL_VS_MOCKED.m
 
 Mission 9: ask the assistant things that need fresh data (`/price`, `/weather`, `/search`, `/ask` in the bot, or the Ask page). It pays from the same capped wallet and shows the receipt. An opt-in leaderboard shows paid asks per assistant.
 
-Judges: open `/judge` → **Start the demo account** → **Run the demo** → **Run the attacks**.
+### SLA credits (main path)
+
+1. Add a case: vendor + a finished month (web: Add a case → Cloud uptime; bot: `sla vercel 2026-10 400`). Optional: your promised uptime, monthly bill, credit tiers.
+2. Settled buys `SLA_COMPLIANCE_GENERAL` for that calendar month from a contract-scoped miner. If it shows a breach, it buys a second opinion from a **different** miner over a rolling window that covers the month (works up to 90 days back).
+3. **Owed** only if both see a breach; credit = your tier × your bill. One says breach and the other doesn't → **Evidence conflict**.
+4. Draft credit request with the receipts appendix and proof page; you confirm the address and send.
+
+Judges: open `/judge` → **Start the demo account** → **Run the demo** (Vercel, October 2026) → **Run the attacks**.
 
 ## How Telegraph is used (sponsor-to-file table)
 
@@ -47,6 +54,7 @@ Judges: open `/judge` → **Start the demo account** → **Run the demo** → **
 | Bug #228 (failed paid ask may still charge): counted as spent, retried once, never loops | `askIntent.js` + [`reconcile.js`](server/src/services/telegraph/reconcile.js) |
 | Ledger reconciliation | [`server/scripts/reconcile.js`](server/scripts/reconcile.js) (`GET /v1/ledger/account/{address}`) |
 | Per-user wallets (HD-derived) and escrow top-up (`depositUSDCFor`) | [`server/src/services/wallet/`](server/src/services/wallet/) |
+| SLA evidence → one decision (month miner + a different window miner) | [`server/src/services/sla/evidence.js`](server/src/services/sla/evidence.js), [`decide.js`](server/src/services/sla/decide.js) |
 | Several purchases → one decision (2 distinct miners + weather) | [`server/src/services/flights/evidence.js`](server/src/services/flights/evidence.js), [`decide.js`](server/src/services/flights/decide.js) |
 | Mission 9 paid asks | [`server/src/services/ask/index.js`](server/src/services/ask/index.js) |
 | Gate 0 (prove the network works for us) | [`server/scripts/gate0.js`](server/scripts/gate0.js) |
@@ -61,7 +69,7 @@ Prerequisites: Node 20+ (22 tested), npm 10, internet access to `devnode.telegra
 git clone https://github.com/london160771/Settled.git
 cd Settled
 npm install
-npm test          # 75 tests, Telegraph mocked; no secrets needed
+npm test          # 89 tests, Telegraph mocked; no secrets needed
 npm run lint
 npm run build
 ```
@@ -87,6 +95,7 @@ Other commands:
 node server/scripts/gate0.js --free-only   # free: Intents, schemas, payment rails → evidence/gate0/
 node server/scripts/gate0.js               # paid Gate 0 (~0.03 test USDC), needs MASTER_MNEMONIC + operator ETH
 node server/scripts/mission9.js            # live mission 9 run: 4 paid asks + a 5th blocked by the cap
+node server/scripts/sla-live.js            # live SLA check (vercel 2026-10): decision + draft, ~0.02 test USDC
 node server/scripts/reconcile.js [--apply] # our receipts vs the Telegraph ledger
 node server/scripts/seed-judge.js          # create a funded demo account and print a login link
 LIVE_TELEGRAPH=1 npm test -w server        # adds 1 real paid smoke ask (0.01 test USDC)
@@ -115,6 +124,7 @@ The 220-minute example above is from the mocked test node, not a live run. Live 
 ## Costs and limits (testnet)
 
 - One Telegraph call: 0.01 test USDC floor (dynamic pricing can raise it; the 402 quote is checked against the reservation).
+- One SLA decision: 1 ask if the month met the SLA, 2 if it didn't (~0.01–0.02 test USDC).
 - One flight decision: 3 asks, expected ~0.03 test USDC. Default per-decision cap 0.20, monthly cap 1.00.
 - Mission 9 ask: 0.01 each.
 - Judge account: funded 0.50 test USDC; new judge accounts limited by `JUDGE_DAILY_RUN_LIMIT` (default 20/day).

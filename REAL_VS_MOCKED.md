@@ -23,3 +23,13 @@ Known limits:
 - The weather check is a current/forecast reading at the departure airport, not historical weather on the flight date; it only adds a warning.
 - Airline country comes from a small built-in carrier map; unknown carriers arriving into the EU/UK give "Needs more proof".
 - The worker auto-checks each past flight once; later checks are manual ("Check now").
+
+## SLA path (added 2026-11-23, main path)
+
+| Part | Status |
+| --- | --- |
+| SLA uptime numbers | Real, from Telegraph miners (SLA_COMPLIANCE_GENERAL), testnet payments. Live run: `evidence/sla/live-check.json`. The miners compute uptime from the vendor's public status-page incidents, not from the user's own traffic. |
+| Credit tiers | Defaults (`99.99:10, 99:25, 95:50`) are an **example**, labelled in the form; the user should enter their contract's tiers. |
+| Vendor list | Fixed to vendors both live SLA miners understand (Vercel, GitHub, DigitalOcean, Twilio). |
+| SLA tests | Telegraph mocked in `server/test/sla.test.js`, answer shapes copied from the live evidence. |
+

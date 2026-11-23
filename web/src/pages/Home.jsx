@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { api, usdc } from '../api/client.js';
+import { api, usdc, caseTitle, caseSub } from '../api/client.js';
 import { useLoad, ErrorBox, Badge, ReceiptsTable } from '../components/ui.jsx';
 
 export default function Home() {
@@ -7,9 +7,12 @@ export default function Home() {
   const budget = useLoad(() => api('/budget'));
   const receipts = useLoad(() => api('/receipts'));
   const list = cases.data?.cases || [];
-  const owed = list
-    .filter((c) => ['Owed', 'DraftReady', 'Sent'].includes(c.status))
-    .reduce((s, c) => s + (c.decision?.amountEur || 0), 0);
+  const owedList = list.filter((c) => ['Owed', 'DraftReady', 'Sent'].includes(c.status));
+  const owedEur = owedList.reduce((s, c) => s + (c.decision?.amountEur || 0), 0);
+  const owedUsd = owedList.reduce((s, c) => s + (c.decision?.amountUsd || 0), 0);
+  const owed = [owedUsd ? `${owedUsd} USD` : '', owedEur ? `${owedEur} EUR` : '']
+    .filter(Boolean)
+    .join(' + ');
   const open = list.filter((c) => !['Paid', 'Rejected', 'NotOwed'].includes(c.status));
   const b = budget.data;
   return (
@@ -17,7 +20,7 @@ export default function Home() {
       <div className="grid3">
         <div className="card stat">
           <div className="muted">You may be owed</div>
-          <div className="big">{owed} EUR</div>
+          <div className="big">{owed || '0'}</div>
         </div>
         <div className="card stat">
           <div className="muted">Open claims</div>
@@ -34,7 +37,7 @@ export default function Home() {
       <div className="row">
         <h2>Open claims</h2>
         <Link className="button" to="/add">
-          Add a flight
+          Add a case
         </Link>
       </div>
       <ErrorBox error={cases.error} />
@@ -43,14 +46,16 @@ export default function Home() {
           {open.map((c) => (
             <li key={c._id}>
               <Link to={`/cases/${c._id}`}>
-                {c.flightNumber} · {c.date} {c.from && c.to ? `· ${c.from} → ${c.to}` : ''}
+                {caseTitle(c)} · {caseSub(c)}
               </Link>{' '}
               <Badge value={c.status} />
             </li>
           ))}
         </ul>
       ) : (
-        <p className="muted">No open claims. Add a flight that was late or cancelled.</p>
+        <p className="muted">
+          No open claims. Add a vendor that broke its uptime promise, or a late flight.
+        </p>
       )}
       <h2>Recent receipts</h2>
       <ReceiptsTable receipts={(receipts.data?.receipts || []).slice(0, 5)} />

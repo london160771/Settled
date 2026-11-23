@@ -1,0 +1,15 @@
+{
+  "at": "2026-11-23T13:37:31.447Z",
+  "miner": "7410311",
+  "request": {
+    "intent": "SLA_COMPLIANCE_GENERAL",
+    "query": "GitHub SLA compliance, period: last 30 days"
+  },
+  "status": 500,
+  "body": {
+    "error": "miner error 400 [unknown_component]: 'SLA' matches no GitHub status-page component",
+    "intent": "SLA_COMPLIANCE_GENERAL",
+    "miner_id": "7410311"
+  },
+  "receipt": null
+}

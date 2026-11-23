@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { api, shortHash, usdc4 } from '../api/client.js';
+import { api, shortHash, usdc4, caseTitle, caseSub, amountText } from '../api/client.js';
 import { useLoad, ErrorBox, Badge, ReceiptsTable } from '../components/ui.jsx';
 
-function SendBox({ claim, onDone }) {
+function SendBox({ claim, onDone, isSla }) {
   const [email, setEmail] = useState(claim.recipientEmail || '');
   const [pending, setPending] = useState(claim.recipientEmail || null);
   const [mailto, setMailto] = useState(null);
@@ -58,12 +58,12 @@ function SendBox({ claim, onDone }) {
   return (
     <div className="card stack">
       <label>
-        Airline claims email address
+        {isSla ? 'Vendor billing / support email address' : 'Airline claims email address'}
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="customer.relations@airline.com"
+          placeholder={isSla ? 'billing@vendor.com' : 'customer.relations@airline.com'}
         />
       </label>
       <div className="row-left">
@@ -104,14 +104,11 @@ export default function CaseDetail() {
   return (
     <>
       <div className="row">
-        <h1>
-          {c.flightNumber} · {c.date}
-        </h1>
+        <h1>{caseTitle(c)}</h1>
         <Badge value={c.status} />
       </div>
       <p className="muted">
-        {c.from && c.to ? `${c.from} → ${c.to}` : 'Route not set'} ·{' '}
-        <a href={proofUrl}>public proof page</a>
+        {caseSub(c)} · <a href={proofUrl}>public proof page</a>
       </p>
       {canCheck ? (
         <button
@@ -126,8 +123,7 @@ export default function CaseDetail() {
       {decision ? (
         <section className="card">
           <h2>
-            Decision: <Badge value={decision.outcome} />{' '}
-            {decision.amountEur ? `${decision.amountEur} EUR` : ''}
+            Decision: <Badge value={decision.outcome} /> {amountText(decision)}
           </h2>
           <ul>
             {decision.reasons.map((r, i) => (
@@ -154,8 +150,9 @@ export default function CaseDetail() {
             ))}
           </ul>
           <p className="muted">
-            Rules: {decision.rulesVersion} (simplified, not legal advice). Evidence cost{' '}
-            {usdc4(decision.spentUusdc)} test USDC.
+            Rules: {decision.rulesVersion} (
+            {c.type === 'sla' ? 'credit tiers from your contract' : 'simplified'}, not legal
+            advice). Evidence cost {usdc4(decision.spentUusdc)} test USDC.
           </p>
         </section>
       ) : (
@@ -212,7 +209,7 @@ export default function CaseDetail() {
               <button className="secondary" onClick={() => setEditing(claim.draftText)}>
                 Edit
               </button>
-              <SendBox claim={claim} onDone={reload} />
+              <SendBox claim={claim} onDone={reload} isSla={c.type === 'sla'} />
             </>
           ) : null}
           {claim.status === 'Sent' ? (
@@ -223,7 +220,7 @@ export default function CaseDetail() {
                   act(() =>
                     api(`/claims/${claim._id}/outcome`, {
                       method: 'POST',
-                      body: { outcome: 'Paid', amountEur: decision?.amountEur },
+                      body: { outcome: 'Paid', amountEur: decision?.amountEur ?? undefined },
                     }),
                   )
                 }
